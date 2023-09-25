@@ -1,7 +1,94 @@
-<!DOCTYPE html><html class="appearance-auto" lang="en"><head><meta charset="UTF-8"><title>Java Summary 1</title><meta name="description" content="They who cannot do as they would, must do as they can."><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
+<!DOCTYPE html><html class="appearance-auto" lang="en"><head><meta charset="UTF-8"><title>DAGs and Topological Sorting</title><meta name="description" content="They who cannot do as they would, must do as they can."><meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, initial-scale=1"><!-- Google Analytics --><!-- End Google Analytics -->
 <!-- Baidu Analytics --><!-- End Baidu Analytics --><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="/style/common/bulma.css"><link rel="stylesheet" href="/style/base.css"><link rel="stylesheet" href="/style/common/helper.css"><script src="/js/common.js"></script><link rel="stylesheet" href="/style/post.css"><link rel="stylesheet" href="/style/themes/highlight-theme-light.css"><link rel="stylesheet" href="/style/common/jquery.fancybox.min.css"><script src="/js/highlight.pack.js"></script><meta name="description" content="
-"><meta name="generator" content="Hexo 6.3.0">
+DAGA Directed Acyclic Graph (DAG) is a type of graph structure composed of a set of nodes and a set of directed edges, where each edge has a direction, pointing from one node to another, and the graph does not contain any cycles (meaning you cannot start at one node and follow directed edges to return to the same node). Therefore, a DAG is a directed grap.."><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="QingZe's Space" type="application/atom+xml">
-</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">QingZe Luo's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Java Summary 1</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3><h3 class="is-inline-block"><a href="/WkExperience">intership-experience</a></h3><h3 class="is-inline-block"><a href="/DQZR/Resume_2023.pdf">download-qingze's-resume</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3><h3 class="is-inline-block"><a href="/WkExperience">intership-experience</a></h3><h3 class="is-inline-block"><a href="/DQZR/Resume_2023.pdf">download-qingze's-resume</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile is-hidden"></div><div class="column is-9"><header class="my-4"></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">Java Summary 1</h1><time class="has-text-grey" datetime="2023-09-15T23:14:03.000Z">2023-09-15</time><article class="mt-2 post-content"><p><img src="/images/Victoria.jpeg"></p>
+</head><body class="is-flex is-flex-direction-column"><header class="header-widget is-flex-shrink-0 is-hidden-mobile"><div class="container is-fullhd is-flex is-justify-content-space-between is-align-items-center is-full-height"><section class="is-hidden-mobile is-flex-shrink-0"><h2><a href="/">QingZe Luo's blog</a></h2></section><h3 class="is-hidden-mobile is-family-serif is-full-height is-flex is-align-items-center is-flex-shrink-0"><div class="is-full-height" id="postTopic"><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">DAGs and Topological Sorting</p><p class="is-full-height is-flex-shrink-0 is-flex is-align-items-center is-justify-content-center">Click back to the top</p></div></h3><aside class="is-flex-shrink-0"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3><h3 class="is-inline-block"><a href="/WkExperience">intership-experience</a></h3><h3 class="is-inline-block"><a href="/DQZR/Resume_2023.pdf">download-qingze's-resume</a></h3></aside></div></header><header class="is-flex header-widget is-flex-shrink-0 is-align-items-center is-justify-content-center is-hidden-tablet"><h3 class="is-inline-block"><a href="/">Home</a></h3><h3 class="is-inline-block"><a href="/about">About</a></h3><h3 class="is-inline-block"><a href="/archives">Archives</a></h3><h3 class="is-inline-block"><a href="/WkExperience">intership-experience</a></h3><h3 class="is-inline-block"><a href="/DQZR/Resume_2023.pdf">download-qingze's-resume</a></h3></header><main><main class="container is-max-widescreen content section post-page pt-4 px-4"><div class="columns is-flex-desktop is-justify-content-center is-flex-direction-row-reverse"><div class="column is-3 is-hidden-mobile"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAG"><span class="toc-text">DAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Topological-Sorting"><span class="toc-text">Topological Sorting</span></a></li></ol></div><div class="column is-9"><header class="my-4"></header><h1 class="mt-0 mb-1 is-family-serif" id="postTitle">DAGs and Topological Sorting</h1><time class="has-text-grey" datetime="2023-09-15T23:14:03.000Z">2023-09-15</time><article class="mt-2 post-content"><p><img src="/images/Victoria.jpeg"></p>
+<h2 id="DAG"><a href="#DAG" class="headerlink" title="DAG"></a>DAG</h2><p>A Directed Acyclic Graph (DAG) is a type of graph structure composed of a set of nodes and a set of directed edges, where each edge has a direction, pointing from one node to another, and the graph does not contain any cycles (meaning you cannot start at one node and follow directed edges to return to the same node). Therefore, a DAG is a directed graph without cycles.</p>
+<p>DAGs find extensive applications in various fields such as task scheduling, compiler optimization, dependency analysis, and more. In these applications, DAGs are typically used to represent dependencies between tasks or data flows within computational processes.</p>
+<h2 id="Topological-Sorting"><a href="#Topological-Sorting" class="headerlink" title="Topological Sorting"></a>Topological Sorting</h2><p>Topological sorting is a fundamental algorithm used in graph theory and project management to linearly order the nodes (or tasks) of a directed acyclic graph (DAG). The goal of topological sorting is to arrange the nodes in such a way that for every directed edge (u, v), node u appears before node v in the linear order. In other words, it establishes a consistent sequence for completing tasks or processing elements while respecting their dependencies.</p>
+<p>Key points about topological sorting:</p>
+<ol>
+<li><p><strong>Directed Acyclic Graph (DAG)</strong>: Topological sorting can only be applied to directed graphs that have no cycles. This is because cycles introduce ambiguity in the order of tasks, making a topological order impossible.</p>
+</li>
+<li><p><strong>Dependency Resolution</strong>: Topological sorting is particularly useful when you have a set of tasks or activities with dependencies. It ensures that tasks are executed in the correct order, so a task that depends on another is never started before its prerequisites are completed.</p>
+</li>
+<li><p><strong>Applications</strong>:</p>
+<ul>
+<li><strong>Project Management</strong>: Topological sorting helps schedule tasks in projects to ensure that the project is completed on time.</li>
+<li><strong>Compiler Optimization</strong>: In compiler design, it helps determine the optimal order for generating code or optimizing program segments.</li>
+<li><strong>Dependency Analysis</strong>: Used in software engineering to analyze dependencies between modules, functions, or classes.</li>
+<li><strong>Course Scheduling</strong>: In academic institutions, it assists in scheduling courses based on prerequisites.</li>
+</ul>
+</li>
+<li><p><strong>Algorithm</strong>: Several algorithms can perform topological sorting. Depth-First Search (DFS) and Breadth-First Search (BFS) are commonly used approaches. The choice of algorithm depends on the specific requirements of the problem.</p>
+</li>
+<li><p><strong>Critical Path</strong>: Topological sorting can also identify the critical path in a project, which is the longest path through the graph. Tasks on the critical path are the ones that, if delayed, will delay the entire project.</p>
+</li>
+<li><p><strong>Multiple Valid Orders</strong>: It’s important to note that in a given DAG, there can be multiple valid topological orders. This flexibility allows for optimization, parallel processing, and resource allocation.</p>
+</li>
+</ol>
+<p>Overall, topological sorting is a powerful tool for managing dependencies and ensuring tasks are executed in the correct order in a wide range of applications where directed acyclic graphs are prevalent.</p>
+<p>There are two commonly used algorithms for performing topological sorting on a Directed Acyclic Graph (DAG): Depth-First Search (DFS) and Breadth-First Search (BFS). Both algorithms can be used to find a valid topological order for the nodes in the graph. Here’s an explanation of each algorithm:</p>
+<ol>
+<li><p><strong>Depth-First Search (DFS) Algorithm</strong>:</p>
+<ul>
+<li>Start from an arbitrary node in the DAG.</li>
+<li>Perform a depth-first traversal of the graph, marking nodes as visited.</li>
+<li>When you reach a node with no unvisited neighbors (i.e., a leaf node), add it to the beginning of the topological order.</li>
+<li>Continue this process until all nodes have been visited.</li>
+</ul>
+<p>Pseudocode for the DFS-based topological sorting algorithm:</p>
+<pre><code>function topologicalSort(graph):
+initialize an empty list for the topological order
+initialize a set to keep track of visited nodes
+
+    for each node in graph:
+        if node is not visited:
+            visit(node, topological order, visited)
+
+    return reverse of the topological order list
+
+function visit(node, topological order, visited):
+    mark node as visited
+    for each neighbor of node:
+    if neighbor is not visited:
+    visit(neighbor, topological order, visited)
+    append node to the topological order list
+</code></pre>
+</li>
+<li><p><strong>Breadth-First Search (BFS) Algorithm</strong>:</p>
+<ul>
+<li>Initialize an empty queue and a list to store the topological order.</li>
+<li>Start by enqueueing all nodes with no incoming edges (in-degree of 0).</li>
+<li>While there are nodes in the queue, do the following:<ul>
+<li>Dequeue a node, add it to the topological order list.</li>
+<li>For each of its neighbors, reduce their in-degrees by 1.</li>
+<li>If a neighbor’s in-degree becomes 0, enqueue that neighbor.</li>
+</ul>
+</li>
+<li>Repeat the above process until the queue is empty.</li>
+</ul>
+<p>Pseudocode for the BFS-based topological sorting algorithm:</p>
+<pre><code>function topologicalSort(graph):
+initialize an empty list for the topological order
+initialize a queue for nodes with in-degrees of 0
+
+    for each node in graph:
+        if in-degree of node is 0:
+            enqueue(node)
+
+    while queue is not empty:
+        node = dequeue(queue)
+        append node to topological order list
+        for each neighbor of node:
+            reduce in-degree of neighbor by 1
+            if in-degree of neighbor is 0:
+                enqueue(neighbor)
+
+    return topological order list
+</code></pre>
+</li>
+</ol>
+<p>Both DFS and BFS-based algorithms will produce a valid topological order for a DAG. The choice between them depends on factors like performance and specific requirements of the problem.</p>
 </article><section class="jump-container is-flex is-justify-content-space-between my-6"><!-- em is empty placeholder--><em></em></section><article class="mt-6 comment-container"><script async repo="Haojen/Claudia-theme-blog" src="https://utteranc.es/client.js" issue-term="pathname" theme="preferred-color-scheme"></script></article></div></div></main></main><footer class="is-flex is-flex-direction-column is-align-items-center is-flex-shrink-0 is-family-serif"><section class="sns-container"><!-- Github--><a title="github" target="_blank" rel="noopener nofollow" href="//github.com/qzkasoma-luo"><i class="iconfont icon-github"></i></a><!-- Ins--><a title="instagram" target="_blank" rel="noopener nofollow" href="//www.instagram.com/luo.qingze"><i class="iconfont icon-ins"></i></a><!-- RSS--><!-- 知乎--><!-- 领英--><a title="linkedin" target="_blank" rel="noopener nofollow" href="//www.linkedin.com/in/qingze/"><i class="iconfont icon-linkedin"></i></a><!-- 脸书--></section><p><span>Copyright ©</span><span> QingZe Luo 2023</span></p><div class="is-flex is-justify-content-center is-flex-wrap-wrap"><p>Powered by Hexo &verbar;&nbsp;</p><p class="is-flex is-justify-content-center"><a title="Hexo theme author" target="_blank" rel="noopener" href="//github.com/haojen">Theme by Haojen&nbsp;</a></p><div style="margin-top: 2px"><a class="github-button" title="github-button" target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Claudia" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true"></a></div></div><div><span>不能如愿而行，也须尽力而为</span></div></footer><script async defer src="https://buttons.github.io/buttons.js"></script><script src="/js/jquery-3.6.1.min.js"></script><script src="/js/jquery-fancybox.min.js"></script><script src="/js/img_zoom.js"></script><script src="/js/post.js"></script></body></html>
