@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-09-26T00:00:05.121Z</updated>
+  <updated>2023-09-29T07:41:26.393Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Human-Computer-Interaction Summary 1</title>
+    <link href="http://example.com/2023/09/29/Human-Computer-Interaction-Summary-1/"/>
+    <id>http://example.com/2023/09/29/Human-Computer-Interaction-Summary-1/</id>
+    <published>2023-09-29T07:40:31.000Z</published>
+    <updated>2023-09-29T07:41:26.393Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/IMG_2032.jpeg"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;/images/IMG_2032.jpeg&quot;&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Transitive Closure and Floyd-Warshall&#39;s Algorithm</title>
