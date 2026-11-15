@@ -12,6 +12,8 @@ and the animation reference are still pending.
 - Project and research detail routes generated from Markdown.
 - Three-layer glass system, JS detection, reduced-transparency/contrast fallbacks.
 - Original “QL signal lock” opening animation, < 2 s, first visit only, skippable.
+- Four legacy course-note posts migrated as Markdown drafts; RAG demo entry marked
+  “in progress”. Both stay hidden from production until verified/approved.
 - Self-hosted fonts, OG card, favicon, robots.txt.
 - Local QA scripts: `npm run check`, `npm run test:intro`, `npm run check:links`,
   `npm run check:private`, `scripts/record-intro.mjs`.

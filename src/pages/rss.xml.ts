@@ -14,7 +14,8 @@ export async function GET(context: APIContext) {
     site: context.site ?? 'https://qzkasoma-luo.github.io',
     items: posts.map((post) => ({
       title: post.data.title,
-      pubDate: post.data.date,
+      // Keep the calendar date stable across negative-offset time zones.
+      pubDate: new Date(`${post.data.date.toISOString().slice(0, 10)}T12:00:00Z`),
       description: post.data.description,
       link: `/blog/${post.id}/`,
     })),

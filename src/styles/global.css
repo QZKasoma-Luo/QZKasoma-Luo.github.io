@@ -851,7 +851,7 @@ html[data-theme="dark"] .btn-solid:hover {
   text-transform: uppercase;
 }
 .article {
-  padding-bottom: 72px;
+  padding-block: 46px 72px;
 }
 .article-body {
   max-width: 68ch;
@@ -888,6 +888,6 @@ html[data-theme="dark"] .btn-solid:hover {
     padding-block: 52px 28px;
   }
   .article {
-    padding-bottom: 52px;
+    padding-block: 30px 52px;
   }
 }

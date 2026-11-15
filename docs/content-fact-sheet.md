@@ -42,7 +42,10 @@ Nothing below is published until it is marked `verified: true` in the content fi
 | 2023-09-28 | Human-Computer-Interaction Summary 1 | Course notes |
 | 2023-10-06 | Minimum Spanning Tree | Course notes |
 
-Migration decision is still open. If migrated, each gets `courseNotes: true` and a “Course notes” label.
+Migration decision is still open. Four drafts have already been generated in
+`src/content/blog/` from the legacy HTML (`draft: true`, `courseNotes: true`) so the blog
+layout and RSS can be tested. They stay out of production until the owner says to publish
+them.
 
 ## Wording rules
 
