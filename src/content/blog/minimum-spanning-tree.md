@@ -5,7 +5,7 @@ date: 2023-10-06
 tags:
   - Algorithms
   - Graphs
-courseNotes: true
+category: course
 draft: false
 ---
 

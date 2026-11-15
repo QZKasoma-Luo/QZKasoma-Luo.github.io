@@ -76,6 +76,7 @@ npm run build
 npm run i18n:offline
 npm run test:intro
 npm run test:locale           # language switch keeps the reading position
+npm run test:blog             # blog category filters and keyword search
 npm run qa:browsers       # Chromium, WebKit, Firefox screenshots
 npm run qa:pages          # key pages in all three browsers
 npm run check:links
@@ -197,15 +198,20 @@ title: "Post title"
 description: "One sentence for the list and RSS."
 date: 2026-11-20
 tags: [Privacy, Notes]
-courseNotes: false
+category: life        # life | course | project
 draft: false
 ---
 
 Markdown body.
 ```
 
-`courseNotes: true` adds a “Course notes” label. The four 2023 course notes are already
-published with this label.
+`category` labels the post in the list and drives the filters on `/blog/`:
+
+- `life` — personal life sharing
+- `course` — course notes
+- `project` — notes from building projects
+
+The four 2023 course notes are published with `category: course`.
 
 ### Résumé PDF
 

@@ -5,7 +5,7 @@ date: 2023-09-28
 tags:
   - HCI
   - Design
-courseNotes: true
+category: course
 draft: false
 ---
 

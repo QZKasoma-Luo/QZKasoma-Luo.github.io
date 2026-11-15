@@ -45,7 +45,7 @@ src/
   data/site.yaml     姓名、标题、描述、tagline、focus、社交链接、简历路径
   i18n/cache/        zh.json / ja.json（已提交，CI 离线构建用）
   layouts/BaseLayout.astro
-  lib/content.ts     isPublic / byOrder
+  lib/content.ts     isPublic / byOrder / BLOG_CATEGORIES
   pages/             index、projects、research、blog、feed、rss.xml、404
   styles/global.css  设计 token、导航、玻璃、通用排版
 scripts/
@@ -53,6 +53,8 @@ scripts/
   qa-browsers.mjs    三浏览器首页截图
   three-browser-pages.mjs  三浏览器关键页检查
   test-intro.mjs     开场动画行为
+  test-locale-scroll.mjs  语言切换保留位置
+  test-blog.mjs      博客筛选 / 搜索
   check-links.mjs    死链
   scan-private.mjs   隐私扫描
   axe.mjs            WCAG A/AA
@@ -74,13 +76,15 @@ public/
 | `projects` | 项目 | `title`, `summary`, `year`, `kind`, `status`, `tags`, `links`, `featured`, `order`, `draft`, `verified` |
 | `research` | 论文 | `title`, `summary`, `year`, `authors`, `venue`, `status`, `tags`, `links`, `featured`, `order` |
 | `experience` | 经历 | `role`, `org`, `location`, `start`, `end`, `current`, `bullets`, `order` |
-| `blog` | 文章 | `title`, `description`, `date`, `tags`, `courseNotes`, `draft` |
+| `blog` | 文章 | `title`, `description`, `date`, `tags`, `category`, `draft` |
 
 发布规则在 `src/lib/content.ts`：
 
 - `draft: true` 或 `verified: false` 的条目**不会进生产构建**；
 - 本地要看草稿：`INCLUDE_DRAFTS=1 npm run build`；
 - 公开内容必须核对简历或哥哥的直接确认，不能编造数字/日期/作者顺序/部署状态。
+
+blog 的 `category` 三选一：`life`（个人生活分享）、`course`（课程笔记）、`project`（项目开发心得）；博客列表按它筛选。
 
 当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、RAG demo（in progress）、4 篇课程笔记。
 仍是草稿：DP 论文、IoUT 项目（IoUT 已并入 SOLIDS Lab 经历）。
@@ -151,7 +155,7 @@ node scripts/i18n-build.mjs --locale=zh --limit=3
 
 ### 缓存与成本
 
-- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 352 条、合计 ~238KB；
+- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 358 条、合计 ~240KB；
 - 缓存 key 是英文 HTML 字符串（含 Astro scoped 属性）。如果大改 CSS 导致 `data-astro-cid-*` 变化，可能触发一批重译；跑 `npm run i18n` 即可，成本很小；
 - 不要为了省缓存去提交三份翻译 Markdown；现在这套只多两个 JSON，仓库 pack 仍约 24.5MB。
 
@@ -207,9 +211,16 @@ CI 不传 `DEEPSEEK_API_KEY`。如果新增英文内容没跑过本地 `npm run 
 ### 加一篇 blog
 
 1. `src/content/blog/<slug>.md`；
-2. `date`、`description`、`tags`；旧课程笔记加 `courseNotes: true`；
+2. `date`、`description`、`tags`，并设 `category`：`life`（个人生活分享）/ `course`（课程笔记）/ `project`（项目开发心得）；
 3. 发布设 `draft: false`；
 4. build + i18n；RSS 会自动包含。
+
+### 博客筛选 / 搜索
+
+- `/blog/` 顶部有分类筛选（All / Life / Course notes / Project notes）和搜索框，纯客户端脚本，没引入前端框架。
+- 卡片带 `data-category`，按钮带 `data-blog-filter`；脚本按渲染后的 `textContent` 匹配，所以中文页搜中文、日文页搜日文（翻译后的标题/摘要/标签都能搜到）。
+- 新增/修改分类：改 `src/lib/content.ts` 的 `BLOG_CATEGORIES` 和 `content.config.ts` 的 enum，再往 `src/i18n/cache/{zh,ja}.json` 补新 label 的翻译（`npm run i18n:offline` 会报缺）。
+- 回归测试：`BASE_URL=http://127.0.0.1:4322/ npm run test:blog`（18 项）。
 
 ### 换头像 / favicon
 
@@ -248,6 +259,7 @@ npm run i18n:offline
 python3 -m http.server 4322 -d dist   # 另一个终端
 BASE_URL=http://127.0.0.1:4322/ npm run test:intro
 BASE_URL=http://127.0.0.1:4322/ npm run test:locale
+BASE_URL=http://127.0.0.1:4322/ npm run test:blog
 BASE_URL=http://127.0.0.1:4322/ npm run qa:browsers
 npm run qa:pages
 BASE_URL=http://127.0.0.1:4322/ npm run check:links
@@ -262,7 +274,7 @@ BASE_URL=http://127.0.0.1:4322/ node scripts/axe.mjs
 - axe：32 个页面/主题组合 clean
 - links：106 条，0 失败（LinkedIn 999 是反爬）
 - private：0 处
-- intro：8/8；locale scroll：8/8
+- intro：8/8；locale scroll：8/8；blog filter/search：18/18
 - Lighthouse：手机 99/100/100/100；桌面 87/100/100/100（1.78s 开场影响 Speed Index；英文首页跳过开场 94）
 - 结果文件：`docs/media/qa/lighthouse.json`、`docs/media/qa/three-browser-pages.json`、`docs/media/qa/report.json`
 

@@ -13,6 +13,7 @@
     "check:private": "node scripts/scan-private.mjs",
     "test:intro": "node scripts/test-intro.mjs",
     "test:locale": "node scripts/test-locale-scroll.mjs",
+    "test:blog": "node scripts/test-blog.mjs",
     "qa:browsers": "node scripts/qa-browsers.mjs",
     "qa:pages": "node scripts/three-browser-pages.mjs",
     "i18n": "node scripts/i18n-build.mjs",

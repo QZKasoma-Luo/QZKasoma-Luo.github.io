@@ -103,7 +103,7 @@ const blog = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
-    courseNotes: z.boolean().default(false),
+    category: z.enum(['life', 'course', 'project']),
     draft: z.boolean().default(false),
   }),
 });

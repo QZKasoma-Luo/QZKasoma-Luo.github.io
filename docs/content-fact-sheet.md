@@ -65,7 +65,7 @@ résumé and direct owner confirmation are the only two bases for that flag.
 | 2023-10-06 | Minimum Spanning Tree | Course notes |
 
 The owner asked to migrate them. All four were published on 2026-11-15 with
-`draft: false` and `courseNotes: true`; they are labelled “Course notes” in the blog index
+`draft: false` and `category: course`; they are labelled “Course notes” in the blog index
 and included in the RSS feed.
 
 ## Wording rules

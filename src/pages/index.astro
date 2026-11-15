@@ -1,7 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { byOrder, isPublic } from '../lib/content';
+import { blogCategoryLabel, byOrder, isPublic } from '../lib/content';
 
 const siteEntry = await getEntry('site', 'site');
 if (!siteEntry) throw new Error('Missing site entry');
@@ -241,7 +241,7 @@ const statusLabel: Record<string, string> = {
               <span>
                 <span class="post-tags">
                   {post.data.draft ? <span class="tag">Draft</span> : null}
-                  {post.data.courseNotes ? <span class="tag tag-accent">Course notes</span> : null}
+                  <span class="tag tag-accent">{blogCategoryLabel(post.data.category)}</span>
                 </span>
                 <strong>{post.data.title}</strong>
                 <span class="post-desc">{post.data.description}</span>

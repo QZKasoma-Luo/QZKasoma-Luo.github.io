@@ -9,6 +9,8 @@ are in place. Deployed through GitHub Actions → GitHub Pages.
 
 - Astro 7.4.12 static site, content collections, RSS, sitemap, 404.
 - Home page with About / Research / Projects / Experience / Résumé / Blog / Contact.
+- Blog index with category filters (life / course / project) and keyword search, as a
+  small progressive-enhancement script over the rendered HTML.
 - Project and research detail routes generated from Markdown.
 - Three-layer glass system, JS detection, reduced-transparency/contrast fallbacks.
 - Original “QL signal lock” opening animation, 1.78 s, skippable; plays on a fresh entry and on refresh, but not when navigating between internal pages.
@@ -95,7 +97,7 @@ src/data/site.yaml                 # name, links, status, focus areas
 src/content/projects/<slug>.md     # frontmatter: title, year, kind, tags, links, order
 src/content/research/<slug>.md     # frontmatter: title, venue, status, authors, links
 src/content/experience/*.yaml      # role, org, dates, bullets
-src/content/blog/<slug>.md         # title, date, description, tags, draft
+src/content/blog/<slug>.md         # title, date, description, tags, category, draft
 public/Qingze_Luo_Resume.pdf       # the public résumé
 ```
 

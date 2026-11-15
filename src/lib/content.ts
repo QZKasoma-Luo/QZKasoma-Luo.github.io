@@ -17,3 +17,20 @@ export function isPublic(entry: Publishable): boolean {
 export function byOrder<T extends { data: { order?: number } }>(a: T, b: T): number {
   return (a.data.order ?? 99) - (b.data.order ?? 99);
 }
+
+
+/**
+ * Blog categories, in the order the filters are shown. The labels are rendered
+ * into the HTML so the translation pass can localise them like other copy.
+ */
+export const BLOG_CATEGORIES = [
+  { id: 'life', label: 'Life' },
+  { id: 'course', label: 'Course notes' },
+  { id: 'project', label: 'Project notes' },
+] as const;
+
+export type BlogCategory = (typeof BLOG_CATEGORIES)[number]['id'];
+
+export function blogCategoryLabel(category: BlogCategory): string {
+  return BLOG_CATEGORIES.find((entry) => entry.id === category)?.label ?? '';
+}
