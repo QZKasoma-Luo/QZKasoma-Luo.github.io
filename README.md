@@ -6,6 +6,9 @@ starting January 2027 across security, privacy, IT audit, and software developme
 
 Live site: <https://qzkasoma-luo.github.io>
 
+> **New session?** Read [PROJECT-GUIDE.md](PROJECT-GUIDE.md) first for the architecture and
+> the recipes for adding or changing content.
+
 > **Status:** live at <https://qzkasoma-luo.github.io>. Direction A is chosen, the visual
 > system is tuned toward the `dsh-startup-screen` reference, and the public résumé PDF is
 > in place. Experience, research, and project content follow the résumé; cross-browser,
@@ -197,16 +200,13 @@ draft: false
 Markdown body.
 ```
 
-`courseNotes: true` adds a “Course notes” label. Old course notes can be migrated with that
-label once the owner decides.
+`courseNotes: true` adds a “Course notes” label. The four 2023 course notes are already
+published with this label.
 
 ### Résumé PDF
 
-1. Put the final public PDF at `public/Qingze_Luo_Resume.pdf`.
-2. Set `site.resume: /Qingze_Luo_Resume.pdf` in `src/data/site.yaml`.
-
-Until then, the header and résumé section show a disabled “PDF being updated” state instead
-of a dead link.
+The public PDF is `public/Qingze_Luo_Resume.pdf`, and `site.resume` points to
+`/Qingze_Luo_Resume.pdf`. Replace both when the owner publishes a new PDF.
 
 ## Draft vs. verified content
 
@@ -226,13 +226,16 @@ src/
   components/        Header, Footer, Opening animation
   content/           Markdown entries (projects, research, experience, blog, pages)
   data/site.yaml     site-wide details
+  i18n/cache/        committed zh/ja translation cache
   layouts/           BaseLayout
   lib/content.ts     draft/verified filtering
-  pages/             home, projects, research, blog, RSS, 404
+  pages/             home, projects, research, blog, feed, RSS, 404
   styles/global.css  tokens, glass system, typography, prose
-public/              fonts, favicon, robots.txt, résumé PDF
-docs/                tech notes, legacy inventory, design directions
+scripts/             i18n builder, QA, link/privacy scans
+public/              fonts, pig avatar, favicons, robots.txt, résumé PDF
+docs/                tech notes, fact sheet, design directions
 design/              design prototypes (not shipped)
+PROJECT-GUIDE.md     architecture + change recipes for future sessions
 ```
 
 ## Liquid glass
@@ -249,22 +252,23 @@ headers, and buttons; body copy stays on solid surfaces.
 
 ## Opening animation
 
-`src/components/Opening.astro` — an original 2-second “QL signal lock” overlay:
+`src/components/Opening.astro` — an original 1.78-second “QL signal lock” overlay:
 
-- first visit only (`localStorage`), never on `prefers-reduced-motion: reduce`;
+- plays on a fresh entry and on refresh; internal page navigation skips it once;
+- never on `prefers-reduced-motion: reduce`;
 - click or any key skips;
 - overlay only, content loads underneath; no layout shift;
 - no copied code/assets and no DeepSeek whale.
 
-In dev, `?intro=1` replays it. In production the query parameter is ignored.
+`?intro=off` is a QA-only bypass used by the screenshot scripts.
 
 ## Deploy
 
 The workflow is `.github/workflows/deploy.yml`. It builds on pushes to `main` and publishes
 `dist/` through GitHub Pages.
 
-**One-time repository setting:** Settings → Pages → Build and deployment → Source =
-**GitHub Actions**.
+Pages Source is **GitHub Actions** (set 2026-11-15). The legacy Jekyll builder should not
+run; do not add `.nojekyll` to work around it.
 
 Write access uses the dedicated deploy key (`github-qz-homepage` SSH alias). Never commit the
 private key.
