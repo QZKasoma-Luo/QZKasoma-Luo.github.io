@@ -75,6 +75,32 @@ function check(name, ok, extra = '') {
   await context.close();
 }
 
+// 5. Internal link navigation does not replay it; a refresh does.
+{
+  const context = await browser.newContext({ viewport: { width: 1200, height: 800 } });
+  const page = await context.newPage();
+  await page.goto(base, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(300);
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(400);
+  await page.click('header a[href="/blog/"]');
+  await page.waitForURL(/\/blog\/$/);
+  await page.waitForTimeout(300);
+  const hiddenOnNavigation = await page.evaluate(() => {
+    const el = document.getElementById('qz-intro');
+    return !el || el.hidden;
+  });
+  check('internal navigation skips', hiddenOnNavigation);
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(300);
+  const visibleOnReload = await page.evaluate(() => {
+    const el = document.getElementById('qz-intro');
+    return Boolean(el && !el.hidden);
+  });
+  check('refresh after navigation plays', visibleOnReload);
+  await context.close();
+}
+
 await browser.close();
 console.log(`\nIntro checks: ${failures ? `${failures} failed` : 'all passed'}.`);
 process.exitCode = failures ? 1 : 0;

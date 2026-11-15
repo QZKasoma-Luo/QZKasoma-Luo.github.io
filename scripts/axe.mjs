@@ -10,6 +10,7 @@ const pages = [
   '/projects/cuda-knn/',
   '/research/',
   '/research/dp-hierarchical-counts/',
+  '/feed/',
 ];
 
 const browser = await chromium.launch();

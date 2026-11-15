@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T06:25:26.454Z",
+  "generatedAt": "2026-11-15T06:33:17.136Z",
   "runs": [
     {
       "page": "home",
@@ -67,6 +67,22 @@
     },
     {
       "page": "blog",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 0.99,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "0.9 s",
+        "lcp": "0.9 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "feed",
       "formFactor": "mobile",
       "scores": {
         "performance": 0.99,

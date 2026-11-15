@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const base = 'http://127.0.0.1:4322/';
 const ffHome = '/tmp/ffuser-pages';
 await mkdir(ffHome, { recursive: true });
-const pages = ['/', '/research/ieee-access-iout-ddos/', '/projects/', '/blog/'];
+const pages = ['/', '/research/ieee-access-iout-ddos/', '/projects/', '/blog/', '/feed/'];
 const engines = { chromium, webkit, firefox };
 const report = {};
 let failures = 0;

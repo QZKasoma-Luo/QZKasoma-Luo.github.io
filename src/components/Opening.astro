@@ -289,7 +289,33 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const skip = new URLSearchParams(location.search).get('intro') === 'off';
 
-    if (reduceMotion || skip) return;
+    // A normal internal link click causes a full page load in this static site.
+    // Mark that one navigation so the destination does not replay the intro;
+    // a refresh or a direct visit still does.
+    let skipNext = false;
+    try {
+      skipNext = sessionStorage.getItem('qz-intro-skip-next') === '1';
+      sessionStorage.removeItem('qz-intro-skip-next');
+    } catch {}
+
+    const markInternalNavigation = (event) => {
+      if (event.defaultPrevented || event.button !== 0
+        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
+      if (!anchor || anchor.hasAttribute('download')
+        || (anchor.target && anchor.target !== '_self')) return;
+      const href = anchor.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      const url = new URL(anchor.href, location.href);
+      if (url.origin !== location.origin || (url.protocol !== 'http:' && url.protocol !== 'https:')) return;
+      if (url.pathname === location.pathname && url.search === location.search && url.hash) return;
+      try {
+        sessionStorage.setItem('qz-intro-skip-next', '1');
+      } catch {}
+    };
+    document.addEventListener('click', markInternalNavigation);
+
+    if (reduceMotion || skip || skipNext) return;
 
     el.hidden = false;
     el.dataset.state = 'playing';

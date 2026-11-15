@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const feedUrl = new URL('/rss.xml', Astro.site).href;
+---
+
+<BaseLayout
+  title="RSS feed — Qingze Luo"
+  description="What RSS is and how to subscribe to Qingze Luo's writing."
+>
+  <div class="wrap page-head">
+    <p class="eyebrow">Subscribe</p>
+    <h1>RSS feed</h1>
+    <p class="page-lead">
+      A small, open format for following new posts without an inbox.
+    </p>
+  </div>
+
+  <div class="wrap prose feed-body">
+    <h2>What is RSS?</h2>
+    <p>
+      RSS is a standard feed format. The site publishes a machine-readable list of new posts at
+      <code>/rss.xml</code>; a feed reader checks that file and shows new writing when it appears.
+    </p>
+    <p>
+      Browsers often show the feed as raw XML. That is normal: the file is meant for a feed
+      reader, not for reading in a browser tab.
+    </p>
+
+    <h2>How to subscribe</h2>
+    <ol>
+      <li>Copy the feed URL: <code>{feedUrl}</code></li>
+      <li>Add it to a feed reader such as Feedly, NetNewsWire, Reeder, or Inoreader.</li>
+      <li>New posts will appear there automatically.</li>
+    </ol>
+
+    <h2>Feed URL</h2>
+    <p>
+      <a class="btn btn-ghost" href="/rss.xml">Open the raw RSS feed ↗</a>
+    </p>
+    <p class="muted">
+      If you do not use a feed reader, you can ignore this page; the blog is also available at
+      <a href="/blog/">/blog/</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .feed-body {
+    max-width: 68ch;
+    margin-inline: 0;
+    padding-bottom: 80px;
+  }
+</style>
