@@ -89,4 +89,3 @@ of production until the owner says to publish them.
   it as a group project and does not attribute the team result to one person.
 - RAG demo: what it retrieves, stack, public repo, evaluation.
 - Blog migration: publish the four course notes, keep them as drafts, or start fresh.
-- GitHub Pages source switch to GitHub Actions, and the final push.

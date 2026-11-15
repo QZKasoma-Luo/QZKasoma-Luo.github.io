@@ -17,8 +17,8 @@ reviewed. The site content has been reconciled with the résumé.
 6. **Publication** — IEEE Access 2025, DOI `10.1109/ACCESS.2025.3621594`; author order taken
    from the résumé.
 7. **Deploy key** — added to the repository; `ssh -T git@github-qz-homepage` succeeds.
-8. **Push** — allowed by the owner after the three-browser, Lighthouse, and opening-video
-   checks.
+8. **Push** — completed 2026-11-15; GitHub Actions deployed successfully. Live site:
+   <https://qzkasoma-luo.github.io>.
 
 ## Still open
 
@@ -30,8 +30,7 @@ reviewed. The site content has been reconciled with the résumé.
    evaluation. It is currently “In progress” with details intentionally sparse.
 4. **Blog migration** — publish the four 2023 course notes, keep them as drafts, or start
    fresh? The drafts are in `src/content/blog/` and are excluded from production.
-5. **Pages setting** — switch Settings → Pages → Source to “GitHub Actions” when the
-   workflow is ready to deploy.
+5. **Pages setting** — done; the GitHub Actions workflow deploys successfully.
 
 ## Content guardrails
 

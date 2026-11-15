@@ -6,10 +6,11 @@ and software development/testing.
 
 Live site: <https://qzkasoma-luo.github.io>
 
-> **Status:** rebuild in progress. Direction A is chosen, the visual system is tuned toward
-> the `dsh-startup-screen` reference, and the public résumé PDF is in place. Experience,
-> research, and project content now follow the résumé. The blog archive decision and the
-> final QA/push remain.
+> **Status:** live at <https://qzkasoma-luo.github.io>. Direction A is chosen, the visual
+> system is tuned toward the `dsh-startup-screen` reference, and the public résumé PDF is
+> in place. Experience, research, and project content follow the résumé; cross-browser,
+> Lighthouse, link, privacy, and accessibility checks pass. The blog archive decision is
+> the remaining content choice.
 
 ## Stack
 
