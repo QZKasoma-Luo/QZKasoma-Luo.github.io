@@ -4,13 +4,13 @@ org: Nicholson Manufacturing Ltd.
 location: Sidney, BC, Canada
 start: Sep 2022
 end: Dec 2022
-summary: Production planning support in a manufacturing environment.
+summary: Production planning and records support in a manufacturing environment.
 bullets:
-  - Supported production work-order packages, project documentation, bills of materials, and material selection.
-  - Worked with the ERP system and the manufacturing engineering team.
-order: 2
-draft: true
-verified: false
+  - Operated an ERP system to manage production work orders end to end across the order-to-delivery process, supporting on-time delivery commitments.
+  - Maintained bills of materials, material-selection records, and project documentation, keeping records traceable across manufacturing workflows.
+order: 4
+draft: false
+verified: true
 ---
 
-Draft entry. Final wording will follow the public résumé.
+Production planning and documentation support.

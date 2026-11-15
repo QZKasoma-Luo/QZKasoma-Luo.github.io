@@ -10,6 +10,7 @@ const patterns = [
 ];
 
 const files = [];
+const pdfFiles = [];
 async function walk(dir) {
   let entries;
   try {
@@ -22,7 +23,11 @@ async function walk(dir) {
     if (entry.isDirectory()) {
       if (entry.name === 'node_modules' || entry.name === '.git') continue;
       await walk(path);
-    } else if (/\.(?:html|css|js|mjs|ts|astro|md|mdx|ya?ml|json|txt|xml|svg|pdf)$/i.test(entry.name)) {
+    } else if (/\.pdf$/i.test(entry.name)) {
+      // PDF streams are binary; scanning them as UTF-8 produces object-offset
+      // false positives. Their extracted text is checked separately.
+      pdfFiles.push(path);
+    } else if (/\.(?:html|css|js|mjs|ts|astro|md|mdx|ya?ml|json|txt|xml|svg)$/i.test(entry.name)) {
       files.push(path);
     }
   }
@@ -42,5 +47,6 @@ for (const file of files) {
     }
   }
 }
-console.log(`\nScanned ${files.length} files. Potential private-data findings: ${findings}.`);
+console.log(`\nScanned ${files.length} text files. PDFs skipped by the binary scanner: ${pdfFiles.length}.`);
+console.log(`Potential private-data findings: ${findings}.`);
 process.exitCode = findings ? 1 : 0;

@@ -6,8 +6,8 @@ authors: []
 status: in-progress
 links:
   repo: https://github.com/QZKasoma-Luo/Matching-Shrinkage-Granularity
-featured: true
-order: 1
+featured: false
+order: 2
 draft: true
 verified: false
 ---

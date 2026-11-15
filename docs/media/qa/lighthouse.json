@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-11-15T06:01:58.207Z",
+  "runs": [
+    {
+      "page": "home",
+      "formFactor": "desktop",
+      "scores": {
+        "performance": 0.9,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "1.2 s",
+        "lcp": "1.2 s",
+        "tbt": "0 ms",
+        "cls": "0.001"
+      }
+    },
+    {
+      "page": "home",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "1.2 s",
+        "lcp": "1.2 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "research",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "0.9 s",
+        "lcp": "0.9 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "projects",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "0.9 s",
+        "lcp": "0.9 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "blog",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "0.9 s",
+        "lcp": "0.9 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    }
+  ]
+}

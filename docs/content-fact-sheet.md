@@ -2,36 +2,58 @@
 
 Source hierarchy for the rebuild:
 
-1. `Qingze_Luo_Resume_public.pdf` — the new public résumé, once supplied. **Not on disk yet.**
-2. The old 2023 résumé (`DQZR/Resume_2023.pdf`) and the public GitHub repositories.
-3. The old Hexo site (`legacy-site-2023` tag).
+1. `public/Qingze_Luo_Resume.pdf` — the public résumé supplied 2026-11-14. This is the
+   source of truth for education, experience, the publication, projects, certifications,
+   and skills.
+2. Public GitHub repositories — used only to confirm project scope, links, and dates.
+3. The old Hexo site (`legacy-site-2023` tag) — historical context only.
 
-Nothing below is published until it is marked `verified: true` in the content file.
+Nothing is published unless it is marked `verified: true` in the content file. The public
+résumé and direct owner confirmation are the only two bases for that flag.
 
-## Confirmed / low-risk
+## Confirmed from the public résumé
 
-| Fact | Source | Notes |
+| Fact | Value | Notes |
 | --- | --- | --- |
-| Name: Qingze Luo | GitHub profile, old résumé | Display name “Qingze Luo”. |
-| GitHub: `QZKasoma-Luo` | GitHub profile | Contact link. |
-| LinkedIn: `linkedin.com/in/qingze/` | Old résumé | **Needs confirmation.** |
-| BSc Computer Science, University of Victoria | Old résumé, site bio | No graduation date asserted on the site. |
-| Based in Victoria, BC, Canada | Old résumé, GitHub | City only; no street address. |
-| Open to co-op · January 2027 | Owner brief | Do not add visa/work-authorization details. |
-| Focus: security, privacy, IT audit, software development/testing | Owner brief | Used as positioning, not as a credential. |
-| Engineering Technician, Flex (Flextronics), Zhuhai, Jan–Jul 2023 | Old résumé | Bullets need professional rewrite. |
-| Production Planning Support, Nicholson Manufacturing, Sidney BC, Sep–Dec 2022 | Old résumé | Bullets need professional rewrite. |
+| Name | Qingze Luo | Display name. |
+| Location | Victoria, BC, Canada | City only; no street address. |
+| GitHub | `https://github.com/QZKasoma-Luo` | Contact link. |
+| LinkedIn | `https://www.linkedin.com/in/qingze/` | Confirmed from the PDF annotation. |
+| Availability | Open to co-op · January 2027 | Owner brief. |
+| Focus | Security, privacy, IT audit, software development & testing | Positioning, not a credential. |
+| Education | MASc Electrical and Computer Engineering, University of Victoria, Sep 2025 – present | Current program. |
+| Education | BSc Computer Science, University of Victoria, Sep 2020 – Jun 2025 | Completed degree. |
+| Certification | CompTIA Security+ | Résumé. |
+| Certification | Microsoft Certified: Azure Fundamentals (AZ-900) | Résumé. |
+| Skills | Java, Python, HTML/CSS, C, C++/CUDA; Vue.js, ASP.NET, Node.js; MySQL, SQL Server; Azure, GitHub, GitLab, Linux (Ubuntu, Kali) | Résumé. |
 
-## Project facts from GitHub
+## Experience (confirmed)
 
-| Project | Facts | Status / constraints |
+| Role | Organisation | Dates | Key facts |
+| --- | --- | --- | --- |
+| Research Assistant | SOLIDS Lab, University of Victoria | Sep 2025 – present | Multi-tiered Python validation framework for IoUT network-traffic datasets: completeness, flow consistency, protocol-flag validation, statistical outlier detection. Deployed BlueOS in Docker for vehicle-software testing without hardware. |
+| Teaching Assistant — SENG 321 | University of Victoria | Sep 2025 – Dec 2025 | Guided 40+ students through requirements elicitation, analysis, specification, and validation; led labs; graded use cases, user stories, and system modelling. Liaised with industry mentors and handled team registration/attendance/announcements for one lab section. |
+| Engineering Technician | Flextronics, Zhuhai, China | Jan 2023 – Jul 2023 | Built a real-time production dashboard with Vue.js, Element UI, ECharts, and a RESTful ASP.NET back end. Turned reporting needs into requirements with production supervisors. |
+| Production Planning Support | Nicholson Manufacturing Ltd., Sidney, BC | Sep 2022 – Dec 2022 | Operated the ERP system for work orders end to end; maintained bills of materials, material-selection records, and project documentation. |
+
+## Research (confirmed)
+
+- M. Gu Kim, Q. Luo, R. P. Singh, N. Kaur Popli and M. Mamun, “Enhancing Underwater Network
+  Security: ML-Based Detection and Prediction of DDoS Attacks in IoUT Networks,” *IEEE
+  Access*, vol. 13, pp. 190618–190629, 2025.
+- DOI: `https://doi.org/10.1109/ACCESS.2025.3621594`
+- Site entry: `src/content/research/ieee-access-iout-ddos.md`, `verified: true`.
+
+## Projects
+
+| Project | Résumé / source facts | Status |
 | --- | --- | --- |
-| CUDA k-NN on MNIST (`CUDA-Written_Number_Classifier`) | CUDA, multi-stream processing, bitonic sort; README reports **96.65%** accuracy before further GPU optimisation. | **Group project.** Do not attribute the team result to one person. |
-| DP hierarchical counts (`Matching-Shrinkage-Granularity`) | Study of scalar / level-wise / per-node shrinkage for differentially private hierarchical counts; code, archived draws, results, paper assets; CCECE and arXiv versions mentioned in the README. | **Authorship, author order, venue, and status are unconfirmed.** Currently marked `in-progress` and “no publication claim yet”. |
-| IoT / IoUT validation framework (`iot-iout-validation-framework`) | Multi-tier data validation: completeness, duplicates, flow consistency, TCP flags, DDoS patterns, underwater latency/bandwidth; Python/scikit-learn. | Role and team are unconfirmed. |
-| Changeover dashboard (`Change-Over-Time-Web-Page`) | Vue.js + ASP.NET + Element UI/ECharts; machine status and changeover time. | **Independent, internal prototype, not deployed.** Never write “deployed”. |
-| Neo4j security-incident analysis (`Security-Incident-Analysis-with-a-Graph-Database-Neo4j-Cypher-`) | Repository contains a `graph_ir_minilab` directory. | **Not Qingze’s design.** Omit by default; if ever mentioned, label “course lab” only. |
-| RAG demo | Owner says it is still being built. | **In progress**; no repo link, no deployment claim. Details pending. |
+| GPU-Accelerated KNN Written Number Classifier | CUDA C++ k-NN for MNIST; 96.65% accuracy on the 10,000-image test set; Euclidean-distance and bitonic-sort kernels; CUDA streams, pinned host memory, `float4` loads; per-stage CUDA-event timing. Public repo. | **Group project** per owner. Year 2024 from repository creation (last push Jan 2025). `verified: true`. |
+| Real-time production dashboard | Flextronics, 2023. Vue.js, Element UI, ECharts, RESTful ASP.NET back end; line status, KPIs, changeover metrics. Public repo. | **Independent, internal tool, not publicly deployed.** `verified: true`. |
+| IoT / IoUT validation framework | Public repo; overlaps with the SOLIDS Lab Research Assistant work. | Held as `draft: true`, `verified: false`; covered by the experience entry instead. |
+| Retrieval-augmented generation demo | Owner says it is in progress. No repo, stack, dataset, or result is confirmed. | **In progress**; `verified: true` by direct owner confirmation, not from the résumé. Details remain intentionally sparse. |
+| DP hierarchical counts (Shrinkage granularity) | Public repo exists; authorship, author order, venue, and status are not on the public résumé. | `draft: true`, `verified: false`. Do not publish or claim a paper. |
+| Neo4j security-incident analysis | Repository exists, but it is **not Qingze’s design**. | Omit by default. If ever mentioned, label “course lab” only. |
 
 ## Old blog posts (candidate migration)
 
@@ -42,29 +64,29 @@ Nothing below is published until it is marked `verified: true` in the content fi
 | 2023-09-28 | Human-Computer-Interaction Summary 1 | Course notes |
 | 2023-10-06 | Minimum Spanning Tree | Course notes |
 
-Migration decision is still open. Four drafts have already been generated in
-`src/content/blog/` from the legacy HTML (`draft: true`, `courseNotes: true`) so the blog
-layout and RSS can be tested. They stay out of production until the owner says to publish
-them.
+Migration decision is still open. Four drafts exist in `src/content/blog/`
+(`draft: true`, `courseNotes: true`) so the blog layout and RSS can be tested. They stay out
+of production until the owner says to publish them.
 
 ## Wording rules
 
-- Rewrite the résumé sentence “Gathered reporting requirements from production supervisors…” — do not copy it.
-- No invented metrics, dates, titles, venues, author positions, team sizes, or deployment claims.
+- Rewrite the résumé sentence “Gathered reporting requirements from production supervisors…”
+  — do not copy it verbatim. Current site wording: “Worked with production supervisors to
+  turn reporting needs into requirements…”
+- No invented metrics, dates, titles, venues, author positions, team sizes, or deployment
+  claims.
 - Group work gets a visible “Group project” label.
-- “Internal prototype — not deployed” for the Flex dashboard.
-- “In progress” for the RAG demo.
+- “Internal tool — not publicly deployed” for the Flextronics dashboard.
+- “In progress” for the RAG demo; keep details sparse.
 - No phone, email, street address, date of birth, student number, passport, or visa data.
 - Contact section = GitHub + LinkedIn only.
 - No third-party analytics or tracking.
 
-## Still unknown
+## Still unknown / open
 
-- New résumé PDF (education dates, graduation, exact bullets, publications).
-- LinkedIn URL confirmation.
 - DP paper: authorship, author order, venue, status, public link.
-- IoT/IoUT: role, team, whether it is a paper, RA work, or coursework.
-- CUDA: team size and Qingze’s individual contribution.
-- RAG demo: what it retrieves, stack, public repo.
-- Blog migration choice.
-- Animation reference clip (optional; original animation already built).
+- CUDA project: team size and Qingze’s exact individual contribution. The site only labels
+  it as a group project and does not attribute the team result to one person.
+- RAG demo: what it retrieves, stack, public repo, evaluation.
+- Blog migration: publish the four course notes, keep them as drafts, or start fresh.
+- GitHub Pages source switch to GitHub Actions, and the final push.

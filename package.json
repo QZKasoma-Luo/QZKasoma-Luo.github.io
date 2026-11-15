@@ -12,7 +12,8 @@
     "check:links": "node scripts/check-links.mjs",
     "check:private": "node scripts/scan-private.mjs",
     "test:intro": "node scripts/test-intro.mjs",
-    "qa:browsers": "node scripts/qa-browsers.mjs"
+    "qa:browsers": "node scripts/qa-browsers.mjs",
+    "qa:pages": "node scripts/three-browser-pages.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
     "lighthouse": "^13.6.0",
     "playwright": "^1.65.1",
     "typescript": "^5.9.3"

@@ -1,17 +1,16 @@
 ---
 role: Engineering Technician
-org: Flex (Flextronics)
+org: Flextronics
 location: Zhuhai, Guangdong, China
 start: Jan 2023
 end: Jul 2023
-summary: Hardware/software integration and production-line tooling.
+summary: Production-line tooling and a real-time dashboard for supervisors.
 bullets:
-  - Built an independent Vue.js dashboard prototype for production-line status and changeover time.
-  - Supported system specifications and hardware/software compatibility work.
-order: 1
-draft: true
-verified: false
+  - Designed and developed a real-time production dashboard with Vue.js, Element UI, and ECharts, giving supervisors visibility into line status, KPIs, and changeover metrics.
+  - Worked with production supervisors to turn reporting needs into requirements, then built the RESTful ASP.NET back end that fed live line data into the dashboard.
+order: 3
+draft: false
+verified: true
 ---
 
-Draft entry. Final bullets will be rewritten from the public résumé; this one deliberately
-avoids the “gathered reporting requirements” phrasing and makes no deployment claim.
+Engineering technician work on production-line software and reporting tools.

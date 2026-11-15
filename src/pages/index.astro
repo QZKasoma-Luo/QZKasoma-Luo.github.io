@@ -57,7 +57,10 @@ const statusLabel: Record<string, string> = {
 
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow mono">Portfolio — 2026 / 27</p>
+        <div class="hero-rail mono">
+          <span class="rail-left"><span class="rail-mark" aria-hidden="true"></span>REV 2026.11 · PORTFOLIO</span>
+          <span class="rail-right">VICTORIA, BC · 48.4°N</span>
+        </div>
         <h1><span>Qingze</span><span class="italic">Luo</span></h1>
         <div class="hero-foot">
           <p class="lead">{site.tagline}</p>
@@ -76,7 +79,7 @@ const statusLabel: Record<string, string> = {
         <div class="dossier-body">
           <div class="d-row">
             <span class="d-key mono">Study</span>
-            <span class="d-val">BSc Computer Science<small>University of Victoria</small></span>
+            <span class="d-val">MASc Electrical &amp; Computer Engineering<small>University of Victoria · BSc Computer Science</small></span>
           </div>
           <div class="d-row">
             <span class="d-key mono">Focus</span>
@@ -287,18 +290,32 @@ const statusLabel: Record<string, string> = {
     gap: 60px;
     align-items: end;
   }
-  .eyebrow {
+  .hero-rail {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 16px;
     margin: 0;
+    padding-top: 13px;
+    border-top: 1px solid var(--line);
     color: var(--muted);
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
   }
-  .eyebrow::before {
-    content: "";
-    width: 34px;
-    height: 1px;
-    background: var(--accent);
+  .rail-left,
+  .rail-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rail-mark {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    background: var(--accent-bright);
+  }
+  .rail-right {
+    color: var(--ink-soft);
   }
   h1 {
     display: flex;
@@ -311,7 +328,7 @@ const statusLabel: Record<string, string> = {
     letter-spacing: -0.045em;
   }
   h1 .italic {
-    color: var(--green);
+    color: var(--accent);
     font-style: italic;
   }
   .hero-foot {
@@ -359,12 +376,34 @@ const statusLabel: Record<string, string> = {
   }
 
   .dossier {
+    position: relative;
     align-self: end;
     border: 1px solid var(--line-strong);
-    border-radius: 18px;
+    border-radius: 14px;
     overflow: hidden;
     background: var(--surface);
     box-shadow: var(--shadow);
+  }
+  .dossier::before,
+  .dossier::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+  }
+  .dossier::before {
+    top: 7px;
+    left: 7px;
+    border-top: 2px solid var(--accent-bright);
+    border-left: 2px solid var(--accent-bright);
+  }
+  .dossier::after {
+    right: 7px;
+    bottom: 7px;
+    border-right: 2px solid var(--accent-bright);
+    border-bottom: 2px solid var(--accent-bright);
   }
   .dossier-head {
     display: flex;
@@ -754,6 +793,13 @@ const statusLabel: Record<string, string> = {
   @media (max-width: 620px) {
     .hero {
       padding: 52px 0 44px;
+    }
+    .hero-rail {
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+    }
+    .rail-right {
+      display: none;
     }
     .hero-contour {
       width: 120vw;

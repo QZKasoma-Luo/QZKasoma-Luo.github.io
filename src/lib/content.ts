@@ -3,7 +3,8 @@ type Publishable = { data: { draft?: boolean; verified?: boolean } };
 /**
  * Unverified / draft content is visible in `npm run dev` so the layout can be
  * tested, but is excluded from production builds. Flip `verified: true` only
- * after the entry has been checked against the public résumé.
+ * after the entry has been checked against the public résumé or directly
+ * confirmed by the owner.
  */
 export function isPublic(entry: Publishable): boolean {
   const includeDrafts =

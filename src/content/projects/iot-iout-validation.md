@@ -10,7 +10,7 @@ tags:
   - Data quality
 links:
   repo: https://github.com/QZKasoma-Luo/iot-iout-validation-framework
-featured: true
+featured: false
 order: 2
 draft: true
 verified: false
@@ -23,3 +23,7 @@ bandwidth expectations.
 
 The repository pairs the validation scripts with a scoring program and a notebook for DDoS
 detection experiments under network noise.
+
+This work is also covered under the SOLIDS Lab Research Assistant experience. It is
+held as a draft project because the public résumé lists it as research-assistant work,
+not as a separate project.

@@ -1,13 +1,17 @@
 # Two design directions
 
+**Chosen 2026-11-15:** Direction A, with its palette and micro-details tuned toward the
+`dsh-startup-screen` reference (warm archive paper, near-black ink, burnt-orange accent,
+thin technical rails and reticle marks). The serif display and editorial layout stay.
+
 Both prototypes use the same provisional content so the comparison is about visual
 language, not copy. Final copy will come from `Qingze_Luo_Resume_public.pdf` and will be
 fact-checked.
 
 ## A — “Field Notes” (light, editorial)
 
-- Warm paper, dark green ink, vermilion accent; serif display type (Newsreader) with a
-  sans body (Public Sans) and mono labels.
+- Warm archive paper, near-black ink, burnt-orange accent; serif display type (Newsreader)
+  with a sans body (Public Sans) and mono labels, plus reference-style technical rails.
 - Reads like a printed research dossier: generous margins, numbered sections, ruled rows.
 - Glass is used on the floating nav and the dossier header only; the dossier body is solid.
 - Strengths: calm, academic, very legible; works well for privacy/IT-audit reviewers.

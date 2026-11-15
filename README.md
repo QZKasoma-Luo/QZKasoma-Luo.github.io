@@ -6,9 +6,10 @@ and software development/testing.
 
 Live site: <https://qzkasoma-luo.github.io>
 
-> **Status:** rebuild in progress. The Astro foundation, content model, glass system, and
-> opening animation are in place. Final copy, the public résumé PDF, the blog archive
-> decision, and the design direction are waiting on the owner.
+> **Status:** rebuild in progress. Direction A is chosen, the visual system is tuned toward
+> the `dsh-startup-screen` reference, and the public résumé PDF is in place. Experience,
+> research, and project content now follow the résumé. The blog archive decision and the
+> final QA/push remain.
 
 ## Stack
 
@@ -31,6 +32,24 @@ npm run check      # Astro + TypeScript + content schema check
 ```
 
 Node 24 is used in CI (`.nvmrc`). Astro 7 needs Node ≥ 22.23.4.
+
+## Quality checks
+
+Serve `dist/` on `http://127.0.0.1:4322/`, then run:
+
+```bash
+npm run check
+npm run test:intro
+npm run qa:browsers       # Chromium, WebKit, Firefox screenshots
+npm run qa:pages          # key pages in all three browsers
+npm run check:links
+npm run check:private
+node scripts/axe.mjs      # WCAG A/AA in light and dark
+```
+
+Lighthouse is run separately for the homepage (desktop and mobile) and the research,
+projects, and blog pages (mobile). Results are summarised in
+`docs/media/qa/lighthouse.json`.
 
 ## Update content (the normal workflow)
 

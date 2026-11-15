@@ -8,8 +8,8 @@ tags: []
 deployed: false
 featured: true
 order: 4
-draft: true
-verified: false
+draft: false
+verified: true
 ---
 
 This entry exists so the site can show the work honestly while it is still being built.

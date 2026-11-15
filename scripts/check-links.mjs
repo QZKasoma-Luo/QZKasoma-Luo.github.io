@@ -29,7 +29,8 @@ while (queue.length) {
     }
     const absolute = new URL(href, url);
     hrefs.add(absolute.href);
-    if (absolute.origin === origin && !pages.has(absolute.pathname)) {
+    const isHtmlPage = !/\.(?:pdf|xml|png|jpe?g|webp|gif|svg|ico|css|js|mjs|woff2?)$/i.test(absolute.pathname);
+    if (absolute.origin === origin && isHtmlPage && !pages.has(absolute.pathname)) {
       pages.add(absolute.pathname);
       queue.push(absolute.pathname);
     }

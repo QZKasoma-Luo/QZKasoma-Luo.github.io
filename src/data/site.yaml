@@ -1,15 +1,16 @@
 site:
   name: Qingze Luo
   initials: QL
-  title: Qingze Luo — Computer Science, Security & Privacy
+  title: Qingze Luo — Security, Privacy & Software Engineering
   description: >-
-    Qingze Luo is a computer science student at the University of Victoria working
-    across security, privacy, IT audit, and software development and testing.
-    Open to co-op opportunities starting January 2027.
+    Qingze Luo is a graduate student in Electrical and Computer Engineering at the
+    University of Victoria, with a BSc in Computer Science. He works across security,
+    privacy, IT audit, and software development and testing, and is open to co-op
+    opportunities starting January 2027.
   url: https://qzkasoma-luo.github.io
   location: Victoria, BC, Canada
   availability: Open to co-op · January 2027
-  tagline: Computer science student at the University of Victoria, working where security, privacy, and careful engineering meet.
+  tagline: Graduate student in Electrical and Computer Engineering at the University of Victoria, with a BSc in Computer Science — working where security, privacy, and careful engineering meet.
   focus:
     - Security
     - Privacy
@@ -18,5 +19,4 @@ site:
   socials:
     github: https://github.com/QZKasoma-Luo
     linkedin: https://www.linkedin.com/in/qingze/
-  # Set to /Qingze_Luo_Resume.pdf after the public PDF is added to public/.
-  resume: ""
+  resume: /Qingze_Luo_Resume.pdf

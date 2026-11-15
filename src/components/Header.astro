@@ -11,18 +11,19 @@ const resumeAvailable = Boolean(site.resume);
 
 <header class="site-header">
   <div class="nav glass">
-    <a class="brand" href="/" aria-label={`${site.name} — home`}>
+    <a class="brand" href="/">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 64 64" fill="none">
           <circle cx="22" cy="30" r="11" stroke="currentColor" stroke-width="3" />
           <path d="M30 38l5 6" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-          <path d="M42 18v22h9" stroke="#b8452a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M42 18v22h9" stroke="var(--accent-bright)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </span>
       <span>
         <span class="brand-name">{site.name}</span>
-        <span class="brand-sub">Computer Science · UVic</span>
+        <span class="brand-sub">Computer Engineering · UVic</span>
       </span>
+      <span class="visually-hidden">— home</span>
     </a>
 
     <nav class="nav-links" aria-label="Primary">
@@ -46,7 +47,7 @@ const resumeAvailable = Boolean(site.resume);
       </button>
 
       {resumeAvailable ? (
-        <a class="btn btn-solid" href={site.resume} download>
+        <a class="btn btn-solid" href={site.resume} download aria-label="Download résumé (PDF)">
           <span class="btn-label">Résumé</span>
           <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
         </a>
