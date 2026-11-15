@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en" class="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qingze Luo — Direction B</title>
+<style>
+@font-face{font-family:"Space Grotesk";src:url("../fonts/space-grotesk.woff2") format("woff2");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url("../fonts/plex-sans.woff2") format("woff2");font-weight:400 600;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../fonts/plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../fonts/plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+
+:root{
+  --bg:#06090d;
+  --bg-2:#080d12;
+  --panel:#0b1118;
+  --panel-2:#0d141c;
+  --ink:#e8eef4;
+  --ink-soft:#b9c4ce;
+  --muted:#7f8d9a;
+  --line:rgba(232,238,244,.11);
+  --line-strong:rgba(232,238,244,.2);
+  --lime:#c9f56d;
+  --cyan:#74d8e8;
+  --accent:#c9f56d;
+  --glass-bg:rgba(13,20,28,.92);
+  --glass-border:rgba(255,255,255,.16);
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --display:"Space Grotesk","IBM Plex Sans",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--lime);color:#0a1015}
+:focus-visible{outline:2px solid var(--lime);outline-offset:4px;border-radius:2px}
+
+/* field */
+.field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.field::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(to right,rgba(232,238,244,.045) 1px,transparent 1px),linear-gradient(to bottom,rgba(232,238,244,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:linear-gradient(to bottom,#000 0%,#000 55%,transparent 92%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 55%,transparent 92%)}
+.field::after{content:"";position:absolute;width:900px;height:900px;right:-220px;top:-420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(116,216,232,.16),rgba(116,216,232,.045) 42%,transparent 68%)}
+.field .glow2{position:absolute;width:700px;height:700px;left:-280px;bottom:-380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,245,109,.08),transparent 66%)}
+.shell{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 40px}
+
+/* glass: solid -> blur -> svg refraction */
+.glass{position:relative;background:var(--glass-bg);border:1px solid var(--glass-border);isolation:isolate;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 18px 50px rgba(0,0,0,.35)}
+html.glass-blur .glass{background:rgba(13,20,28,.52);
+  -webkit-backdrop-filter:blur(20px) saturate(1.45);
+  backdrop-filter:blur(20px) saturate(1.45)}
+html.glass-blur .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.14),transparent 30%,transparent 68%,rgba(255,255,255,.06) 88%,rgba(255,255,255,.16));
+  mix-blend-mode:screen;opacity:.55}
+html.glass-refract .glass::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;z-index:-1;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),inset 0 0 0 1px rgba(255,255,255,.06),0 0 38px rgba(116,216,232,.08)}
+
+/* nav */
+header{position:sticky;top:16px;z-index:40;padding:0 24px}
+.nav{max-width:1240px;margin:0 auto;height:64px;border-radius:16px;display:flex;align-items:center;gap:24px;padding:0 12px 0 16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.mark{width:36px;height:36px;border-radius:10px;border:1px solid var(--line-strong);display:grid;place-items:center;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:-.02em;background:linear-gradient(160deg,rgba(201,245,109,.16),rgba(201,245,109,.02));color:var(--lime)}
+.brand-name{font-family:var(--display);font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1}
+.brand-sub{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+nav{display:flex;align-items:center;gap:2px;margin-left:16px}
+nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:9px 11px;border-radius:8px}
+nav a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+.nav-cta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:500;border:1px solid transparent;transition:transform .16s ease,background .16s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-ghost{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);padding:0 10px;border-color:transparent}
+.btn-ghost:hover{color:var(--lime)}
+.btn-lime{background:var(--lime);color:#0a1015;border-color:var(--lime);font-weight:600}
+.btn-lime svg{width:12px;height:12px}
+.menu-btn{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer;color:var(--ink)}
+.menu-btn i{display:block;width:16px;height:1.5px;background:currentColor}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(340px,.72fr);gap:56px;align-items:center;padding:92px 0 72px;min-height:620px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(116,216,232,.24);background:rgba(116,216,232,.055);border-radius:999px;padding:6px 11px}
+.eyebrow .pulse{width:5px;height:5px;border-radius:50%;background:var(--lime)}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(64px,7.6vw,104px);line-height:.96;letter-spacing:-.045em;margin:24px 0 22px}
+h1 .dim{color:#71808c}
+.hero-sub{max-width:47ch;margin:0;font-size:18px;line-height:1.62;color:var(--ink-soft)}
+.hero-sub strong{color:var(--ink);font-weight:500}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:26px;margin-top:34px;padding-top:20px;border-top:1px solid var(--line)}
+.meta-item{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.7}
+.meta-item b{display:block;color:var(--ink);font-weight:400;font-size:11px;letter-spacing:.04em;text-transform:none}
+
+/* radar */
+.radar-wrap{position:relative;display:flex;justify-content:center;align-items:center}
+.radar{position:relative;width:min(100%,392px);aspect-ratio:1;border-radius:50%;padding:18px}
+.radar-plate{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+.radar-plate::before{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%,rgba(116,216,232,.13),rgba(6,9,13,.12) 45%,rgba(6,9,13,.55) 74%);
+  border:1px solid rgba(116,216,232,.16)}
+.ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(232,238,244,.13)}
+.ring.r1{width:88%;height:88%}.ring.r2{width:66%;height:66%}.ring.r3{width:44%;height:44%}
+.ring.r2{border-color:rgba(201,245,109,.18)}
+.cross{position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent,rgba(232,238,244,.14) 18%,rgba(232,238,244,.14) 82%,transparent);transform:translateX(-.5px)}
+.cross.h{left:8%;right:8%;top:50%;bottom:auto;height:1px;width:auto;transform:translateY(-.5px);background:linear-gradient(to right,transparent,rgba(232,238,244,.14) 18%,rgba(232,238,244,.14) 82%,transparent)}
+.sweep{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 210deg,rgba(201,245,109,0) 0deg,rgba(201,245,109,.02) 46deg,rgba(201,245,109,.20) 68deg,rgba(201,245,109,0) 70deg);
+  mask-image:radial-gradient(circle,transparent 31%,#000 32%,#000 50%,transparent 51%);
+  -webkit-mask-image:radial-gradient(circle,transparent 31%,#000 32%,#000 50%,transparent 51%);
+  opacity:.9}
+.orbit-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px 2px rgba(201,245,109,.45);left:74%;top:26%}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:118px;height:118px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 38% 30%,rgba(255,255,255,.10),rgba(10,16,22,.5) 55%,rgba(6,9,13,.85));border:1px solid rgba(255,255,255,.14);box-shadow:0 0 0 10px rgba(6,9,13,.35),0 22px 50px rgba(0,0,0,.45)}
+.core span{font-family:var(--display);font-size:38px;font-weight:500;letter-spacing:-.07em;color:var(--lime)}
+.core small{position:absolute;bottom:19px;font-family:var(--mono);font-size:7px;letter-spacing:.24em;color:var(--muted)}
+.radar-foot{position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);font-family:var(--mono);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.coord{position:absolute;left:50%;top:-24px;transform:translateX(-50%);font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:var(--muted);white-space:nowrap}
+
+/* work */
+.section{padding:0 0 26px}
+.section-head{display:flex;align-items:flex-end;gap:18px;padding-bottom:18px;border-bottom:1px solid var(--line-strong)}
+.sec-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);padding-bottom:7px}
+h2{font-family:var(--display);font-weight:500;font-size:clamp(30px,3.2vw,42px);line-height:1;letter-spacing:-.035em;margin:0}
+.sec-count{margin-left:auto;font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);padding-bottom:8px}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding-top:18px}
+.card{border-radius:16px;overflow:hidden;background:var(--panel);border:1px solid var(--line);text-decoration:none;display:flex;flex-direction:column;min-height:210px;position:relative;transition:border-color .2s ease,transform .2s ease}
+.card:hover{border-color:rgba(201,245,109,.36);transform:translateY(-2px)}
+.card.span7{grid-column:span 7}.card.span5{grid-column:span 5}
+.card-head{height:42px;display:flex;align-items:center;gap:10px;padding:0 15px;border-bottom:1px solid var(--line);flex-shrink:0;border-radius:16px 16px 0 0}
+.card-head .idx{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--muted)}
+.card-head .kind{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(201,245,109,.26);border-radius:999px;padding:3px 7px}
+.card-head .kind.plain{color:var(--cyan);border-color:rgba(116,216,232,.26)}
+.card-head .arrow{margin-left:auto;color:var(--muted);font-size:14px;transition:transform .18s,color .18s}
+.card:hover .card-head .arrow{transform:translate(2px,-2px);color:var(--lime)}
+.card-body{padding:18px 19px 20px;display:flex;flex-direction:column;flex:1}
+.card h3{font-family:var(--display);font-weight:500;font-size:21px;line-height:1.22;letter-spacing:-.02em;margin:0 0 7px}
+.card p{margin:0;font-size:13px;line-height:1.55;color:var(--muted);max-width:52ch}
+.card .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:16px}
+.tag{font-family:var(--mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:4px 7px;white-space:nowrap}
+.metric{display:flex;align-items:baseline;gap:9px;margin:10px 0 2px}
+.metric b{font-family:var(--display);font-size:38px;line-height:1;font-weight:500;letter-spacing:-.04em;color:var(--lime)}
+.metric span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);max-width:12ch;line-height:1.4}
+.bars{display:flex;align-items:flex-end;gap:3px;height:28px;margin-top:12px;opacity:.7}
+.bars i{display:block;width:4px;background:linear-gradient(to top,rgba(116,216,232,.08),rgba(116,216,232,.55));border-radius:1px}
+.checks{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:5px 14px;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.checks li::before{content:"+";color:var(--cyan);margin-right:6px}
+.card-foot{display:flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card-foot .dot{width:4px;height:4px;border-radius:50%;background:var(--lime)}
+
+/* now strip */
+.now{display:flex;align-items:center;gap:16px;margin-top:16px;padding:14px 18px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(90deg,rgba(201,245,109,.035),transparent 42%)}
+.now-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);white-space:nowrap}
+.now p{margin:0;font-size:12.5px;color:var(--ink-soft)}
+.now .sep{margin-left:auto;font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;gap:26px;padding:64px 0 46px;min-height:0}
+  .radar-wrap{order:2;margin-top:6px}
+  .radar{width:min(100%,300px)}
+  .radar-foot,.coord{display:none}
+  .hero-sub{font-size:16px}
+  .field::after{width:600px;height:600px;right:-240px;top:-240px}
+}
+@media(max-width:760px){
+  .shell{padding:0 20px}
+  header{padding:0 12px;top:10px}
+  .nav{height:58px;padding:0 10px 0 12px;border-radius:14px;gap:10px}
+  nav,.brand-sub,.nav-cta .btn-ghost{display:none}
+  .menu-btn{display:flex}
+  .nav-cta{margin-left:auto}
+  .btn-lime{height:36px;padding:0 12px;font-size:12px}
+  .hero{padding:48px 0 38px;gap:22px}
+  h1{font-size:clamp(52px,15vw,72px);margin:20px 0 16px}
+  .hero-sub{font-size:15px;line-height:1.6}
+  .actions{margin-top:24px}
+  .hero-meta{gap:18px 24px;margin-top:26px;padding-top:16px}
+  .hero-meta .meta-item:nth-child(3){display:none}
+  .radar{width:min(100%,240px)}
+  .core{width:92px;height:92px}
+  .core span{font-size:30px}
+  .section-head{gap:12px}
+  .sec-count{display:none}
+  .bento{grid-template-columns:1fr;gap:10px}
+  .card.span7,.card.span5{grid-column:span 1}
+  .card{min-height:0}
+  .card-body{padding:16px 17px 18px}
+  .now{flex-wrap:wrap;gap:8px 14px;padding:13px 16px}
+  .now .sep{display:none}
+  .now p{font-size:12px}
+}
+@media(prefers-reduced-transparency:reduce){
+  .glass{background:#0c131a !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-color:rgba(232,238,244,.3)}
+  .glass::after,.glass::before{display:none}
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more){
+  .glass{background:var(--panel) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-color:rgba(232,238,244,.55) !important;box-shadow:none !important}
+  .glass::before,.glass::after{display:none !important}
+}
+</style>
+<script>
+(function(){var r=document.documentElement,u=navigator.userAgent;
+var ff=/Firefox|FxiOS/i.test(u);
+var cr=/Chrome\/|Chromium\/|Edg\//.test(u)&&!/CriOS/i.test(u);
+var s=!ff&&(CSS.supports('backdrop-filter','blur(1px)')||CSS.supports('-webkit-backdrop-filter','blur(1px)'));
+r.classList.toggle('glass-blur',s);
+r.classList.toggle('glass-refract',s&&cr);})();
+</script>
+</head>
+<body>
+<div class="field" aria-hidden="true"><div class="glow2"></div></div>
+
+<header>
+  <div class="nav glass">
+    <a class="brand" href="#" aria-label="Qingze Luo, home">
+      <span class="mark">QL</span>
+      <span class="brand-name">Qingze Luo<span class="brand-sub">Security · Privacy · Software</span></span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#">Work</a>
+      <a href="#">Research</a>
+      <a href="#">Experience</a>
+      <a href="#">Notes</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://github.com/QZKasoma-Luo" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a class="btn btn-lime" href="#">Résumé <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button class="menu-btn" aria-label="Open menu"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <span class="eyebrow"><span class="pulse"></span>Open to co-op · January 2027</span>
+      <h1>Qingze <span class="dim">Luo</span></h1>
+      <p class="hero-sub">Computer science at the <strong>University of Victoria</strong>. I work where <strong>security, privacy, and software engineering</strong> overlap — building systems, testing them, and writing down what holds.</p>
+      <div class="actions">
+        <a class="btn btn-lime" href="#">Download résumé <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-ghost" style="border:1px solid var(--line)" href="https://github.com/QZKasoma-Luo" target="_blank" rel="noreferrer">github.com/QZKasoma-Luo ↗</a>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">Study<b>BSc Computer Science</b></div>
+        <div class="meta-item">Focus<b>Security · Privacy · IT audit</b></div>
+        <div class="meta-item">Based in<b>Victoria, BC</b></div>
+      </div>
+    </div>
+
+    <div class="radar-wrap" aria-hidden="true">
+      <div class="radar glass">
+        <div class="radar-plate">
+          <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+          <span class="cross"></span><span class="cross h"></span>
+          <span class="sweep"></span><span class="orbit-dot"></span>
+        </div>
+        <div class="core"><span>QL</span><small>SIGNAL / 01</small></div>
+        <span class="coord">48.4284° N · 123.3656° W</span>
+        <span class="radar-foot">Security · Privacy · Audit · Software</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="work-title">
+    <div class="section-head">
+      <span class="sec-kicker">// Selected work</span>
+      <h2 id="work-title" class="sr-only" style="position:absolute;left:-9999px">Selected work</h2>
+      <span class="sec-count">04 entries · 2023—2026</span>
+    </div>
+
+    <div class="bento">
+      <a class="card glass span7" href="#">
+        <div class="card-head">
+          <span class="idx">01</span><span class="kind">Research</span><span class="arrow">↗</span>
+        </div>
+        <div class="card-body">
+          <h3>Shrinkage granularity in differentially private hierarchical counts</h3>
+          <p>A reproducibility-first study of scalar, level-wise, and per-node shrinkage for DP census releases — with archived draws and every figure regenerated from results.</p>
+          <div class="bars" aria-hidden="true">
+            <i style="height:38%"></i><i style="height:56%"></i><i style="height:44%"></i><i style="height:72%"></i><i style="height:61%"></i><i style="height:88%"></i><i style="height:70%"></i><i style="height:96%"></i><i style="height:82%"></i><i style="height:64%"></i><i style="height:47%"></i><i style="height:35%"></i><i style="height:28%"></i>
+          </div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Differential privacy</span></div>
+        </div>
+      </a>
+
+      <a class="card glass span5" href="#">
+        <div class="card-head">
+          <span class="idx">02</span><span class="kind plain">Group project</span><span class="arrow">↗</span>
+        </div>
+        <div class="card-body">
+          <h3>GPU-accelerated k-NN for handwritten digits</h3>
+          <div class="metric"><b>96.65%</b><span>MNIST test accuracy</span></div>
+          <p>Reported baseline before GPU tuning. CUDA k-nearest neighbours with multi-stream processing and a bitonic-sort kernel.</p>
+          <div class="tags"><span class="tag">CUDA</span><span class="tag">C++</span><span class="tag">MNIST</span></div>
+        </div>
+      </a>
+
+      <a class="card span5" href="#">
+        <div class="card-head">
+          <span class="idx">03</span><span class="kind plain">Research tooling</span><span class="arrow">↗</span>
+        </div>
+        <div class="card-body">
+          <h3>IoT / IoUT data validation framework</h3>
+          <p>Multi-tier checks that score dataset quality and catch broken network-flow assumptions before modelling.</p>
+          <ul class="checks"><li>completeness</li><li>flow consistency</li><li>protocol flags</li><li>DDoS patterns</li></ul>
+          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span></div>
+        </div>
+      </a>
+
+      <a class="card span7" href="#">
+        <div class="card-head">
+          <span class="idx">04</span><span class="kind plain">Independent</span><span class="arrow">↗</span>
+        </div>
+        <div class="card-body">
+          <h3>Changeover dashboard for production planning</h3>
+          <p>A Vue.js and ASP.NET prototype for tracking machine status and changeover time on a production line. Built internally at Flex; never deployed to production.</p>
+          <div class="card-foot"><span class="dot"></span>Internal prototype · not deployed</div>
+          <div class="tags"><span class="tag">Vue.js</span><span class="tag">ASP.NET</span><span class="tag">Element UI</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="now">
+      <span class="now-k">// Now</span>
+      <p>Building a retrieval-augmented generation demo <span style="color:var(--muted)">— in progress</span>. Writing notes on privacy, systems, and learning in public.</p>
+      <span class="sep">Blog →</span>
+    </div>
+  </section>
+</main>
+</body>
+</html>

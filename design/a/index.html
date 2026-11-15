@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" class="glass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qingze Luo — Direction A</title>
+<style>
+@font-face{font-family:"Newsreader";src:url("../fonts/newsreader.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("../fonts/newsreader-italic.woff2") format("woff2");font-weight:300 600;font-style:italic;font-display:swap}
+@font-face{font-family:"Public Sans";src:url("../fonts/public-sans.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../fonts/plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("../fonts/plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+
+:root{
+  --paper:#f3f0e6;
+  --paper-2:#eeeade;
+  --ink:#16211c;
+  --ink-soft:#38443d;
+  --muted:#6b756d;
+  --line:rgba(22,33,28,.16);
+  --line-strong:rgba(22,33,28,.34);
+  --green:#1c4a3b;
+  --accent:#b8452a;
+  --glass-bg:rgba(250,248,241,.9);
+  --glass-border:rgba(255,255,255,.75);
+  --serif:"Newsreader",Georgia,serif;
+  --sans:"Public Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit}
+::selection{background:#d9e6dd;color:#0d1a14}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:2px}
+
+/* paper texture + contour field */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E")}
+.contour{position:fixed;z-index:0;right:-26vw;top:-32vh;width:82vw;height:110vh;pointer-events:none;opacity:.55}
+.contour svg{width:100%;height:100%}
+.shell{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 40px}
+
+/* ---------- glass system: solid -> blur -> refraction ---------- */
+.glass{position:relative;background:var(--glass-bg);border:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 14px 40px rgba(20,33,27,.07);isolation:isolate}
+html.glass-blur .glass{background:rgba(250,248,241,.56);border-color:var(--glass-border);
+  -webkit-backdrop-filter:blur(18px) saturate(1.55);
+  backdrop-filter:blur(18px) saturate(1.55)}
+html.glass-blur .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.5),rgba(255,255,255,0) 34%,rgba(255,255,255,.14) 74%,rgba(255,255,255,.34));
+  mix-blend-mode:screen;opacity:.7}
+html.glass-refract .glass::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;z-index:-1;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 0 0 1px rgba(255,255,255,.18),0 0 34px rgba(255,255,255,.18)}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:18px;z-index:40;padding:0 24px}
+.nav{max-width:1240px;margin:0 auto;height:64px;border-radius:18px;display:flex;align-items:center;gap:26px;padding:0 12px 0 16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.mark{width:36px;height:36px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;font-family:var(--serif);font-size:17px;letter-spacing:-.03em;background:rgba(255,255,255,.28)}
+.brand-name{font-family:var(--serif);font-size:19px;letter-spacing:-.015em;line-height:1}
+.brand-sub{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+nav{display:flex;align-items:center;gap:2px;margin-left:18px}
+nav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);padding:9px 12px;border-radius:9px}
+nav a:hover{background:rgba(22,33,28,.06);color:var(--ink)}
+.nav-cta{margin-left:auto;display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:40px;padding:0 16px;border-radius:11px;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.01em;border:1px solid transparent;transition:transform .16s ease,background .16s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-ghost{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:400;color:var(--ink-soft);border-color:transparent;padding:0 10px}
+.btn-ghost:hover{color:var(--ink)}
+.btn-solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn-solid svg{width:12px;height:12px}
+.menu-btn{display:none;width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer}
+.menu-btn i{display:block;width:16px;height:1.5px;background:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(300px,.58fr);gap:72px;align-items:end;padding:104px 0 74px}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(72px,9.4vw,138px);line-height:.84;letter-spacing:-.045em;margin:26px 0 0;font-variation-settings:"opsz" 72}
+h1 .line{display:block}
+h1 em{font-style:italic;font-weight:300;color:var(--green)}
+.hero-foot{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+.lead{max-width:35ch;margin:0;font-size:17px;line-height:1.62;color:var(--ink-soft)}
+.status{display:flex;flex-direction:column;gap:9px;min-width:210px}
+.status-line{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(184,69,42,.13);flex-shrink:0}
+.status-muted{color:var(--muted)}
+
+/* dossier */
+.dossier{border-radius:20px;overflow:hidden;align-self:end;margin-bottom:4px}
+.dossier-head{display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);border-radius:20px 20px 0 0}
+.dossier-head b{font-weight:500;color:var(--accent)}
+.dossier-body{padding:8px 18px 10px}
+.d-row{display:grid;grid-template-columns:66px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.d-row:first-child{border-top:0}
+.d-key{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.d-val{font-size:13.5px;line-height:1.45;color:var(--ink)}
+.d-val small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.d-links{display:flex;gap:16px;margin-top:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em}
+.d-links a{text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px}
+.d-links a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---------- work ---------- */
+.section{padding:0 0 30px}
+.section-head{display:flex;align-items:baseline;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line-strong)}
+.sec-no{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--accent)}
+h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,3.6vw,48px);line-height:1;letter-spacing:-.025em;margin:0}
+.sec-link{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.sec-link:hover{color:var(--accent)}
+.work-row{display:grid;grid-template-columns:56px minmax(0,1fr) 196px 28px;gap:26px;align-items:start;padding:26px 0 27px;border-bottom:1px solid var(--line);text-decoration:none;position:relative}
+.work-row::after{content:"";position:absolute;left:-18px;right:-18px;top:0;bottom:0;background:rgba(255,255,255,.32);opacity:0;border-radius:8px;transition:opacity .18s;z-index:-1}
+.work-row:hover::after{opacity:1}
+.w-year{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted);padding-top:7px}
+.w-main h3{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.15;letter-spacing:-.018em;margin:0 0 6px}
+.w-main p{margin:0;font-size:13.5px;color:var(--muted);max-width:56ch;line-height:1.55}
+.w-tags{display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;justify-content:flex-end}
+.tag{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:4px 8px;white-space:nowrap}
+.tag-accent{color:var(--accent);border-color:rgba(184,69,42,.35);background:rgba(184,69,42,.045)}
+.w-arrow{font-size:16px;color:var(--muted);padding-top:4px;justify-self:end;transition:transform .18s ease,color .18s}
+.work-row:hover .w-arrow{transform:translate(2px,-2px);color:var(--accent)}
+.work-note{display:flex;justify-content:space-between;gap:20px;padding:18px 0 0;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- lower band (peek) ---------- */
+.band{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:46px 0 0;border-radius:16px;overflow:hidden}
+.band-cell{background:var(--paper);padding:26px 28px}
+.band-k{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.band-v{font-family:var(--serif);font-size:22px;line-height:1.25;letter-spacing:-.01em}
+.band-v span{color:var(--muted);font-size:15px;font-family:var(--sans)}
+
+@media(max-width:920px){
+  .shell{padding:0 24px}
+  header{padding:0 14px;top:12px}
+  .nav{height:58px;padding:0 10px 0 12px;gap:12px;border-radius:15px}
+  nav,.nav-cta .btn-ghost,.brand-sub{display:none}
+  .menu-btn{display:flex}
+  .nav-cta{margin-left:auto}
+  .btn-solid{height:36px;padding:0 13px;font-size:12px}
+  .hero{grid-template-columns:1fr;gap:36px;padding:70px 0 46px}
+  h1{font-size:clamp(66px,17vw,96px);margin-top:20px}
+  .hero-foot{gap:22px;margin-top:26px;padding-top:20px}
+  .lead{font-size:15.5px;max-width:32ch}
+  .status{flex-direction:row;flex-wrap:wrap;gap:14px}
+  .dossier{max-width:none}
+  .section-head{gap:14px}
+  .sec-link{display:none}
+  .work-row{grid-template-columns:36px minmax(0,1fr);gap:14px;padding:22px 0}
+  .w-year{padding-top:4px}
+  .w-tags{grid-column:2;justify-content:flex-start;padding-top:2px}
+  .w-arrow{display:none}
+  .w-main h3{font-size:21px}
+  .band{grid-template-columns:1fr}
+  .band-cell{padding:22px}
+}
+@media(prefers-color-scheme:dark){
+  :root{--paper:#111713;--paper-2:#151d18;--ink:#e9e6da;--ink-soft:#c4c8bd;--muted:#8c968c;--line:rgba(233,230,218,.14);--line-strong:rgba(233,230,218,.3);--green:#a8cbb4;--accent:#e07a5f;--glass-bg:rgba(17,23,19,.9);--glass-border:rgba(255,255,255,.16)}
+  html.glass-blur .glass{background:rgba(20,27,22,.55)}
+  body::before{opacity:.3}
+  .mark{background:rgba(255,255,255,.04)}
+  .tag-accent{background:rgba(224,122,95,.07)}
+  .btn-solid{background:var(--ink);color:#121713;border-color:var(--ink)}
+  .work-row::after{background:rgba(255,255,255,.035)}
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more){
+  .glass{background:var(--paper) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-color:var(--ink-soft) !important;box-shadow:none !important}
+  .glass::before,.glass::after{display:none !important}
+}
+</style>
+<script>
+(function(){var r=document.documentElement,u=navigator.userAgent;
+var ff=/Firefox|FxiOS/i.test(u);
+var cr=/Chrome\/|Chromium\/|Edg\//.test(u)&&!/CriOS/i.test(u);
+var s=!ff&&(CSS.supports('backdrop-filter','blur(1px)')||CSS.supports('-webkit-backdrop-filter','blur(1px)'));
+r.classList.toggle('glass-blur',s);
+r.classList.toggle('glass-refract',s&&cr);})();
+</script>
+</head>
+<body>
+<div class="contour" aria-hidden="true">
+<svg viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#1c4a3b" stroke-opacity=".14" stroke-width="1">
+<path d="M250 1180C250 700 600 620 900 620"/>
+<path d="M290 1180C290 720 620 580 960 580"/>
+<path d="M330 1180C330 740 640 540 1020 540"/>
+<path d="M370 1180C370 760 660 500 1080 500"/>
+<path d="M410 1180C410 780 680 460 1140 460"/>
+<path d="M450 1180C450 800 700 420 1200 420"/>
+<path d="M490 1180C490 820 720 380 1260 380"/>
+<path d="M530 1180C530 840 740 340 1320 340"/>
+<path d="M570 1180C570 860 760 300 1380 300"/>
+</g>
+<g fill="#b8452a" fill-opacity=".5"><circle cx="640" cy="548" r="3"/><circle cx="760" cy="452" r="2"/></g>
+</svg>
+</div>
+
+<header>
+  <div class="nav glass">
+    <a class="brand" href="#" aria-label="Qingze Luo, home">
+      <span class="mark">QL</span>
+      <span class="brand-name">Qingze Luo<span class="brand-sub">Computer Science · UVic</span></span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="#">Work</a>
+      <a href="#">Research</a>
+      <a href="#">Experience</a>
+      <a href="#">Notes</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://github.com/QZKasoma-Luo" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a class="btn btn-solid" href="#">Résumé <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button class="menu-btn" aria-label="Open menu"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Portfolio — 2026 / 27</p>
+      <h1><span class="line">Qingze</span><span class="line"><em>Luo</em></span></h1>
+      <div class="hero-foot">
+        <p class="lead">Computer science student at the University of Victoria, working where security, privacy, and careful engineering meet.</p>
+        <div class="status">
+          <span class="status-line"><span class="dot"></span>Open to co-op · Jan 2027</span>
+          <span class="status-line status-muted">Victoria, BC · Canada</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="dossier glass" aria-label="At a glance">
+      <div class="dossier-head"><span>At a glance</span><b>01</b></div>
+      <div class="dossier-body">
+        <div class="d-row"><div class="d-key">Study</div><div class="d-val">BSc Computer Science<small>University of Victoria</small></div></div>
+        <div class="d-row"><div class="d-key">Focus</div><div class="d-val">Security · Privacy · IT audit<small>Software development &amp; testing</small></div></div>
+        <div class="d-row"><div class="d-key">Latest</div><div class="d-val">Differentially private hierarchical counts<small>Research · reproducible experiments</small></div></div>
+        <div class="d-row"><div class="d-key">Elsewhere</div><div class="d-val"><div class="d-links"><a href="https://github.com/QZKasoma-Luo" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/qingze/" target="_blank" rel="noreferrer">LinkedIn</a></div></div></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section" aria-labelledby="work-title">
+    <div class="section-head">
+      <span class="sec-no">01 /</span>
+      <h2 id="work-title">Selected work</h2>
+      <a class="sec-link" href="#">All projects <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <a class="work-row" href="#">
+      <span class="w-year">2026</span>
+      <span class="w-main"><h3>Shrinkage granularity in differentially private hierarchical counts</h3><p>A reproducibility-first study of scalar, level-wise, and per-node shrinkage for DP census releases — code, archives, and every figure regenerated from results.</p></span>
+      <span class="w-tags"><span class="tag tag-accent">Research</span><span class="tag">Python</span><span class="tag">NumPy</span></span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="work-row" href="#">
+      <span class="w-year">2025</span>
+      <span class="w-main"><h3>GPU-accelerated k-NN for handwritten digits</h3><p>CUDA implementation of k-nearest neighbours on MNIST, using multi-stream processing and a bitonic-sort kernel. Built as a group project.</p></span>
+      <span class="w-tags"><span class="tag tag-accent">Group project</span><span class="tag">CUDA</span><span class="tag">C++</span></span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="work-row" href="#">
+      <span class="w-year">2025</span>
+      <span class="w-main"><h3>IoT / IoUT data validation framework</h3><p>Multi-tier checks for completeness, network-flow consistency, protocol behaviour, and DDoS patterns across laboratory and underwater datasets.</p></span>
+      <span class="w-tags"><span class="tag tag-accent">Research tooling</span><span class="tag">Python</span><span class="tag">scikit-learn</span></span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <a class="work-row" href="#">
+      <span class="w-year">2023</span>
+      <span class="w-main"><h3>Changeover dashboard for production planning</h3><p>Independent Vue.js and ASP.NET prototype for tracking machine status and changeover time. Built internally; not deployed.</p></span>
+      <span class="w-tags"><span class="tag tag-accent">Independent</span><span class="tag">Vue.js</span><span class="tag">ASP.NET</span></span>
+      <span class="w-arrow" aria-hidden="true">↗</span>
+    </a>
+
+    <div class="work-note"><span>Selected from research, coursework, and industry work</span><span>04 entries</span></div>
+  </section>
+
+  <section class="band" aria-label="More">
+    <div class="band-cell"><div class="band-k">Currently</div><div class="band-v">Building a RAG demo <span>— in progress</span></div></div>
+    <div class="band-cell"><div class="band-k">Writing</div><div class="band-v">Notes on privacy, systems, and learning in public</div></div>
+  </section>
+</main>
+</body>
+</html>

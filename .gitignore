@@ -1,0 +1,9 @@
+.DS_Store
+node_modules/
+dist/
+.astro/
+design/node_modules/
+design/package-lock.json
+.screenshots/
+*.log
+design/firefox-app/
