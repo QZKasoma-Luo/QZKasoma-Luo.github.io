@@ -10,7 +10,8 @@
     "check": "astro check",
     "sync": "astro sync",
     "check:links": "node scripts/check-links.mjs",
-    "check:private": "node scripts/scan-private.mjs"
+    "check:private": "node scripts/scan-private.mjs",
+    "test:intro": "node scripts/test-intro.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

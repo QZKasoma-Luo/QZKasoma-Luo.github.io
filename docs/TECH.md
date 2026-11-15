@@ -1,7 +1,29 @@
 # Project tech note — Qingze Luo personal site
 
-**Status:** design phase. Legacy site backed up; two design directions built for review.
+**Status:** Astro foundation built. Legacy site backed up; two design directions and a
+working A-style preview exist. Final visual direction, résumé PDF, blog archive choice,
+and the animation reference are still pending.
 **Owner:** Qingze Luo. **Implemented by:** 秧秧 (Yangyang) for this rebuild.
+
+## 0. What is built (2026-11-14)
+
+- Astro 7.4.12 static site, content collections, RSS, sitemap, 404.
+- Home page with About / Research / Projects / Experience / Résumé / Writing / Contact.
+- Project and research detail routes generated from Markdown.
+- Three-layer glass system, JS detection, reduced-transparency/contrast fallbacks.
+- Original “QL signal lock” opening animation, < 2 s, first visit only, skippable.
+- Self-hosted fonts, OG card, favicon, robots.txt.
+- Local QA scripts: `npm run check`, `npm run test:intro`, `npm run check:links`,
+  `npm run check:private`, `scripts/record-intro.mjs`.
+- Lighthouse local QA with draft content: mobile 100 / 100 / 100 / 100; desktop
+  100 / 100 / 100 / 100. LCP 0.9 s mobile, 0.2 s desktop; CLS 0.
+- Opening animation videos: `docs/media/opening-desktop.webm`,
+  `docs/media/opening-mobile.webm`.
+- GitHub Actions workflow written; Pages source still needs the one-time switch.
+
+Content is intentionally marked `verified: false` until it is checked against the public
+résumé. Production builds exclude unverified entries; `INCLUDE_DRAFTS=1 npm run build`
+is for local visual QA only.
 
 ## 1. Isolation and paths
 

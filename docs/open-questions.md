@@ -1,5 +1,9 @@
 # Open questions for 哥哥
 
+**Update 2026-11-14:** the Astro foundation, content model, glass system, and an original
+2-second opening animation are built and passing local checks. The blockers below are now
+mostly about final copy and visual direction.
+
 Items are ordered by how much they block the build. Questions that the new résumé will
 answer are marked “résumé”.
 
@@ -10,10 +14,10 @@ answer are marked “résumé”.
 2. **Résumé PDF** — `Qingze_Luo_Resume_public.pdf` is not in this session's files yet.
    Brother said it comes next round. It is the source of truth for education, dates,
    experience bullets, and publications.
-3. **Animation reference** — the forwarded “DeepSeek Harness style” clip is not on disk
-   and the IM history is not available from this Web session. Please resend it or give a
-   link. If it is gone, I will design an original 2-second “Q / L signal-lock” in the same
-   restrained, fast, dark style.
+3. **Animation reference** — the forwarded “DeepSeek Harness style” clip is still not on
+   disk. An original 2-second “Q / L signal-lock” is already built, tested, and recorded
+   (`docs/media/`). If the reference is resent, it can be used only to tune rhythm/style;
+   no code or assets will be copied.
 4. **LinkedIn URL** — old résumé says `linkedin.com/in/qingze/`. Still correct?
    (Contact section will only show GitHub + LinkedIn.)
 
@@ -50,7 +54,8 @@ answer are marked “résumé”.
 ## Operations
 
 14. **Deploy key** — add `~/.ssh/qz_homepage_deploy.pub` to the homepage repo as a deploy key
-    with write access. Public key is in the stage report.
+    with write access. It is not added yet: `ssh -T git@github-qz-homepage` still returns
+    `Permission denied (publickey)`. Public key is in the stage report.
 15. **Pages setting** — when we switch to Actions, change Settings → Pages → Source to
     “GitHub Actions”. I will remind brother at that step.
 16. **Push approval** — the backup tag `legacy-site-2023` is local only. Pushing it is a
