@@ -21,6 +21,8 @@ reviewed. The site content has been reconciled with the résumé.
    <https://qzkasoma-luo.github.io>.
 9. **Blog migration** — the four 2023 course notes are published with a “Course notes” label.
 10. **Pages setting** — the owner switched the Pages source to GitHub Actions on 2026-11-15.
+11. **Languages** — English, Simplified Chinese, and Japanese are live through the
+    build-time translation cache; see `docs/TECH.md` for the pipeline.
 
 ## Still open
 

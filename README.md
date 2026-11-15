@@ -1,8 +1,8 @@
 # qzkasoma-luo.github.io
 
-Personal site for **Qingze Luo** — a computer science student at the University of
-Victoria, looking for co-op work starting January 2027 across security, privacy, IT audit,
-and software development/testing.
+Personal site for **Qingze Luo** — a graduate student in Electrical and Computer Engineering
+at the University of Victoria, with a BSc in Computer Science, looking for co-op work
+starting January 2027 across security, privacy, IT audit, and software development/testing.
 
 Live site: <https://qzkasoma-luo.github.io>
 
@@ -11,7 +11,8 @@ Live site: <https://qzkasoma-luo.github.io>
 > in place. Experience, research, and project content follow the résumé; cross-browser,
 > link, privacy, and accessibility checks pass. Lighthouse mobile is 99; desktop is 87 with
 > the 1.78s opening (94 with the opening skipped). The four 2023 course notes are migrated
-> and published with a “Course notes” label.
+> and published with a “Course notes” label. The full site is available in English,
+> Simplified Chinese, and Japanese.
 
 ## Stack
 
@@ -35,12 +36,38 @@ npm run check      # Astro + TypeScript + content schema check
 
 Node 24 is used in CI (`.nvmrc`). Astro 7 needs Node ≥ 22.23.4.
 
+## Languages
+
+The site is generated in three static locales:
+
+- English: `/`
+- Simplified Chinese: `/zh/`
+- Japanese: `/ja/`
+
+The language switcher in the header keeps the current page. Localized RSS feeds are at
+`/zh/rss.xml` and `/ja/rss.xml`.
+
+Translations are **build-time**, not a Google widget or a runtime API. After
+`npm run build`, the translation pass reads the English HTML, translates the visible text
+with DeepSeek using a fixed glossary and tone guide, caches every string, and writes the
+`/zh/` and `/ja/` pages. The cache is committed so CI can rebuild without an API key.
+
+```bash
+npm run i18n           # translate missing strings (local only; needs DEEPSEEK_API_KEY)
+npm run i18n:offline   # rebuild locales from the committed cache (used by CI)
+```
+
+After editing English content, run `npm run i18n`, check the affected localized pages, and
+commit `src/i18n/cache/*.json`. Do not edit generated `dist/` files by hand.
+
 ## Quality checks
 
 Serve `dist/` on `http://127.0.0.1:4322/`, then run:
 
 ```bash
 npm run check
+npm run build
+npm run i18n:offline
 npm run test:intro
 npm run qa:browsers       # Chromium, WebKit, Firefox screenshots
 npm run qa:pages          # key pages in all three browsers
@@ -49,9 +76,9 @@ npm run check:private
 node scripts/axe.mjs      # WCAG A/AA in light and dark
 ```
 
-Lighthouse is run separately for the homepage (desktop and mobile) and the research,
-projects, and blog pages (mobile). Results are summarised in
-`docs/media/qa/lighthouse.json`.
+Lighthouse is run separately for the English, Chinese, and Japanese homepages (desktop and
+mobile) and the research, projects, blog, and feed pages (mobile). Results are summarised
+in `docs/media/qa/lighthouse.json`.
 
 ## Update content (the normal workflow)
 

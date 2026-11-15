@@ -38,6 +38,11 @@ jobs:
         env:
           ASTRO_TELEMETRY_DISABLED: 1
 
+      - name: Build localized pages
+        run: npm run i18n:offline
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

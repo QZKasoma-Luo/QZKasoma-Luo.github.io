@@ -9,8 +9,16 @@ const pages = [
   '/projects/',
   '/projects/cuda-knn/',
   '/research/',
-  '/research/dp-hierarchical-counts/',
+  '/research/ieee-access-iout-ddos/',
   '/feed/',
+  '/zh/',
+  '/ja/',
+  '/zh/blog/minimum-spanning-tree/',
+  '/ja/blog/minimum-spanning-tree/',
+  '/zh/projects/cuda-knn/',
+  '/ja/research/ieee-access-iout-ddos/',
+  '/zh/feed/',
+  '/ja/feed/',
 ];
 
 const browser = await chromium.launch();

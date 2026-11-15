@@ -368,6 +368,47 @@ html.glass-refract .glass > * {
   gap: 8px;
   margin-left: auto;
 }
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+  margin-right: 2px;
+  border-right: 1px solid var(--line);
+}
+.lang-switch a,
+.menu-langs a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  min-height: 30px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+.lang-switch a:hover,
+.menu-langs a:hover,
+.lang-switch a[aria-current="page"],
+.menu-langs a[aria-current="page"] {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+.menu-langs {
+  display: flex;
+  gap: 3px;
+  margin-top: 4px;
+  padding: 10px 12px 4px;
+  border-top: 1px solid var(--line);
+}
+.menu-langs a {
+  padding: 0 8px;
+  border: 1px solid var(--line);
+}
 
 .theme-toggle {
   width: 38px;
@@ -736,6 +777,9 @@ html[data-theme="dark"] .btn-solid:hover {
   .brand-mark {
     width: 34px;
     height: 34px;
+  }
+  .lang-switch {
+    display: none;
   }
   .nav-actions .btn-solid span {
     display: none;

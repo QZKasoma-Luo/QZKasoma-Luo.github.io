@@ -1,31 +1,31 @@
 # Project tech note — Qingze Luo personal site
 
-**Status:** Astro foundation built. Legacy site backed up; two design directions and a
-working A-style preview exist. Final visual direction, résumé PDF, blog archive choice,
-and the animation reference are still pending.
+**Status:** Live at <https://qzkasoma-luo.github.io> in English, Simplified Chinese, and
+Japanese. Résumé-backed content, the 2023 course notes, the design pass, and the QA gates
+are in place. Deployed through GitHub Actions → GitHub Pages.
 **Owner:** Qingze Luo. **Implemented by:** 秧秧 (Yangyang) for this rebuild.
 
-## 0. What is built (2026-11-14)
+## 0. What is built (2026-11-15)
 
 - Astro 7.4.12 static site, content collections, RSS, sitemap, 404.
 - Home page with About / Research / Projects / Experience / Résumé / Writing / Contact.
 - Project and research detail routes generated from Markdown.
 - Three-layer glass system, JS detection, reduced-transparency/contrast fallbacks.
-- Original “QL signal lock” opening animation, < 2 s, first visit only, skippable.
-- Four legacy course-note posts migrated as Markdown drafts; RAG demo entry marked
-  “in progress”. Both stay hidden from production until verified/approved.
-- Self-hosted fonts, OG card, favicon, robots.txt.
-- Local QA scripts: `npm run check`, `npm run test:intro`, `npm run check:links`,
-  `npm run check:private`, `scripts/record-intro.mjs`.
-- Lighthouse local QA with draft content: mobile 100 / 100 / 100 / 100; desktop
-  100 / 100 / 100 / 100. LCP 0.9 s mobile, 0.2 s desktop; CLS 0.
+- Original “QL signal lock” opening animation, 1.78 s, skippable; plays on a fresh entry and on refresh, but not when navigating between internal pages.
+- Four legacy course-note posts migrated and published with a “Course notes” label; RAG demo entry is public as “In progress”.
+- Self-hosted fonts, OG card, 2023 pig-avatar favicon and profile, robots.txt.
+- Local QA scripts: `npm run check`, `npm run test:intro`, `npm run qa:browsers`,
+  `npm run qa:pages`, `npm run check:links`, `npm run check:private`, `scripts/axe.mjs`,
+  `scripts/record-intro.mjs`.
+- Lighthouse: mobile 99 / 100 / 100 / 100; desktop 87 / 100 / 100 / 100 (the 1.78 s
+  opening affects desktop Speed Index; page-only is 94). Localized pages match.
 - Opening animation videos: `docs/media/opening-desktop.webm`,
   `docs/media/opening-mobile.webm`.
-- GitHub Actions workflow written; Pages source still needs the one-time switch.
+- GitHub Actions workflow builds and deploys; Pages source is GitHub Actions.
 
-Content is intentionally marked `verified: false` until it is checked against the public
-résumé. Production builds exclude unverified entries; `INCLUDE_DRAFTS=1 npm run build`
-is for local visual QA only.
+Public content is checked against the public résumé or direct owner confirmation.
+Draft-only entries (the DP paper and the IoUT project) are excluded from production;
+`INCLUDE_DRAFTS=1 npm run build` is for local visual QA only.
 
 ## 1. Isolation and paths
 
@@ -154,10 +154,9 @@ Rules:
 
 GitHub Actions → GitHub Pages. The workflow will build Astro and publish `dist/`.
 
-Brother must change: **Settings → Pages → Build and deployment → Source = GitHub Actions**
-(the repository is currently likely set to “Deploy from a branch”).
-
-The deploy key is independent of the Pages setting; it is only for `git push`.
+Pages source is set to **GitHub Actions** (2026-11-15). The legacy Jekyll builder is no
+longer triggered. The deploy key is independent of the Pages setting; it is only for
+`git push`.
 
 ## 9. Commands (once scaffolded)
 
@@ -172,5 +171,33 @@ node design/shoot.mjs  # design screenshots (current phase)
 
 ## 10. Current decisions / open items
 
-See `docs/open-questions.md`. Blocking items: design direction, new résumé PDF,
-animation reference, LinkedIn confirmation, blog migration choice.
+See `docs/open-questions.md`. The design direction, résumé, LinkedIn URL, animation
+reference, blog migration, Pages setting, and deployment are settled. Remaining content
+questions are CUDA team details, the DP paper’s authorship/venue, and RAG demo details.
+
+## 11. Three-language build
+
+English at `/` is the source of truth. The site is built in three static locales:
+
+- English: `/`
+- Simplified Chinese: `/zh/`
+- Japanese: `/ja/`
+
+`scripts/i18n-build.mjs` runs after `astro build`:
+
+1. Parses every generated English HTML page with Cheerio.
+2. Collects visible text blocks and `alt` / `title` / `aria-label` / meta values.
+3. Translates only missing strings through the DeepSeek chat API using a fixed glossary
+   and tone guide; every translation is cached in `src/i18n/cache/{zh,ja}.json`.
+4. Writes localized HTML under `dist/zh/` and `dist/ja/`, rewrites internal links,
+   preserves the current page in the language switcher, adds `hreflang` / canonical /
+   `og:locale`, and generates localized RSS feeds.
+5. Appends the localized URLs to `dist/sitemap-0.xml`.
+
+The cache is committed. CI runs `npm run i18n:offline`, which rebuilds locales without an
+API key and fails if a new English string has no cached translation. Local runs use
+`npm run i18n` (key from `DEEPSEEK_API_KEY` or the local DSH credentials file). No API key
+is exposed to the browser or committed.
+
+When adding or editing English content, run `npm run build && npm run i18n`, check the
+affected `/zh/` and `/ja/` pages, and commit the updated cache.

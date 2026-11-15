@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-15T06:43:34.016Z",
+  "generatedAt": "2026-11-15T07:12:00.497Z",
   "runs": [
     {
-      "page": "home",
+      "page": "en home",
       "formFactor": "desktop",
       "scores": {
         "performance": 0.87,
@@ -18,7 +18,7 @@
       }
     },
     {
-      "page": "home",
+      "page": "en home",
       "formFactor": "mobile",
       "scores": {
         "performance": 0.99,
@@ -34,7 +34,7 @@
       }
     },
     {
-      "page": "research",
+      "page": "en research",
       "formFactor": "mobile",
       "scores": {
         "performance": 0.99,
@@ -50,7 +50,7 @@
       }
     },
     {
-      "page": "projects",
+      "page": "en projects",
       "formFactor": "mobile",
       "scores": {
         "performance": 0.99,
@@ -66,7 +66,7 @@
       }
     },
     {
-      "page": "blog",
+      "page": "en blog",
       "formFactor": "mobile",
       "scores": {
         "performance": 0.99,
@@ -82,7 +82,87 @@
       }
     },
     {
-      "page": "feed",
+      "page": "en feed",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 0.99,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "0.9 s",
+        "lcp": "0.9 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "zh home",
+      "formFactor": "desktop",
+      "scores": {
+        "performance": 0.87,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "1.2 s",
+        "lcp": "1.2 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "zh home",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 0.99,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "1.2 s",
+        "lcp": "1.2 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "ja home",
+      "formFactor": "desktop",
+      "scores": {
+        "performance": 0.87,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "1.2 s",
+        "lcp": "1.2 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "ja home",
+      "formFactor": "mobile",
+      "scores": {
+        "performance": 0.99,
+        "accessibility": 1,
+        "bestPractices": 1,
+        "seo": 1
+      },
+      "metrics": {
+        "fcp": "1.2 s",
+        "lcp": "1.2 s",
+        "tbt": "0 ms",
+        "cls": "0"
+      }
+    },
+    {
+      "page": "zh blog",
       "formFactor": "mobile",
       "scores": {
         "performance": 0.99,
