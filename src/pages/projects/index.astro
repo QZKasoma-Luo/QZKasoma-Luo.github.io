@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byOrder, isPublic } from '../../lib/content';
+
+const projects = (await getCollection('projects')).filter(isPublic).sort(byOrder);
+const kindLabel: Record<string, string> = {
+  research: 'Research',
+  group: 'Group project',
+  independent: 'Independent',
+  coursework: 'Coursework',
+};
+---
+
+<BaseLayout
+  title="Projects — Qingze Luo"
+  description="Research projects, group work, and independent builds by Qingze Luo."
+>
+  <div class="wrap page-head">
+    <p class="eyebrow">Selected work</p>
+    <h1>Projects</h1>
+    <p class="page-lead">
+      Research, group work, and independent builds — with the context to show what was
+      mine and what was shared.
+    </p>
+  </div>
+
+  <div class="wrap list">
+    {
+      projects.length > 0 ? (
+        projects.map((project) => (
+          <a class="item" href={`/projects/${project.id}/`}>
+            <span class="year">{project.data.year}</span>
+            <span class="main">
+              <span class="kind">
+                {kindLabel[project.data.kind]}
+                {project.data.status === 'in-progress' ? ' · In progress' : ''}
+              </span>
+              <h2>{project.data.title}</h2>
+              <p>{project.data.summary}</p>
+              <span class="tags">
+                {project.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        ))
+      ) : (
+        <p class="empty">Projects are being finalized.</p>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .list {
+    padding-bottom: 80px;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 24px;
+    gap: 24px;
+    padding: 26px 0 28px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .item:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .year {
+    padding-top: 6px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+  .kind {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  h2 {
+    margin-bottom: 6px;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  p {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 11px;
+  }
+  .arrow {
+    color: var(--muted);
+    justify-self: end;
+    padding-top: 3px;
+  }
+  .item:hover .arrow {
+    color: var(--accent);
+  }
+  .item:hover h2 {
+    color: var(--green);
+  }
+  .empty {
+    color: var(--muted);
+    padding: 30px 0;
+  }
+  @media (max-width: 620px) {
+    .item {
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .arrow {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Qingze Luo — social card</title>
+<style>
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("/fonts/newsreader-italic.woff2") format("woff2");font-weight:300 600;font-style:italic;font-display:swap}
+@font-face{font-family:"Public Sans";src:url("/fonts/public-sans.woff2") format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("/fonts/plex-mono-400.woff2") format("woff2");font-weight:400;font-display:swap}
+*{box-sizing:border-box}
+html,body{margin:0;width:1200px;height:630px;overflow:hidden}
+body{background:#0d1411;color:#f2efe4;font-family:"Public Sans",sans-serif;position:relative}
+body::before{content:"";position:absolute;inset:0;background-image:
+  radial-gradient(circle at 76% 18%,rgba(28,74,59,.55),transparent 42%),
+  radial-gradient(circle at 12% 94%,rgba(184,69,42,.18),transparent 38%),
+  linear-gradient(to right,rgba(242,239,228,.055) 1px,transparent 1px),
+  linear-gradient(to bottom,rgba(242,239,228,.055) 1px,transparent 1px);
+  background-size:auto,auto,64px 64px,64px 64px;opacity:.9}
+.frame{position:absolute;inset:30px;border:1px solid rgba(242,239,228,.16);border-radius:18px;padding:54px 58px;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{width:52px;height:52px;border-radius:13px;background:#f2efe4;color:#16211c;display:grid;place-items:center}
+.mark svg{width:34px;height:34px}
+.name{font-family:"Newsreader",Georgia,serif;font-size:27px;line-height:1;letter-spacing:-.02em}
+.sub{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#98a59a;margin-top:6px}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#c9f56d;border:1px solid rgba(201,245,109,.28);border-radius:999px;padding:8px 13px}
+.middle{margin-top:auto}
+h1{font-family:"Newsreader",Georgia,serif;font-weight:300;font-size:112px;line-height:.82;letter-spacing:-.05em;margin:0}
+h1 em{font-style:italic;color:#a8cbb4}
+.rule{height:1px;background:rgba(242,239,228,.2);margin:30px 0 22px}
+.bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+.line{max-width:640px;font-size:19px;line-height:1.45;color:#c6ccc5;margin:0}
+.line strong{color:#f2efe4;font-weight:500}
+.focus{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end;max-width:330px}
+.focus span{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#b9c4bb;border:1px solid rgba(242,239,228,.16);border-radius:999px;padding:5px 8px}
+.corner{position:absolute;right:58px;bottom:38px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#6f7d73}
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top">
+      <div class="brand">
+        <span class="mark">
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="22" cy="30" r="11" stroke="currentColor" stroke-width="3"/>
+            <path d="M30 38l5 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M42 18v22h9" stroke="#b8452a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>
+          <span class="name">Qingze Luo</span>
+          <span class="sub">Computer Science · UVic</span>
+        </span>
+      </div>
+      <span class="tag">Open to co-op · Jan 2027</span>
+    </div>
+
+    <div class="middle">
+      <h1>Qingze <em>Luo</em></h1>
+      <div class="rule"></div>
+      <div class="bottom">
+        <p class="line">Working where <strong>security, privacy, and software engineering</strong> meet.</p>
+        <div class="focus">
+          <span>Security</span><span>Privacy</span><span>IT audit</span><span>Software test</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="corner">qzkasoma-luo.github.io</span>
+</body>
+</html>

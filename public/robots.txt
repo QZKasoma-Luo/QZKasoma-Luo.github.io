@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qzkasoma-luo.github.io/sitemap-index.xml

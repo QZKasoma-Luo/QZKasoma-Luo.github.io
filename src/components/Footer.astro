@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  site: CollectionEntry<'site'>['data'];
+}
+
+const { site } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span class="copyright">© {year} {site.name}. Built with care.</span>
+    <nav class="footer-links" aria-label="Elsewhere">
+      <a href={site.socials.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href={site.socials.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+      <a href="/rss.xml">RSS</a>
+      <a href="#main">Top ↑</a>
+    </nav>
+  </div>
+</footer>

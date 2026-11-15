@@ -1,0 +1,127 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isPublic } from '../../lib/content';
+
+const posts = (await getCollection('blog'))
+  .filter(isPublic)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const dateFormat = new Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Writing — Qingze Luo"
+  description="Notes on privacy, systems, coursework, and learning in public by Qingze Luo."
+>
+  <div class="wrap page-head">
+    <p class="eyebrow">Notes &amp; essays</p>
+    <h1>Writing</h1>
+    <p class="page-lead">
+      Short notes on privacy, systems, coursework, and the process of learning in public.
+      Longer pieces are added when they are ready, not to fill a feed.
+    </p>
+  </div>
+
+  <div class="wrap blog-list">
+    {posts.length > 0 ? (
+      posts.map((post) => (
+        <a class="post" href={`/blog/${post.id}/`}>
+          <time datetime={post.data.date.toISOString()}>{dateFormat.format(post.data.date)}</time>
+          <span class="post-main">
+            <span class="post-tags">
+              {post.data.courseNotes ? <span class="tag tag-accent">Course notes</span> : null}
+              {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </span>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+          </span>
+        </a>
+      ))
+    ) : (
+      <div class="empty-card">
+        <p>The first notes are being written. The RSS feed will be the quiet way to know when they land.</p>
+        <a href="/rss.xml">Subscribe via RSS →</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-list {
+    padding-bottom: 80px;
+  }
+  .post {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 30px;
+    padding: 26px 0 28px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .post:first-child {
+    border-top: 1px solid var(--line);
+  }
+  time {
+    padding-top: 5px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  h2 {
+    margin-bottom: 6px;
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    font-weight: 300;
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+  }
+  p {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  .post:hover h2 {
+    color: var(--green);
+  }
+  .empty-card {
+    padding: 28px 30px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .empty-card p {
+    margin: 0 0 12px;
+    color: var(--muted);
+  }
+  .empty-card a {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  @media (max-width: 620px) {
+    .post {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+    time {
+      padding-top: 0;
+    }
+  }
+</style>

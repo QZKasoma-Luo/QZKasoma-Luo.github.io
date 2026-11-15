@@ -1,0 +1,812 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { byOrder, isPublic } from '../lib/content';
+
+const siteEntry = await getEntry('site', 'site');
+if (!siteEntry) throw new Error('Missing site entry');
+const site = siteEntry.data;
+
+const aboutEntry = await getEntry('pages', 'about');
+const about = aboutEntry && isPublic(aboutEntry) ? aboutEntry : null;
+const AboutContent = about ? (await render(about)).Content : null;
+
+const research = (await getCollection('research')).filter(isPublic).sort(byOrder);
+const projects = (await getCollection('projects')).filter(isPublic).sort(byOrder);
+const experience = (await getCollection('experience')).filter(isPublic).sort(byOrder);
+const posts = (await getCollection('blog'))
+  .filter(isPublic)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const latest = research[0]?.data.title ?? projects[0]?.data.title ?? 'Research and projects in progress';
+
+const kindLabel: Record<string, string> = {
+  research: 'Research',
+  group: 'Group project',
+  independent: 'Independent',
+  coursework: 'Coursework',
+};
+
+const statusLabel: Record<string, string> = {
+  published: 'Published',
+  'under-review': 'Under review',
+  preprint: 'Preprint',
+  'in-progress': 'In progress',
+  completed: 'Completed',
+};
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-contour" aria-hidden="true">
+      <svg viewBox="0 0 900 900" fill="none">
+        <g stroke="var(--green)" stroke-opacity=".16" stroke-width="1">
+          <path d="M220 900C220 540 470 470 720 470" />
+          <path d="M270 900C270 570 510 430 780 430" />
+          <path d="M320 900C320 600 550 390 840 390" />
+          <path d="M370 900C370 630 590 350 900 350" />
+          <path d="M420 900C420 660 630 310 960 310" />
+          <path d="M470 900C470 690 670 270 1020 270" />
+          <path d="M520 900C520 720 710 230 1080 230" />
+        </g>
+        <circle cx="640" cy="430" r="3" fill="var(--accent)" fill-opacity=".55" />
+      </svg>
+    </div>
+
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mono">Portfolio — 2026 / 27</p>
+        <h1><span>Qingze</span><span class="italic">Luo</span></h1>
+        <div class="hero-foot">
+          <p class="lead">{site.tagline}</p>
+          <div class="status">
+            <span class="status-line"><span class="dot"></span>{site.availability}</span>
+            <span class="status-line status-muted">{site.location}</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="dossier" aria-label="At a glance">
+        <div class="dossier-head glass">
+          <span class="mono">At a glance</span>
+          <span class="mono accent">01</span>
+        </div>
+        <div class="dossier-body">
+          <div class="d-row">
+            <span class="d-key mono">Study</span>
+            <span class="d-val">BSc Computer Science<small>University of Victoria</small></span>
+          </div>
+          <div class="d-row">
+            <span class="d-key mono">Focus</span>
+            <span class="d-val">{site.focus.join(' · ')}</span>
+          </div>
+          <div class="d-row">
+            <span class="d-key mono">Latest</span>
+            <span class="d-val">{latest}</span>
+          </div>
+          <div class="d-row">
+            <span class="d-key mono">Elsewhere</span>
+            <span class="d-val d-links">
+              <a href={site.socials.github} target="_blank" rel="noreferrer">GitHub</a>
+              <a href={site.socials.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            </span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="section" id="about">
+      <div class="section-head">
+        <span class="sec-no">01 /</span>
+        <h2>About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="prose">
+          {AboutContent ? <AboutContent /> : <p>About section is being written.</p>}
+        </div>
+        <aside class="about-aside">
+          <div class="aside-block">
+            <span class="mono">Focus</span>
+            <ul class="focus-list">
+              {site.focus.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+          <div class="aside-block">
+            <span class="mono">Availability</span>
+            <p>{site.availability}</p>
+          </div>
+          <div class="aside-block">
+            <span class="mono">Based in</span>
+            <p>{site.location}</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="section-head">
+        <span class="sec-no">02 /</span>
+        <h2>Research &amp; Publications</h2>
+        <a class="sec-link" href="/research/">All research ↗</a>
+      </div>
+      {research.length > 0 ? (
+        <div class="rows">
+          {research.map((item) => (
+            <a class="row" href={`/research/${item.id}/`}>
+              <span class="row-year">{item.data.year}</span>
+              <span class="row-main">
+                <span class="row-kicker mono">{statusLabel[item.data.status]}{item.data.venue ? ` · ${item.data.venue}` : ''}</span>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.summary}</p>
+                {item.data.tags?.length ? <span class="tags">{item.data.tags.map((tag) => <span class="tag">{tag}</span>)}</span> : null}
+              </span>
+              <span class="row-arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="empty">Research notes are being prepared.</p>
+      )}
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head">
+        <span class="sec-no">03 /</span>
+        <h2>Projects</h2>
+        <a class="sec-link" href="/projects/">All projects ↗</a>
+      </div>
+      <div class="project-grid">
+        {projects.map((project) => (
+          <a class="project-card card" href={`/projects/${project.id}/`}>
+            <span class="project-top">
+              <span class="mono">{kindLabel[project.data.kind]}</span>
+              {project.data.status === 'in-progress' ? <span class="tag tag-accent">In progress</span> : null}
+            </span>
+            <h3>{project.data.title}</h3>
+            <p>{project.data.summary}</p>
+            <span class="tags">
+              {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </span>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head">
+        <span class="sec-no">04 /</span>
+        <h2>Experience</h2>
+      </div>
+      <div class="exp-list">
+        {experience.map((job) => (
+          <article class="exp">
+            <span class="exp-date mono">{job.data.start} — {job.data.current ? 'Present' : job.data.end}</span>
+            <div class="exp-main">
+              <h3>{job.data.role}</h3>
+              <p class="exp-org">{job.data.org}{job.data.location ? ` · ${job.data.location}` : ''}</p>
+              {job.data.bullets.length ? (
+                <ul>
+                  {job.data.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="resume-band" id="resume">
+      <div>
+        <span class="mono">Résumé</span>
+        <h2>One page. The full picture.</h2>
+      </div>
+      <p>The public PDF has the same dates, roles, and project details as this site.</p>
+      {site.resume ? (
+        <a class="btn btn-solid" href={site.resume} download>
+          Download PDF
+          <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+      ) : (
+        <span class="btn btn-ghost" aria-disabled="true">PDF being updated</span>
+      )}
+    </section>
+
+    <section class="section" id="writing">
+      <div class="section-head">
+        <span class="sec-no">05 /</span>
+        <h2>Writing</h2>
+        <a class="sec-link" href="/blog/">All notes ↗</a>
+      </div>
+      {posts.length > 0 ? (
+        <div class="post-list">
+          {posts.map((post) => (
+            <a class="post-row" href={`/blog/${post.id}/`}>
+              <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+              <span>
+                <strong>{post.data.title}</strong>
+                <span class="post-desc">{post.data.description}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-card">
+          <p>Notes on privacy, systems, and learning in public are on the way.</p>
+          <a href="/blog/">Visit the blog →</a>
+        </div>
+      )}
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="section-head">
+        <span class="sec-no">06 /</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <p class="contact-lead">I’m looking for co-op work starting in January 2027 — security, privacy, IT audit, or software development and testing.</p>
+          <p class="muted">The fastest way to reach me is GitHub or LinkedIn.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-solid" href={site.socials.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a class="btn btn-ghost" href={site.socials.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 92px 0 72px;
+    isolation: isolate;
+  }
+  .hero-contour {
+    position: absolute;
+    z-index: -1;
+    top: -12%;
+    right: -10%;
+    width: min(720px, 58vw);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.42fr) minmax(290px, 0.58fr);
+    gap: 60px;
+    align-items: end;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    color: var(--muted);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.22em;
+    margin: 22px 0 0;
+    font-size: clamp(4.3rem, 9vw, 8.3rem);
+    font-weight: 300;
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+  }
+  h1 .italic {
+    color: var(--green);
+    font-style: italic;
+  }
+  .hero-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 26px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .lead {
+    max-width: 34ch;
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    line-height: 1.62;
+  }
+  .status {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .status-line {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .status-muted {
+    color: var(--muted);
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 14%, transparent);
+    flex-shrink: 0;
+  }
+
+  .dossier {
+    align-self: end;
+    border: 1px solid var(--line-strong);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .dossier-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .accent {
+    color: var(--accent);
+  }
+  .dossier-body {
+    padding: 4px 16px 8px;
+  }
+  .d-row {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 12px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+  }
+  .d-row:first-child {
+    border-top: 0;
+  }
+  .d-key {
+    padding-top: 3px;
+    color: var(--muted);
+    font-size: 0.52rem;
+  }
+  .d-val {
+    font-size: 0.83rem;
+    line-height: 1.45;
+  }
+  .d-val small {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.74rem;
+  }
+  .d-links {
+    display: flex;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+  }
+  .d-links a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .d-links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.5fr);
+    gap: 56px;
+    align-items: start;
+  }
+  .about-aside {
+    display: grid;
+    gap: 22px;
+    padding-top: 4px;
+  }
+  .aside-block {
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .aside-block .mono {
+    color: var(--muted);
+    font-size: 0.54rem;
+  }
+  .aside-block p {
+    margin: 7px 0 0;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  .focus-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 9px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .focus-list li {
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .rows {
+    display: grid;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr) 24px;
+    gap: 24px;
+    align-items: start;
+    padding: 24px 0 26px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .row:first-child {
+    padding-top: 0;
+  }
+  .row-year {
+    padding-top: 5px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+  .row-kicker {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 0.52rem;
+  }
+  .row h3 {
+    margin-bottom: 6px;
+    font-size: clamp(1.35rem, 2vw, 1.62rem);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+  }
+  .row p {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 11px;
+  }
+  .row-arrow {
+    padding-top: 2px;
+    color: var(--muted);
+    justify-self: end;
+    transition: color 0.16s var(--ease), transform 0.16s var(--ease);
+  }
+  .row:hover .row-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .project-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 240px;
+    padding: 20px 20px 18px;
+    text-decoration: none;
+    transition: border-color 0.18s var(--ease), transform 0.18s var(--ease);
+  }
+  .project-card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+  }
+  .project-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .project-top .mono {
+    font-size: 0.52rem;
+  }
+  .project-card h3 {
+    margin-bottom: 8px;
+    font-size: 1.35rem;
+    line-height: 1.18;
+  }
+  .project-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.83rem;
+    line-height: 1.55;
+  }
+  .project-card .tags {
+    margin-top: auto;
+    padding-top: 16px;
+  }
+  .project-arrow {
+    position: absolute;
+    right: 18px;
+    bottom: 17px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .exp-list {
+    display: grid;
+  }
+  .exp {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 30px;
+    padding: 24px 0 26px;
+    border-bottom: 1px solid var(--line);
+  }
+  .exp:first-child {
+    padding-top: 0;
+  }
+  .exp-date {
+    color: var(--muted);
+    font-size: 0.55rem;
+    padding-top: 5px;
+  }
+  .exp-main h3 {
+    margin-bottom: 3px;
+    font-size: 1.32rem;
+    line-height: 1.2;
+  }
+  .exp-org {
+    margin: 0 0 12px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .exp-main ul {
+    margin: 0;
+    padding-left: 1.05em;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+  .exp-main li + li {
+    margin-top: 5px;
+  }
+
+  .resume-band {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 0.7fr) auto;
+    gap: 28px;
+    align-items: center;
+    margin: 8px 0 0;
+    padding: 30px 32px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--paper-2);
+  }
+  .resume-band .mono {
+    color: var(--accent);
+    font-size: 0.54rem;
+  }
+  .resume-band h2 {
+    margin-top: 6px;
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  }
+  .resume-band p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+
+  .post-list {
+    display: grid;
+  }
+  .post-row {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .post-row time {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .post-row strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  .post-desc {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .empty-card {
+    padding: 26px 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .empty-card p {
+    margin: 0 0 10px;
+    color: var(--muted);
+  }
+  .empty-card a {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--accent);
+  }
+  .empty {
+    color: var(--muted);
+  }
+
+  .contact {
+    padding-bottom: 80px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 40px;
+    align-items: end;
+    padding: 30px 0 8px;
+  }
+  .contact-lead {
+    max-width: 38ch;
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+  .contact-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 980px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+    .hero {
+      padding-top: 70px;
+    }
+    h1 {
+      font-size: clamp(4rem, 14vw, 6.5rem);
+    }
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .dossier {
+      max-width: none;
+    }
+    .resume-band {
+      grid-template-columns: 1fr auto;
+    }
+    .resume-band p {
+      display: none;
+    }
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .hero {
+      padding: 52px 0 44px;
+    }
+    .hero-contour {
+      width: 120vw;
+      right: -45%;
+      top: 0;
+      opacity: 0.5;
+    }
+    h1 {
+      font-size: clamp(3.7rem, 19vw, 5rem);
+      margin-top: 18px;
+    }
+    .hero-foot {
+      margin-top: 24px;
+      padding-top: 18px;
+      gap: 18px;
+    }
+    .lead {
+      font-size: 0.95rem;
+    }
+    .status {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+    .project-card {
+      min-height: 0;
+    }
+    .row {
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .row-arrow {
+      display: none;
+    }
+    .exp {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .exp-date {
+      padding-top: 0;
+    }
+    .resume-band {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding: 24px;
+    }
+    .resume-band p {
+      display: block;
+    }
+    .post-row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .contact-actions {
+      width: 100%;
+    }
+    .contact-actions .btn {
+      flex: 1;
+    }
+    .nav-actions .btn[aria-disabled="true"] {
+      display: none;
+    }
+  }
+</style>

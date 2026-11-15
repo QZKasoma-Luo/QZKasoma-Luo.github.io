@@ -1,0 +1,132 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isPublic } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const research = (await getCollection('research')).filter(isPublic);
+  return research.map((item) => ({
+    params: { id: item.id },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: CollectionEntry<'research'>;
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const statusLabel: Record<string, string> = {
+  published: 'Published',
+  'under-review': 'Under review',
+  preprint: 'Preprint',
+  'in-progress': 'In progress',
+};
+
+const linkEntries = [
+  item.data.links.paper && { label: 'Paper', href: item.data.links.paper },
+  item.data.links.doi && { label: 'DOI', href: item.data.links.doi },
+  item.data.links.repo && { label: 'Code', href: item.data.links.repo },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<BaseLayout
+  title={`${item.data.title} — Qingze Luo`}
+  description={item.data.summary}
+>
+  <div class="wrap detail">
+    <a class="back-link" href="/research/">← All research</a>
+    {import.meta.env.DEV && !item.data.verified ? (
+      <p class="draft-note">Draft content — pending résumé verification</p>
+    ) : null}
+
+    <header class="detail-head">
+      <p class="kind">{statusLabel[item.data.status]} · {item.data.year}</p>
+      <h1>{item.data.title}</h1>
+      <p class="lede">{item.data.summary}</p>
+      <div class="detail-meta">
+        <span>Status <strong>{statusLabel[item.data.status]}</strong></span>
+        {item.data.venue ? <span>Venue <strong>{item.data.venue}</strong></span> : null}
+        {item.data.authors.length ? <span>Authors <strong>{item.data.authors.join(', ')}</strong></span> : null}
+      </div>
+      <div class="tags">
+        {item.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+      {linkEntries.length ? (
+        <div class="detail-actions">
+          {linkEntries.map((link) => (
+            <a class="btn btn-ghost" href={link.href} target="_blank" rel="noreferrer">
+              {link.label} ↗
+            </a>
+          ))}
+        </div>
+      ) : null}
+    </header>
+
+    {item.data.status === 'in-progress' ? (
+      <aside class="notice">
+        <strong>Work in progress.</strong> This page does not claim a publication, venue, or
+        author order until those details are confirmed.
+      </aside>
+    ) : null}
+
+    <div class="prose article-body">
+      <Content />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail {
+    padding-block: 46px 80px;
+  }
+  .kind {
+    margin: 0 0 12px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  h1 {
+    max-width: 26ch;
+    font-size: clamp(2.15rem, 4.6vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+  .lede {
+    max-width: 62ch;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.63;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 18px;
+  }
+  .notice {
+    max-width: 68ch;
+    margin: 30px 0 0;
+    padding: 14px 16px;
+    border-left: 2px solid var(--accent);
+    background: var(--paper-2);
+    color: var(--ink-soft);
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+  .article-body {
+    margin-top: 36px;
+  }
+  @media (max-width: 620px) {
+    .detail {
+      padding-block: 30px 56px;
+    }
+  }
+</style>

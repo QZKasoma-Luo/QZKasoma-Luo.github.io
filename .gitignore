@@ -7,3 +7,6 @@ design/package-lock.json
 .screenshots/
 *.log
 design/firefox-app/
+
+# local QA browsers / large test tools
+.tools/

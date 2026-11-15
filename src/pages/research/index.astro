@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byOrder, isPublic } from '../../lib/content';
+
+const research = (await getCollection('research')).filter(isPublic).sort(byOrder);
+const statusLabel: Record<string, string> = {
+  published: 'Published',
+  'under-review': 'Under review',
+  preprint: 'Preprint',
+  'in-progress': 'In progress',
+};
+---
+
+<BaseLayout
+  title="Research — Qingze Luo"
+  description="Research and publications by Qingze Luo, including work on differential privacy and data validation."
+>
+  <div class="wrap page-head">
+    <p class="eyebrow">Research &amp; publications</p>
+    <h1>Research</h1>
+    <p class="page-lead">
+      Work on privacy, data quality, and the engineering that makes results reproducible.
+    </p>
+  </div>
+
+  <div class="wrap list">
+    {
+      research.length > 0 ? (
+        research.map((item) => (
+          <a class="item" href={`/research/${item.id}/`}>
+            <span class="year">{item.data.year}</span>
+            <span class="main">
+              <span class="kind">
+                {statusLabel[item.data.status]}
+                {item.data.venue ? ` · ${item.data.venue}` : ''}
+              </span>
+              <h2>{item.data.title}</h2>
+              <p>{item.data.summary}</p>
+              <span class="tags">
+                {item.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </span>
+            </span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        ))
+      ) : (
+        <p class="empty">Research notes are being prepared.</p>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .list {
+    padding-bottom: 80px;
+  }
+  .item {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 24px;
+    gap: 24px;
+    padding: 26px 0 28px;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .item:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .year {
+    padding-top: 6px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+  }
+  .kind {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  h2 {
+    margin-bottom: 6px;
+    font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+    font-weight: 300;
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+  }
+  p {
+    max-width: 64ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 11px;
+  }
+  .arrow {
+    color: var(--muted);
+    justify-self: end;
+    padding-top: 3px;
+  }
+  .item:hover .arrow {
+    color: var(--accent);
+  }
+  .item:hover h2 {
+    color: var(--green);
+  }
+  .empty {
+    color: var(--muted);
+    padding: 30px 0;
+  }
+  @media (max-width: 620px) {
+    .item {
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 12px;
+    }
+    .arrow {
+      display: none;
+    }
+  }
+</style>

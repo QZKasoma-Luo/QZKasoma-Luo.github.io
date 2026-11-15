@@ -1,0 +1,305 @@
+---
+const isDev = import.meta.env.DEV;
+---
+
+<div id="qz-intro" class="intro" hidden aria-hidden="true" data-dev={isDev ? 'true' : 'false'}>
+  <div class="intro-stage">
+    <div class="intro-kicker">
+      <span>Portfolio</span>
+      <span>2026 / 27</span>
+    </div>
+
+    <svg class="intro-mark" viewBox="0 0 160 120" fill="none" aria-hidden="true">
+      <circle class="draw q" cx="56" cy="56" r="30" pathLength="1" />
+      <path class="draw q-tail" d="M77 77 96 96" pathLength="1" />
+      <path class="draw l" d="M112 26V84" pathLength="1" />
+      <path class="draw l-foot" d="M112 84H142" pathLength="1" />
+      <path class="scan" d="M8 56H152" pathLength="1" />
+      <circle class="spark" cx="152" cy="56" r="2.2" />
+    </svg>
+
+    <p class="intro-name"><span>Qingze</span> <span>Luo</span></p>
+    <p class="intro-meta">Security · Privacy · Software</p>
+    <div class="intro-rule" aria-hidden="true"></div>
+    <p class="intro-hint">Click or press any key to skip</p>
+  </div>
+</div>
+
+<style>
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #070b0a;
+    color: #f2efe4;
+    padding: 28px;
+    animation: intro-in 0.18s var(--ease) both;
+  }
+  .intro[hidden] {
+    display: none;
+  }
+  .intro[data-state="leaving"] {
+    animation: intro-out 0.26s ease-in both;
+  }
+
+  .intro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 50% 46%, rgba(7, 11, 10, 0) 0%, rgba(7, 11, 10, 0.5) 58%, #070b0a 84%),
+      linear-gradient(to right, rgba(242, 239, 228, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(242, 239, 228, 0.055) 1px, transparent 1px);
+    background-size: auto, 56px 56px, 56px 56px;
+    background-repeat: no-repeat, repeat, repeat;
+    pointer-events: none;
+  }
+  .intro::after {
+    content: "";
+    position: absolute;
+    width: 70vmax;
+    height: 70vmax;
+    left: 50%;
+    top: 46%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(28, 74, 59, 0.34), rgba(7, 11, 10, 0) 62%);
+    pointer-events: none;
+  }
+
+  .intro-stage {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 86vw);
+    text-align: center;
+  }
+
+  .intro-kicker {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 228, 0.58);
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(242, 239, 228, 0.16);
+    opacity: 0;
+    animation: rise 0.32s 0.04s var(--ease) both;
+  }
+
+  .intro-mark {
+    display: block;
+    width: min(360px, 76%);
+    margin: 34px auto 14px;
+    overflow: visible;
+  }
+  .intro-mark .draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .intro-mark .q,
+  .intro-mark .q-tail,
+  .intro-mark .l {
+    stroke: #f2efe4;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+  }
+  .intro-mark .l-foot {
+    stroke: #d9664a;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+  }
+  .intro-mark .q {
+    animation: draw 0.46s 0.12s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+  .intro-mark .q-tail {
+    animation: draw 0.3s 0.34s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+  .intro-mark .l {
+    animation: draw 0.34s 0.28s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+  .intro-mark .l-foot {
+    animation: draw 0.2s 0.52s ease-out both;
+  }
+  .intro-mark .scan {
+    stroke: rgba(201, 245, 109, 0.9);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 0.3s 0.56s ease-out both;
+  }
+  .intro-mark .spark {
+    fill: #c9f56d;
+    opacity: 0;
+    animation: spark 0.3s 0.78s ease-out both;
+  }
+
+  .intro-name {
+    margin: 8px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 6.2vw, 3.55rem);
+    font-weight: 400;
+    letter-spacing: 0.11em;
+    line-height: 1;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    gap: 0.42em;
+    flex-wrap: wrap;
+  }
+  .intro-name span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(7px);
+    animation: rise 0.34s 0.92s var(--ease) both;
+  }
+  .intro-name span:last-child {
+    animation-delay: 1.02s;
+  }
+
+  .intro-meta {
+    margin: 14px 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #c9f56d;
+    opacity: 0;
+    animation: rise 0.3s 1.18s var(--ease) both;
+  }
+
+  .intro-rule {
+    width: 100%;
+    height: 1px;
+    margin-top: 26px;
+    background: linear-gradient(to right, transparent, rgba(242, 239, 228, 0.5), transparent);
+    transform: scaleX(0);
+    animation: rule 0.42s 1.12s var(--ease) both;
+  }
+
+  .intro-hint {
+    margin: 14px 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(242, 239, 228, 0.38);
+    opacity: 0;
+    animation: fade 0.34s 1.24s ease-out both;
+  }
+
+  @keyframes intro-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes intro-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rule {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes spark {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (max-width: 620px) {
+    .intro-stage {
+      width: 88vw;
+    }
+    .intro-mark {
+      margin-top: 28px;
+      width: 72%;
+    }
+    .intro-name {
+      letter-spacing: 0.08em;
+      gap: 0.3em;
+    }
+    .intro-kicker {
+      font-size: 0.52rem;
+    }
+    .intro-hint {
+      font-size: 0.46rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro {
+      display: none !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const el = document.getElementById('qz-intro');
+    if (!el) return;
+
+    const root = document.documentElement;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const replay = el.dataset.dev === 'true' && new URLSearchParams(location.search).has('intro');
+    const key = 'qz-intro-seen';
+
+    let seen = false;
+    try {
+      seen = localStorage.getItem(key) === '1';
+    } catch {
+      return;
+    }
+
+    if (reduceMotion) return;
+    if (!replay && seen) return;
+
+    try {
+      localStorage.setItem(key, '1');
+    } catch {}
+
+    el.hidden = false;
+    el.dataset.state = 'playing';
+    root.classList.add('intro-active');
+
+    let closed = false;
+    let timer = 0;
+
+    const cleanup = () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('pointerdown', onPointer);
+      root.classList.remove('intro-active');
+    };
+
+    const close = () => {
+      if (closed) return;
+      closed = true;
+      window.clearTimeout(timer);
+      cleanup();
+      el.dataset.state = 'leaving';
+      window.setTimeout(() => el.remove(), 220);
+    };
+
+    const onKey = () => close();
+    const onPointer = () => close();
+
+    window.addEventListener('keydown', onKey, { passive: true });
+    window.addEventListener('pointerdown', onPointer, { passive: true });
+    timer = window.setTimeout(close, 1720);
+  })();
+</script>
