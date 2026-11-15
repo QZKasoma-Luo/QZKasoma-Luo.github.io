@@ -19,6 +19,8 @@ reviewed. The site content has been reconciled with the résumé.
 7. **Deploy key** — added to the repository; `ssh -T git@github-qz-homepage` succeeds.
 8. **Push** — completed 2026-11-15; GitHub Actions deployed successfully. Live site:
    <https://qzkasoma-luo.github.io>.
+9. **Blog migration** — the four 2023 course notes are published with a “Course notes” label.
+10. **Pages setting** — the owner switched the Pages source to GitHub Actions on 2026-11-15.
 
 ## Still open
 
@@ -28,9 +30,6 @@ reviewed. The site content has been reconciled with the résumé.
    résumé does not list it, so it stays an unpublished draft.
 3. **RAG demo** — what it retrieves, the stack, whether there is a public repo, and any
    evaluation. It is currently “In progress” with details intentionally sparse.
-4. **Blog migration** — publish the four 2023 course notes, keep them as drafts, or start
-   fresh? The drafts are in `src/content/blog/` and are excluded from production.
-5. **Pages setting** — done; the GitHub Actions workflow deploys successfully.
 
 ## Content guardrails
 

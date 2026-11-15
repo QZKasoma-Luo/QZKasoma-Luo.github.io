@@ -6,12 +6,12 @@ tags:
   - HCI
   - Design
 courseNotes: true
-draft: true
+draft: false
 ---
 
 ## In the Human-Centered design process
 
-After understanding and specify context of use, the specify user requirements:
+After understanding and specifying the context of use, specify the user requirements:
 
 - Functional requirements (what the interface will do)
 - Non-functional requirements (constraints)
@@ -27,7 +27,7 @@ After understanding and specify context of use, the specify user requirements:
 - Allows users to verify and contribute towards the development.
 - Overall advancing our goal to build usable system and one that meets the needs of people.
 
-## Requirements Gathering and communication:
+## Requirements gathering and communication:
 
 - Happens iteratively and could be gathered from different stages of HCD process.
 - Over a period of time, requirements could change completely. For example, our requirements from our smartphone today are very different from early phones such as landline phone and early cell phones.
@@ -37,7 +37,7 @@ After understanding and specify context of use, the specify user requirements:
 - Functional (what people need)
     1.  Describe what the product will do.
     2.  E.g., new video game
-    3.  Client wants a beginner level squash video game that supports signle or two-players.
+    3.  Client wants a beginner level squash video game that supports single or two players.
     4.  Has to capture player data continuously.
 - Non-functional (what people expect)
     1.  Describe the constraints (physical, logical, semantic, culture, technical) and aesthetics style.
@@ -74,8 +74,8 @@ After understanding and specify context of use, the specify user requirements:
 4. Say who the users are.  
     a. Helps the designer understand who will be using the system, how and their context of use.
 5. As a set, cover a range of possibilities.  
-    a. The potential users of the systems-primary occasional and least likely to use the system.  
-    b. Types of tasks – routine important but infrequent, unexpected, or rarely performed.
+    a. The potential users of the system: primary, occasional, and least likely to use it.  
+    b. Types of tasks — routine, important but infrequent, unexpected, or rarely performed.
 
 ## Which user groups will be addressed by the interface?
 

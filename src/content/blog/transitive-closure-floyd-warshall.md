@@ -6,7 +6,7 @@ tags:
   - Algorithms
   - Graphs
 courseNotes: true
-draft: true
+draft: false
 ---
 
 ## Transitive Closure

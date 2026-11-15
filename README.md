@@ -10,8 +10,8 @@ Live site: <https://qzkasoma-luo.github.io>
 > system is tuned toward the `dsh-startup-screen` reference, and the public résumé PDF is
 > in place. Experience, research, and project content follow the résumé; cross-browser,
 > link, privacy, and accessibility checks pass. Lighthouse mobile is 99; desktop is 87 with
-> the 1.78s opening (94 with the opening skipped). The blog archive decision is the remaining
-> content choice.
+> the 1.78s opening (94 with the opening skipped). The four 2023 course notes are migrated
+> and published with a “Course notes” label.
 
 ## Stack
 

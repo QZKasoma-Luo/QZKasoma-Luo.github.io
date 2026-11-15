@@ -6,14 +6,14 @@ tags:
   - Algorithms
   - Graphs
 courseNotes: true
-draft: true
+draft: false
 ---
 
 ## Weighted Graph
 
 Before we get into Minimum Spanning Tree (MST), let’s get to know what is a weighted graph:
 
-- A weighted graph is a graph model where we associate weights (or costs) with each edge. That is, for each edge e, it has a numeric label associate with it, denote as w(e).
+- A weighted graph is a graph model where we associate weights (or costs) with each edge. That is, for each edge e, it has a numeric label associated with it, denoted w(e).
 
 That we will look at algorithms for solving three general problems of weighted graph:
 
@@ -26,7 +26,7 @@ That we will look at algorithms for solving three general problems of weighted g
 - Input of MST: A weighted, connected graph 𝐺 = (𝑉, 𝐸) consisting of vertices (or nodes), 𝑉, and edges, 𝐸, with edge weights.
 - Output: A minimum spanning tree (MST) 𝑇 = (𝑉, 𝐸𝑇) of 𝐺. That is, 𝑇 is a connected spanning subgraph of 𝐺 (𝐸𝑇 ⊆ 𝐸) such that 𝑇 is acyclic, and the total weight of 𝑇, is minimized.
 
-The real-life application of MST are:
+Real-life applications of MST include:
 
 1. Cluster analysis.
 
@@ -36,7 +36,7 @@ The real-life application of MST are:
 
 4. LDPC codes for error correction.
 
-5. Image registration with Renyi entropy.
+5. Image registration with Rényi entropy.
 
 6. Find road networks in satellite and aerial imagery.
 
@@ -44,13 +44,13 @@ The real-life application of MST are:
 
 8. Model locality of particle interactions in turbulent fluid flows.
 
-9. Autoconfig protocol for Ethernet bridging to avoid cycles in a network.
+9. Auto-config protocol for Ethernet bridging to avoid cycles in a network.
 
 10. Approximation algorithms for NP-hard problems (e.g., TSP, Steiner tree).
 
 11. Network design (communication, electrical, hydraulic, computer, road).
 
-    For more information, please go to: [http://www.ics.uci.edu/~eppstein/gina/mst.html](http://www.ics.uci.edu/~eppstein/gina/mst.html)
+    Further reading: [http://www.ics.uci.edu/~eppstein/gina/mst.html](http://www.ics.uci.edu/~eppstein/gina/mst.html)
 
 ## How to find the MST in a Graph G?
 

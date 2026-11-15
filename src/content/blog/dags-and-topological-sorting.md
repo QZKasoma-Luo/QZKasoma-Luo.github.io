@@ -6,7 +6,7 @@ tags:
   - Algorithms
   - Graphs
 courseNotes: true
-draft: true
+draft: false
 ---
 
 ## DAG
@@ -52,21 +52,21 @@ There are two commonly used algorithms for performing topological sorting on a D
 
     ```
     function topologicalSort(graph):
-    initialize an empty list for the topological order
-    initialize a set to keep track of visited nodes
+        order = []
+        visited = set()
 
         for each node in graph:
             if node is not visited:
-                visit(node, topological order, visited)
+                visit(node, order, visited)
 
-        return reverse of the topological order list
+        return reverse(order)
 
-    function visit(node, topological order, visited):
+    function visit(node, order, visited):
         mark node as visited
         for each neighbor of node:
-        if neighbor is not visited:
-        visit(neighbor, topological order, visited)
-        append node to the topological order list
+            if neighbor is not visited:
+                visit(neighbor, order, visited)
+        append node to order
     ```
 
 2. **Breadth-First Search (BFS) Algorithm**:
@@ -83,8 +83,8 @@ There are two commonly used algorithms for performing topological sorting on a D
 
     ```
     function topologicalSort(graph):
-    initialize an empty list for the topological order
-    initialize a queue for nodes with in-degrees of 0
+        order = []
+        queue = empty queue
 
         for each node in graph:
             if in-degree of node is 0:
@@ -92,13 +92,13 @@ There are two commonly used algorithms for performing topological sorting on a D
 
         while queue is not empty:
             node = dequeue(queue)
-            append node to topological order list
+            append node to order
             for each neighbor of node:
                 reduce in-degree of neighbor by 1
                 if in-degree of neighbor is 0:
                     enqueue(neighbor)
 
-        return topological order list
+        return order
     ```
 
 Both DFS and BFS-based algorithms will produce a valid topological order for a DAG. The choice between them depends on factors like performance and specific requirements of the problem.

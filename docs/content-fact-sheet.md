@@ -64,9 +64,9 @@ résumé and direct owner confirmation are the only two bases for that flag.
 | 2023-09-28 | Human-Computer-Interaction Summary 1 | Course notes |
 | 2023-10-06 | Minimum Spanning Tree | Course notes |
 
-Migration decision is still open. Four drafts exist in `src/content/blog/`
-(`draft: true`, `courseNotes: true`) so the blog layout and RSS can be tested. They stay out
-of production until the owner says to publish them.
+The owner asked to migrate them. All four were published on 2026-11-15 with
+`draft: false` and `courseNotes: true`; they are labelled “Course notes” in the blog index
+and included in the RSS feed.
 
 ## Wording rules
 
@@ -88,4 +88,3 @@ of production until the owner says to publish them.
 - CUDA project: team size and Qingze’s exact individual contribution. The site only labels
   it as a group project and does not attribute the team result to one person.
 - RAG demo: what it retrieves, stack, public repo, evaluation.
-- Blog migration: publish the four course notes, keep them as drafts, or start fresh.
