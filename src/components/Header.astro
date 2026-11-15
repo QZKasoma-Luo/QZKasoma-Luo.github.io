@@ -102,5 +102,12 @@ const resumeAvailable = Boolean(site.resume);
         if (menu) menu.open = false;
       });
     });
+    const menu = document.querySelector('.menu');
+    if (menu) {
+      const summary = menu.querySelector('summary');
+      menu.addEventListener('toggle', () => {
+        summary?.setAttribute('aria-label', menu.open ? 'Close menu' : 'Open menu');
+      });
+    }
   })();
 </script>
