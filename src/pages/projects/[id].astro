@@ -24,6 +24,7 @@ const kindLabel: Record<string, string> = {
   group: 'Group project',
   independent: 'Independent',
   coursework: 'Coursework',
+  project: 'Project',
 };
 const statusLabel: Record<string, string> = {
   completed: 'Completed',
@@ -44,7 +45,7 @@ const linkEntries = [
 >
   <div class="wrap detail">
     <a class="back-link" href="/projects/">← All projects</a>
-    {import.meta.env.DEV && !project.data.verified ? (
+    {!project.data.verified ? (
       <p class="draft-note">Draft content — pending résumé verification</p>
     ) : null}
 

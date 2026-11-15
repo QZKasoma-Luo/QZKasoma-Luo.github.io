@@ -26,6 +26,7 @@ const kindLabel: Record<string, string> = {
   group: 'Group project',
   independent: 'Independent',
   coursework: 'Coursework',
+  project: 'Project',
 };
 
 const statusLabel: Record<string, string> = {
@@ -225,8 +226,12 @@ const statusLabel: Record<string, string> = {
         <div class="post-list">
           {posts.map((post) => (
             <a class="post-row" href={`/blog/${post.id}/`}>
-              <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+              <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</time>
               <span>
+                <span class="post-tags">
+                  {post.data.draft ? <span class="tag">Draft</span> : null}
+                  {post.data.courseNotes ? <span class="tag tag-accent">Course notes</span> : null}
+                </span>
                 <strong>{post.data.title}</strong>
                 <span class="post-desc">{post.data.description}</span>
               </span>
@@ -651,6 +656,12 @@ const statusLabel: Record<string, string> = {
     font-size: 0.56rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
+  }
+  .post-row .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 6px;
   }
   .post-row strong {
     display: block;

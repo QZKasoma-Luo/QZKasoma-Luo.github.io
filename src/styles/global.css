@@ -55,8 +55,8 @@
   --glass-edge-solid: rgba(22, 33, 28, 0.22);
 
   --font-display: "Newsreader", Georgia, "Times New Roman", serif;
-  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
 
   --wrap: 1180px;
   --gutter: 32px;

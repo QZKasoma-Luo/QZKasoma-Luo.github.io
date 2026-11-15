@@ -39,7 +39,7 @@ const linkEntries = [
 >
   <div class="wrap detail">
     <a class="back-link" href="/research/">← All research</a>
-    {import.meta.env.DEV && !item.data.verified ? (
+    {!item.data.verified ? (
       <p class="draft-note">Draft content — pending résumé verification</p>
     ) : null}
 

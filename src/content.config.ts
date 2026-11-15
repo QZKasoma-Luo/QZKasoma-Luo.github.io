@@ -47,7 +47,7 @@ const projects = defineCollection({
     title: z.string(),
     summary: z.string(),
     year: z.number().int(),
-    kind: z.enum(['research', 'group', 'independent', 'coursework']),
+    kind: z.enum(['research', 'group', 'independent', 'coursework', 'project']),
     status: z.enum(['completed', 'in-progress']).default('completed'),
     role: z.string().optional(),
     team: z.string().optional(),

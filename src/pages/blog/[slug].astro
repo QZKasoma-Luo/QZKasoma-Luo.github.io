@@ -30,7 +30,7 @@ const dateFormat = new Intl.DateTimeFormat('en-CA', {
 <BaseLayout title={`${post.data.title} — Qingze Luo`} description={post.data.description}>
   <article class="wrap article">
     <a class="back-link" href="/blog/">← All writing</a>
-    {import.meta.env.DEV && post.data.draft ? (
+    {post.data.draft ? (
       <p class="draft-note">Draft — not published</p>
     ) : null}
 

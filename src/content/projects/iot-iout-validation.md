@@ -2,7 +2,7 @@
 title: "IoT / IoUT data validation framework"
 summary: "Multi-tier validation for data quality, network-flow consistency, protocol behaviour, and DDoS patterns across laboratory and underwater datasets."
 year: 2025
-kind: research
+kind: project
 status: completed
 tags:
   - Python
