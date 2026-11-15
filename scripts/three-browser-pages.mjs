@@ -25,14 +25,15 @@ for (const [engineName, engine] of Object.entries(engines)) {
         colorScheme: 'light',
       });
       const page = await context.newPage();
-      await page.addInitScript(() => { try { localStorage.setItem('qz-intro-seen', '1'); } catch {} });
       const consoleErrors = [];
       const pageErrors = [];
       const failed = [];
       page.on('console', (msg) => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
       page.on('pageerror', (err) => pageErrors.push(String(err)));
       page.on('requestfailed', (req) => failed.push(`${req.url()} ${req.failure()?.errorText ?? ''}`));
-      await page.goto(new URL(path, base).href, { waitUntil: 'networkidle', timeout: 30000 });
+      const pageUrl = new URL(path, base);
+      pageUrl.searchParams.set('intro', 'off');
+      await page.goto(pageUrl.href, { waitUntil: 'networkidle', timeout: 30000 });
       await page.evaluate(() => document.fonts.ready);
       const info = await page.evaluate(() => ({
         title: document.title,

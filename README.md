@@ -9,8 +9,9 @@ Live site: <https://qzkasoma-luo.github.io>
 > **Status:** live at <https://qzkasoma-luo.github.io>. Direction A is chosen, the visual
 > system is tuned toward the `dsh-startup-screen` reference, and the public résumé PDF is
 > in place. Experience, research, and project content follow the résumé; cross-browser,
-> Lighthouse, link, privacy, and accessibility checks pass. The blog archive decision is
-> the remaining content choice.
+> link, privacy, and accessibility checks pass. Lighthouse mobile is 99; desktop is 87 with
+> the 1.78s opening (94 with the opening skipped). The blog archive decision is the remaining
+> content choice.
 
 ## Stack
 
@@ -18,7 +19,7 @@ Live site: <https://qzkasoma-luo.github.io>
 - Markdown + YAML content collections.
 - Hand-written CSS with design tokens; self-hosted WOFF2 fonts.
 - No analytics, cookies, third-party embeds, or tracking pixels.
-- Playwright for cross-browser screenshots; Lighthouse for the 90+ gate.
+- Playwright for cross-browser screenshots; Lighthouse for performance, accessibility, and SEO checks.
 - GitHub Actions → GitHub Pages.
 
 ## Run it

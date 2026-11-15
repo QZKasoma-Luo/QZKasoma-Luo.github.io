@@ -1,8 +1,7 @@
 ---
-const isDev = import.meta.env.DEV;
 ---
 
-<div id="qz-intro" class="intro" hidden aria-hidden="true" data-dev={isDev ? 'true' : 'false'}>
+<div id="qz-intro" class="intro" hidden aria-hidden="true">
   <div class="intro-stage">
     <div class="intro-kicker">
       <span>Portfolio</span>
@@ -44,7 +43,7 @@ const isDev = import.meta.env.DEV;
     display: none;
   }
   .intro[data-state="leaving"] {
-    animation: intro-out 0.26s ease-in both;
+    animation: intro-out 0.2s ease-in both;
   }
 
   .intro::before {
@@ -59,7 +58,7 @@ const isDev = import.meta.env.DEV;
     background-size: auto, 56px 56px, 56px 56px, auto;
     background-repeat: no-repeat, repeat, repeat, no-repeat;
     opacity: 0;
-    animation: plate-in 0.35s 0.07s ease-out forwards;
+    animation: plate-in 0.45s 0.08s ease-out forwards;
     pointer-events: none;
   }
   .intro::after {
@@ -78,9 +77,9 @@ const isDev = import.meta.env.DEV;
   .intro-stage {
     position: relative;
     z-index: 1;
-    width: min(560px, 86vw);
+    width: min(760px, 84vw);
     text-align: center;
-    animation: stage-glitch 0.16s 0.87s steps(2) both;
+    animation: stage-glitch 0.2s 1.56s steps(2) both;
   }
 
   .intro-kicker {
@@ -88,20 +87,20 @@ const isDev = import.meta.env.DEV;
     justify-content: space-between;
     gap: 16px;
     font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-size: 0.66rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(10, 10, 10, 0.62);
-    padding-bottom: 18px;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgba(10, 10, 10, 0.16);
     opacity: 0;
-    animation: rise 0.26s 0.03s var(--ease) both;
+    animation: rise 0.34s 0.04s var(--ease) both;
   }
 
   .intro-mark {
     display: block;
-    width: min(360px, 76%);
-    margin: 34px auto 14px;
+    width: min(520px, 78%);
+    margin: 40px auto 18px;
     overflow: visible;
   }
   .intro-mark .draw {
@@ -135,16 +134,16 @@ const isDev = import.meta.env.DEV;
     animation-duration: 18s;
   }
   .intro-mark .q {
-    animation: draw 0.36s 0.08s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation: draw 0.5s 0.12s cubic-bezier(0.65, 0, 0.35, 1) both;
   }
   .intro-mark .q-tail {
-    animation: draw 0.24s 0.21s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation: draw 0.34s 0.38s cubic-bezier(0.65, 0, 0.35, 1) both;
   }
   .intro-mark .l {
-    animation: draw 0.28s 0.18s cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation: draw 0.38s 0.3s cubic-bezier(0.65, 0, 0.35, 1) both;
   }
   .intro-mark .l-foot {
-    animation: draw 0.16s 0.33s ease-out both;
+    animation: draw 0.24s 0.52s ease-out both;
   }
   .intro-mark .scan {
     stroke: rgba(255, 117, 0, 0.9);
@@ -152,66 +151,66 @@ const isDev = import.meta.env.DEV;
     stroke-linecap: round;
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    animation: draw 0.24s 0.35s ease-out both;
+    animation: draw 0.34s 0.56s ease-out both;
   }
   .intro-mark .spark {
     fill: #ff7500;
     opacity: 0;
-    animation: spark 0.24s 0.49s ease-out both;
+    animation: spark 0.3s 0.78s ease-out both;
   }
 
   .intro-name {
     margin: 8px 0 0;
     font-family: var(--font-display);
-    font-size: clamp(2.1rem, 6.2vw, 3.55rem);
+    font-size: clamp(2.6rem, 7.4vw, 4.6rem);
     font-weight: 400;
     letter-spacing: 0.11em;
     line-height: 1;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
-    gap: 0.42em;
+    gap: 0.38em;
     flex-wrap: wrap;
   }
   .intro-name span {
     display: inline-block;
     opacity: 0;
     transform: translateY(7px);
-    animation: rise 0.28s 0.58s var(--ease) both;
+    animation: rise 0.38s 0.92s var(--ease) both;
   }
   .intro-name span:last-child {
-    animation-delay: 0.64s;
+    animation-delay: 1.04s;
   }
 
   .intro-meta {
-    margin: 14px 0 0;
+    margin: 18px 0 0;
     font-family: var(--font-mono);
-    font-size: 0.58rem;
+    font-size: 0.68rem;
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: #a83a22;
     opacity: 0;
-    animation: rise 0.24s 0.75s var(--ease) both;
+    animation: rise 0.34s 1.18s var(--ease) both;
   }
 
   .intro-rule {
     width: 100%;
     height: 1px;
-    margin-top: 26px;
+    margin-top: 30px;
     background: linear-gradient(to right, transparent, rgba(10, 10, 10, 0.45), transparent);
     transform: scaleX(0);
-    animation: rule 0.32s 0.71s var(--ease) both;
+    animation: rule 0.4s 1.1s var(--ease) both;
   }
 
   .intro-hint {
     margin: 14px 0 0;
     font-family: var(--font-mono);
-    font-size: 0.5rem;
+    font-size: 0.56rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(10, 10, 10, 0.55);
     opacity: 0;
-    animation: fade 0.28s 0.78s ease-out both;
+    animation: fade 0.34s 1.26s ease-out both;
   }
 
   @keyframes intro-in {
@@ -259,18 +258,18 @@ const isDev = import.meta.env.DEV;
       width: 88vw;
     }
     .intro-mark {
-      margin-top: 28px;
-      width: 72%;
+      margin-top: 32px;
+      width: 78%;
     }
     .intro-name {
       letter-spacing: 0.08em;
       gap: 0.3em;
     }
     .intro-kicker {
-      font-size: 0.52rem;
+      font-size: 0.54rem;
     }
     .intro-hint {
-      font-size: 0.46rem;
+      font-size: 0.5rem;
     }
   }
 
@@ -288,22 +287,9 @@ const isDev = import.meta.env.DEV;
 
     const root = document.documentElement;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const replay = el.dataset.dev === 'true' && new URLSearchParams(location.search).has('intro');
-    const key = 'qz-intro-seen';
+    const skip = new URLSearchParams(location.search).get('intro') === 'off';
 
-    let seen = false;
-    try {
-      seen = localStorage.getItem(key) === '1';
-    } catch {
-      return;
-    }
-
-    if (reduceMotion) return;
-    if (!replay && seen) return;
-
-    try {
-      localStorage.setItem(key, '1');
-    } catch {}
+    if (reduceMotion || skip) return;
 
     el.hidden = false;
     el.dataset.state = 'playing';
@@ -324,7 +310,7 @@ const isDev = import.meta.env.DEV;
       window.clearTimeout(timer);
       cleanup();
       el.dataset.state = 'leaving';
-      window.setTimeout(() => el.remove(), 220);
+      window.setTimeout(() => el.remove(), 210);
     };
 
     const onKey = () => close();
@@ -332,6 +318,6 @@ const isDev = import.meta.env.DEV;
 
     window.addEventListener('keydown', onKey, { passive: true });
     window.addEventListener('pointerdown', onPointer, { passive: true });
-    timer = window.setTimeout(close, 1100);
+    timer = window.setTimeout(close, 1780);
   })();
 </script>

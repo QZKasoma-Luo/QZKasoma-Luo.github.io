@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-15T06:01:58.207Z",
+  "generatedAt": "2026-11-15T06:14:20.044Z",
   "runs": [
     {
       "page": "home",
       "formFactor": "desktop",
       "scores": {
-        "performance": 0.9,
+        "performance": 0.87,
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 1
@@ -21,7 +21,7 @@
       "page": "home",
       "formFactor": "mobile",
       "scores": {
-        "performance": 1,
+        "performance": 0.99,
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 1
@@ -37,7 +37,7 @@
       "page": "research",
       "formFactor": "mobile",
       "scores": {
-        "performance": 1,
+        "performance": 0.99,
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 1
@@ -53,7 +53,7 @@
       "page": "projects",
       "formFactor": "mobile",
       "scores": {
-        "performance": 1,
+        "performance": 0.99,
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 1
@@ -69,7 +69,7 @@
       "page": "blog",
       "formFactor": "mobile",
       "scores": {
-        "performance": 1,
+        "performance": 0.99,
         "accessibility": 1,
         "bestPractices": 1,
         "seo": 1

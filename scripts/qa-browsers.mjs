@@ -28,9 +28,9 @@ for (const [name, engine] of Object.entries(engines)) {
       colorScheme: 'light',
     });
     const page = await context.newPage();
-    await page.goto(base, { waitUntil: 'networkidle' });
-    await page.evaluate(() => localStorage.setItem('qz-intro-seen', '1'));
-    await page.reload({ waitUntil: 'networkidle' });
+    const pageUrl = new URL(base);
+    pageUrl.searchParams.set('intro', 'off');
+    await page.goto(pageUrl.href, { waitUntil: 'networkidle' });
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(250);
 

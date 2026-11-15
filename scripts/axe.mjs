@@ -18,14 +18,15 @@ let violations = 0;
 for (const theme of ['light', 'dark']) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   const page = await context.newPage();
-  await page.goto(base, { waitUntil: 'networkidle' });
-  await page.evaluate((t) => {
-    localStorage.setItem('qz-intro-seen', '1');
-    localStorage.setItem('theme', t);
-  }, theme);
+  const firstUrl = new URL(base);
+  firstUrl.searchParams.set('intro', 'off');
+  await page.goto(firstUrl.href, { waitUntil: 'networkidle' });
+  await page.evaluate((t) => localStorage.setItem('theme', t), theme);
 
   for (const path of pages) {
-    await page.goto(new URL(path, base).href, { waitUntil: 'networkidle' });
+    const pageUrl = new URL(path, base);
+    pageUrl.searchParams.set('intro', 'off');
+    await page.goto(pageUrl.href, { waitUntil: 'networkidle' });
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
