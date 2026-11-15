@@ -3,9 +3,9 @@
  * Build-time translation pass.
  *
  * English is the source of truth. This script runs after `astro build`,
- * translates the visible English strings into Simplified Chinese and
- * Japanese with DeepSeek, caches every translation, and writes static
- * /zh/ and /ja/ copies of the generated HTML.
+ * translates the visible English strings into Simplified Chinese, Japanese,
+ * and Korean with DeepSeek, caches every translation, and writes static
+ * /zh/, /ja/, and /ko/ copies of the generated HTML.
  *
  * The cache is committed so CI can run with --offline and no API key.
  */
@@ -24,9 +24,10 @@ const VERSION = 1;
 const LOCALES = {
   zh: { htmlLang: 'zh-Hans', ogLocale: 'zh_CN', label: 'Simplified Chinese', rssLang: 'zh-cn' },
   ja: { htmlLang: 'ja', ogLocale: 'ja_JP', label: 'Japanese', rssLang: 'ja' },
+  ko: { htmlLang: 'ko', ogLocale: 'ko_KR', label: 'Korean', rssLang: 'ko' },
 };
-const ALL_LANGS = ['en', 'zh', 'ja'];
-const HREFLANG = { en: 'en', zh: 'zh-Hans', ja: 'ja' };
+const ALL_LANGS = ['en', 'zh', 'ja', 'ko'];
+const HREFLANG = { en: 'en', zh: 'zh-Hans', ja: 'ja', ko: 'ko' };
 
 const args = new Set(process.argv.slice(2));
 const OFFLINE = args.has('--offline');
@@ -62,6 +63,7 @@ addresses exactly as they are. Do not translate text inside <code>...</code>.
 const SYSTEM_PROMPTS = {
   zh: `You are a careful professional translator for a personal academic and co-op portfolio. Translate the input strings from English to Simplified Chinese (简体中文). Use a calm, precise, professional tone. Keep the HTML structure and all attributes intact; translate only visible text. ${GLOSSARY} Return only JSON of the form {"translations":["...", "..."]} with exactly the same number and order as the input strings. Do not add notes or explanations.`,
   ja: `You are a careful professional translator for a personal academic and co-op portfolio. Translate the input strings from English to natural Japanese. Use a calm, precise, professional tone; use です・ます for prose and concise labels for UI. Keep the HTML structure and all attributes intact; translate only visible text. ${GLOSSARY} Return only JSON of the form {"translations":["...", "..."]} with exactly the same number and order as the input strings. Do not add notes or explanations.`,
+  ko: `You are a careful professional translator for a personal academic and co-op portfolio. Translate the input strings from English to natural Korean (한국어). Use a calm, precise, professional tone: 합니다체 for prose and concise noun-style labels for UI. Use natural Korean technical vocabulary while keeping the glossary terms in English. Keep the HTML structure and all attributes intact; translate only visible text. ${GLOSSARY} Return only JSON of the form {"translations":["...", "..."]} with exactly the same number and order as the input strings. Do not add notes or explanations.`,
 };
 
 let apiKey = null;
@@ -249,6 +251,27 @@ const TERM_OVERRIDES = {
     ['SOLIDS Lab, University of Victoria · Victoria, BC, Canada', 'SOLIDS Lab, University of Victoria · カナダ ブリティッシュコロンビア州ビクトリア'],
     ['University of Victoria · Victoria, BC, Canada', 'University of Victoria · カナダ ブリティッシュコロンビア州ビクトリア'],
   ],
+  ko: [
+    ['Enhancing Underwater Network Security: ML-Based Detection and Prediction of DDoS Attacks in IoUT Networks', '수중 네트워크 보안 강화: 머신러닝 기반 IoUT 네트워크 DDoS 공격 탐지 및 예측'],
+    ['VICTORIA, BC · 48.4°N', '빅토리아, BC · 48.4°N'],
+    ['Independent', '개인 프로젝트'],
+    ['REV 2026.11 · PORTFOLIO', 'REV 2026.11 · 포트폴리오'],
+    ['MASc Electrical &amp; Computer Engineering', '전기 및 컴퓨터 공학 석사(MASc)'],
+    ['University of Victoria · BSc Computer Science', 'University of Victoria · 컴퓨터 과학 학사(BSc)'],
+    ['Electrical and Computer Engineering', '전기 및 컴퓨터 공학'],
+    ['Computer Science', '컴퓨터 과학'],
+    ['Download PDF', 'PDF 다운로드'],
+    ['Research Assistant', '연구 조교'],
+    ['Teaching Assistant — SENG 321', '조교 — SENG 321'],
+    ['Engineering Technician', '엔지니어링 테크니션'],
+    ['Production Planning Support', '생산 계획 지원'],
+    ['Flextronics · Zhuhai, Guangdong, China', 'Flextronics · 중국 광둥성 주하이'],
+    ['Nicholson Manufacturing Ltd. · Sidney, BC, Canada', 'Nicholson Manufacturing Ltd. · 캐나다 브리티시컬럼비아주 시드니'],
+    ['Minimum Spanning Tree — Qingze Luo', '최소 신장 트리 — Qingze Luo'],
+    ['Victoria, BC, Canada', '캐나다 브리티시컬럼비아주 빅토리아'],
+    ['SOLIDS Lab, University of Victoria · Victoria, BC, Canada', 'SOLIDS Lab, University of Victoria · 캐나다 브리티시컬럼비아주 빅토리아'],
+    ['University of Victoria · Victoria, BC, Canada', 'University of Victoria · 캐나다 브리티시컬럼비아주 빅토리아'],
+  ],
 };
 
 function polish(text, lang) {
@@ -256,6 +279,7 @@ function polish(text, lang) {
   let value = text;
   if (lang === 'zh') value = value.replace(/\bIT audit\b/gi, 'IT 审计').replace(/独立完成/g, '独立项目');
   if (lang === 'ja') value = value.replace(/\bIT audit\b/gi, 'IT 監査').replace(/個人制作/g, '個人プロジェクト').replace(/>個人</g, '>個人プロジェクト<');
+  if (lang === 'ko') value = value.replace(/\bIT audit\b/gi, 'IT 감사').replace(/개인 제작/g, '개인 프로젝트');
   for (const [from, to] of TERM_OVERRIDES[lang] ?? []) {
     value = value.split(from).join(to);
   }
@@ -430,13 +454,20 @@ function localizePageLinks($, lang) {
     if (typeof href !== 'string') return;
     $(el).attr('href', localizeHref(href, lang));
   });
+  // The feed page shows the feed URL as text inside <code>, which is otherwise
+  // skipped by the translator. Point the copied URL at this locale's feed.
+  $('code').each((_, el) => {
+    const value = $(el).text().trim();
+    if (value === `${SITE}/rss.xml`) $(el).text(`${SITE}${localePath(lang, '/rss.xml')}`);
+    else if (value === '/rss.xml') $(el).text(localePath(lang, '/rss.xml'));
+  });
 }
 
 async function walkHtml(dir, out = []) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'zh' || entry.name === 'ja' || entry.name === '_astro') continue;
+      if (entry.name === 'zh' || entry.name === 'ja' || entry.name === 'ko' || entry.name === '_astro') continue;
       await walkHtml(path, out);
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       out.push(path);
@@ -469,6 +500,10 @@ async function translateRss(lang, cache, stats) {
     if (translation !== undefined) $(node.el).text(polish(translation, lang));
   }
   $('channel > language').text(LOCALES[lang].rssLang);
+  $('channel > link').each((_, el) => {
+    const value = $(el).text();
+    if (value === SITE || value === `${SITE}/`) $(el).text(`${SITE}${localePath(lang, '/')}`);
+  });
   $('item > link, item > guid').each((_, el) => {
     const value = $(el).text();
     if (value.startsWith(`${SITE}/`)) $(el).text(`${SITE}${localizeHref(value.slice(SITE.length), lang)}`);
@@ -487,7 +522,7 @@ async function updateSitemap(paths) {
   }
   const existing = new Set([...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
   const additions = [];
-  for (const lang of ['zh', 'ja']) {
+  for (const lang of Object.keys(LOCALES)) {
     for (const path of paths) {
       if (path === '/404.html') continue;
       const loc = `${SITE}${localePath(lang, path)}`;

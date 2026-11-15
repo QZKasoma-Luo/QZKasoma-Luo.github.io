@@ -5,11 +5,11 @@ const base = 'http://127.0.0.1:4322/';
 const ffHome = '/tmp/ffuser-pages';
 await mkdir(ffHome, { recursive: true });
 const pages = [
-  '/', '/zh/', '/ja/',
-  '/research/ieee-access-iout-ddos/', '/zh/research/ieee-access-iout-ddos/', '/ja/research/ieee-access-iout-ddos/',
-  '/projects/', '/zh/projects/', '/ja/projects/',
-  '/blog/', '/zh/blog/', '/ja/blog/',
-  '/feed/', '/zh/feed/', '/ja/feed/',
+  '/', '/zh/', '/ja/', '/ko/',
+  '/research/ieee-access-iout-ddos/', '/zh/research/ieee-access-iout-ddos/', '/ja/research/ieee-access-iout-ddos/', '/ko/research/ieee-access-iout-ddos/',
+  '/projects/', '/zh/projects/', '/ja/projects/', '/ko/projects/',
+  '/blog/', '/zh/blog/', '/ja/blog/', '/ko/blog/',
+  '/feed/', '/zh/feed/', '/ja/feed/', '/ko/feed/',
 ];
 const engines = { chromium, webkit, firefox };
 const report = {};

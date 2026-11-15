@@ -1,7 +1,7 @@
 import { chromium, devices } from 'playwright';
 
 // Blog list: category filters + keyword search, on the English and localised pages.
-// The search matches the rendered (translated) text, so it is checked in zh/ja too.
+// The search matches the rendered (translated) text, so it is checked in zh/ja/ko too.
 const base = process.env.BASE_URL || 'http://127.0.0.1:4322/';
 const browser = await chromium.launch();
 let failures = 0;
@@ -78,6 +78,17 @@ check('zh search matches translated text', (await visiblePosts(page)) === 1, `${
 await page.goto(`${base}ja/blog/`, { waitUntil: 'networkidle' });
 await page.fill('#blog-search', '最小全域木');
 check('ja search matches translated text', (await visiblePosts(page)) === 1, `${await visiblePosts(page)} visible`);
+
+await page.goto(`${base}ko/blog/`, { waitUntil: 'networkidle' });
+check('ko labels match their categories', await page.evaluate(() =>
+  [...document.querySelectorAll('#blog-posts .post')].every((el) => {
+    const label = el.querySelector('.tag-accent')?.textContent.trim();
+    if (el.dataset.category === 'course') return label === '수업 노트';
+    if (el.dataset.category === 'project') return label === '프로젝트 노트';
+    return true;
+  })));
+await page.fill('#blog-search', '최소 신장 트리');
+check('ko search matches translated text', (await visiblePosts(page)) === 1, `${await visiblePosts(page)} visible`);
 
 const mobile = await browser.newContext({ ...devices['iPhone 13'] });
 const mobilePage = await mobile.newPage();

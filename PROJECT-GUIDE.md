@@ -1,7 +1,7 @@
 # 项目架构与增改说明
 
 > 给下一个新 session 的秧秧：先读这份，再读 `README.md`、`docs/TECH.md`、`docs/content-fact-sheet.md`。
-> 当前线上：<https://qzkasoma-luo.github.io>（英文 `/`、简体中文 `/zh/`、日文 `/ja/`）。
+> 当前线上：<https://qzkasoma-luo.github.io>（英文 `/`、简体中文 `/zh/`、日文 `/ja/`、韩文 `/ko/`）。
 
 ## 0. 五分钟接手
 
@@ -16,7 +16,7 @@
 
 ## 1. 一句话架构
 
-Astro 7 静态站 → `npm run build` 生成英文 `dist/` → `scripts/i18n-build.mjs` 用 DeepSeek 翻译并写入 `/zh/`、`/ja/` 静态副本 → GitHub Actions 跑离线翻译缓存 → 上传 `dist/` 到 GitHub Pages。
+Astro 7 静态站 → `npm run build` 生成英文 `dist/` → `scripts/i18n-build.mjs` 用 DeepSeek 翻译并写入 `/zh/`、`/ja/`、`/ko/` 静态副本 → GitHub Actions 跑离线翻译缓存 → 上传 `dist/` 到 GitHub Pages。
 
 ```
 src/content/*.md  ──┐
@@ -25,7 +25,7 @@ src/pages/*.astro  ─┘                      │
                                            ├─> scripts/i18n-build.mjs
                                            │      ├─ DeepSeek (only missing strings)
                                            │      ├─ src/i18n/cache/{zh,ja}.json
-                                           │      ├─ dist/zh/**, dist/ja/**
+                                           │      ├─ dist/zh/**, dist/ja/**, dist/ko/**
                                            │      ├─ localized RSS
                                            │      └─ sitemap append
                                            └─> GitHub Pages
@@ -114,29 +114,29 @@ blog 的 `category` 三选一：`life`（个人生活分享）、`course`（课�
 ### 语言切换
 
 - `LangSwitch.astro` 渲染两组开关：`Header.astro` 的 `nav.lang-switch`（桌面）和移动菜单里的 `.menu-langs`（`as="div"`），链接带 `data-locale="en|zh|ja"`、`lang`、`hreflang`，`data-i18n-skip` 防止被翻译。
-- 语言项显示 **English / 中文 / 日本語 + 矩形国旗**：文字是各语言本名，故意不做翻译（三语页面都长一样）；旗子是 `BaseLayout.astro` 里的内联 `<symbol>`（`#flag-ca` / `#flag-cn` / `#flag-jp`），统一 3:2 小旗，不请求外部资源。改旗子只改那几个 symbol。
-- 带文字后开关变宽，导航在 **≤1120px** 收进汉堡菜单（原来 980）；菜单里的语言项是三行整宽。别再改回 980，否则 981–1096px 会横向溢出。
-- 源码里的 `href` 是占位（`/`、`/zh/`、`/ja/`）；**构建后的 `i18n-build.mjs` 会把它们改写成当前页面对应语言**，例如 `/projects/` → `/zh/projects/`。
-- 不要手工创建 `src/pages/zh/` 或 `src/pages/ja/`；三语页面由构建脚本生成。
-- 新增一个页面时，只要它走 `BaseLayout`（Header 在），脚本会自动生成 `/zh/`、`/ja/` 版本并接好切换链接。
-- **切换语言会保留当前阅读位置**：三语是三份静态文档，点切换是整页导航，浏览器默认回到顶部；`components/LocaleScroll.astro`（放在 `BaseLayout` 的 `<head>`）在点击时把「视口顶部所在带 id 的元素 + 偏移」写进 `sessionStorage`，目标页在 `DOMContentLoaded` 恢复；恢复期间 `<html class="locale-restoring">` 隐藏 body，避免先闪一下顶部（规则在 `global.css`）。字体/图片加载完会在读者未滚动时再校正一次。
+- 语言项显示 **English / 中文 / 日本語 / 한국어 + 矩形国旗**：文字是各语言本名，故意不做翻译（四语页面都长一样）；旗子是 `BaseLayout.astro` 里的内联 `<symbol>`（`#flag-ca` / `#flag-cn` / `#flag-jp` / `#flag-kr`），统一 3:2 小旗，不请求外部资源。改旗子只改那几个 symbol。
+- 带文字后开关变宽，导航在 **≤1160px** 收进汉堡菜单（三个语言时是 1120）；菜单里的语言项是四行整宽。别再改回 1120，否则 1121–1160px 会横向溢出。
+- 源码里的 `href` 是占位（`/`、`/zh/`、`/ja/`、`/ko/`）；**构建后的 `i18n-build.mjs` 会把它们改写成当前页面对应语言**，例如 `/projects/` → `/zh/projects/`。
+- 不要手工创建 `src/pages/zh/`、`src/pages/ja/`、`src/pages/ko/`；四语页面由构建脚本生成。
+- 新增一个页面时，只要它走 `BaseLayout`（Header 在），脚本会自动生成 `/zh/`、`/ja/`、`/ko/` 版本并接好切换链接。
+- **切换语言会保留当前阅读位置**：四语是四份静态文档，点切换是整页导航，浏览器默认回到顶部；`components/LocaleScroll.astro`（放在 `BaseLayout` 的 `<head>`）在点击时把「视口顶部所在带 id 的元素 + 偏移」写进 `sessionStorage`，目标页在 `DOMContentLoaded` 恢复；恢复期间 `<html class="locale-restoring">` 隐藏 body，避免先闪一下顶部（规则在 `global.css`）。字体/图片加载完会在读者未滚动时再校正一次。
 - 如果目标页没有对应的 id 锚点，就退回复原原始 `scrollY`。不要改成“切换语言回顶部”，也不要手工在语言链接上加 `scrollTo(0, …)`。
 - 回归测试：`BASE_URL=http://127.0.0.1:4322/ npm run test:locale`（桌面 + 移动折叠菜单，8 项）。
 
-## 6. 三语翻译系统（重点）
+## 6. 四语翻译系统（重点）
 
 ### 原理
 
 英文 HTML 是源文。`scripts/i18n-build.mjs` 在 `astro build` 之后：
 
-1. 读取 `dist/**/*.html`（排除 `zh/`、`ja/`）；
+1. 读取 `dist/**/*.html`（排除 `zh/`、`ja/`、`ko/`）；
 2. 用 Cheerio 提取可见文本块、`alt/title/aria-label`、`<title>`、meta description / og / twitter；
 3. 只把**缓存里没有的字符串**发给 DeepSeek（`deepseek-chat`），带术语表和语气要求；
-4. 把译文写入 `src/i18n/cache/zh.json` / `ja.json`；
-5. 生成 `dist/zh/**`、`dist/ja/**`；
+4. 把译文写入 `src/i18n/cache/zh.json` / `ja.json` / `ko.json`；
+5. 生成 `dist/zh/**`、`dist/ja/**`、`dist/ko/**`；
 6. 改写站内链接（PDF/图片等资源不前缀），保留当前页语言切换，补 canonical / hreflang / og:locale；
-7. 生成 `/zh/rss.xml`、`/ja/rss.xml`；
-8. 把 zh/ja URL 追加到 `dist/sitemap-0.xml`。
+7. 生成 `/zh/rss.xml`、`/ja/rss.xml`、`/ko/rss.xml`；
+8. 把 zh/ja/ko URL 追加到 `dist/sitemap-0.xml`。
 
 ### 常用命令
 
@@ -144,7 +144,7 @@ blog 的 `category` 三选一：`life`（个人生活分享）、`course`（课�
 # 本地：翻译新增/改动内容（需要 DeepSeek key）
 npm run i18n
 
-# CI / 离线：只读缓存重建三语页面（不需要 key）
+# CI / 离线：只读缓存重建四语页面（不需要 key）
 npm run i18n:offline
 
 # 只试一个语言/一个页面（调试）
@@ -155,17 +155,17 @@ node scripts/i18n-build.mjs --locale=zh --limit=3
 
 ### 缓存与成本
 
-- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 385 条、合计 ~270KB；
+- 缓存是 `src/i18n/cache/zh.json` + `ja.json` + `ko.json`，每份约 385 条；
 - 缓存 key 是英文 HTML 字符串（含 Astro scoped 属性）。如果大改 CSS 导致 `data-astro-cid-*` 变化，可能触发一批重译；跑 `npm run i18n` 即可，成本很小；
-- 不要为了省缓存去提交三份翻译 Markdown；现在这套只多两个 JSON，仓库 pack 仍约 24.5MB。
+- 不要为了省缓存去提交四份翻译 Markdown；现在这套只多三个 JSON，仓库 pack 仍约 24.5MB。
 
 ### 术语
 
 `scripts/i18n-build.mjs` 顶部有：
 
 - `GLOSSARY`：保留英文的专有名词（University of Victoria、IEEE Access、CUDA、co-op 等）；
-- `SYSTEM_PROMPTS`：中文/日文语气；
-- `TERM_OVERRIDES`：输出后统一替换（例如 `IT audit` → `IT 审计` / `IT 監査`、`Independent` → `独立项目`）。
+- `SYSTEM_PROMPTS`：中文/日文/韩文语气；
+- `TERM_OVERRIDES`：输出后统一替换（例如 `IT audit` → `IT 审计` / `IT 監査` / `IT 감사`、`Independent` → `独立项目`）。
 
 发现固定译法不对：改 `TERM_OVERRIDES`，跑 `npm run i18n:offline` 重新生成，不用重翻全站。
 
@@ -186,7 +186,7 @@ CI 不传 `DEEPSEEK_API_KEY`。如果新增英文内容没跑过本地 `npm run 
 1. 改 `src/data/site.yaml`（title/description/tagline/focus/resume/socials）；
 2. 改 `src/content/pages/about.md`（首页 About 正文）；
 3. `npm run build && npm run i18n`；
-4. 看 `/zh/`、`/ja/` 首页，提交 cache。
+4. 看 `/zh/`、`/ja/`、`/ko/` 首页，提交 cache。
 
 ### 加一个项目
 
@@ -227,7 +227,7 @@ CI 不传 `DEEPSEEK_API_KEY`。如果新增英文内容没跑过本地 `npm run 
 1. 原图放 `public/avatar-pig.jpg`；
 2. 生成 `public/favicon.png`（192）、`public/favicon.ico`（64）、`public/apple-touch-icon.png`（180）；
 3. `BaseLayout.astro` 的 icon link 已指向这些文件；
-4. Header 和 About Profile 都引用 `/avatar-pig.jpg`，不需要改三语文案。
+4. Header 和 About Profile 都引用 `/avatar-pig.jpg`，不需要改四语文案。
 
 ### 改样式
 
@@ -240,7 +240,7 @@ CI 不传 `DEEPSEEK_API_KEY`。如果新增英文内容没跑过本地 `npm run 
 
 1. 在 `src/pages/` 建 `.astro`，用 `BaseLayout`；
 2. 在 `Header.astro` / `Footer.astro` 或页面里加链接；
-3. `npm run build` → 脚本会自动生成 `/zh/`、`/ja/` 版本、hreflang 和 sitemap；
+3. `npm run build` → 脚本会自动生成 `/zh/`、`/ja/`、`/ko/` 版本、hreflang 和 sitemap；
 4. `npm run i18n` 补新文案。
 
 ### 改 RSS / Feed 页
@@ -296,11 +296,11 @@ CHROME_PATH="$(node -e "console.log(require('playwright').chromium.executablePat
 - Pages Source：**GitHub Actions**（2026-11-15 已切）；旧的 `pages build and deployment` 不应再触发。若又出现 Jekyll 红叉，先检查 Pages Source，**不要加 `.nojekyll`**（会发布 repo 根目录旧站，覆盖新站）。
 - `dist/` 在 `.gitignore`；不要提交。
 - push 前必须获得哥哥本次同意；不要 `git push --force`。
-- 部署后验证：`/`、`/zh/`、`/ja/`、`/zh/rss.xml`、`/ja/rss.xml`、语言切换是否保留当前页。
+- 部署后验证：`/`、`/zh/`、`/ja/`、`/ko/`、`/zh/rss.xml`、`/ja/rss.xml`、`/ko/rss.xml`、语言切换是否保留当前页。
 
 ## 10. 坑 / 不要做
 
-- ❌ 不要手工创建 `src/pages/zh/`、`src/pages/ja/`；那是脚本生成的。
+- ❌ 不要手工创建 `src/pages/zh/`、`src/pages/ja/`、`src/pages/ko/`；那是脚本生成的。
 - ❌ 不要手改 `dist/`；每次 build 会覆盖。
 - ❌ 不要把 `DEEPSEEK_API_KEY` 写进代码、commit、客户端。
 - ❌ 不要接入 Google Translate / Google Analytics / 第三方追踪。
@@ -317,4 +317,4 @@ CHROME_PATH="$(node -e "console.log(require('playwright').chromium.executablePat
 - RAG demo 的检索内容、技术栈、是否有公开 repo/eval；
 - 旧站大图是否清理（需哥哥同意）。
 
-其余（设计 A、简历、LinkedIn、动画参考、blog 迁移、Pages、三语）都已定。
+其余（设计 A、简历、LinkedIn、动画参考、blog 迁移、Pages、四语）都已定。

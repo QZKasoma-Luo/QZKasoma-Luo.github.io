@@ -172,6 +172,7 @@
     "Designed and developed a real-time production dashboard with Vue.js, Element UI, and ECharts, giving supervisors visibility into line status, KPIs, and changeover metrics.": "使用 Vue.js、Element UI 和 ECharts 设计并开发了一个实时生产仪表盘，让主管能够查看产线状态、KPI 和换线指标。",
     "Designs can rarely handle everyone; we typically need feature-level customization to reach a broad audience.": "设计很少能兼顾所有人；我们通常需要功能层面的定制来覆盖广泛受众。",
     "Developing Tasks:": "开发任务：",
+    "Download PDF": "下载 PDF",
     "Download résumé (PDF)": "下载简历（PDF）",
     "ECharts": "ECharts",
     "Element UI": "Element UI",

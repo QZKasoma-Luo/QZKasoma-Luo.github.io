@@ -1,6 +1,6 @@
 import { chromium, devices } from 'playwright';
 
-// Language switching moves between three static documents, so it is a full
+// Language switching moves between four static documents, so it is a full
 // page navigation. This checks that the reading position survives the switch.
 const base = process.env.BASE_URL || 'http://127.0.0.1:4322/';
 const browser = await chromium.launch();
@@ -31,7 +31,7 @@ const introSkipped = () => page.evaluate(() => {
 // The language links keep the current page in every locale.
 await page.goto(`${base}zh/blog/`, { waitUntil: 'networkidle' });
 const links = await page.evaluate(() => [...document.querySelectorAll('a[data-locale]')].map((el) => `${el.dataset.locale}=${el.getAttribute('href')}`));
-check('language links keep the page', links.includes('en=/blog/') && links.includes('ja=/ja/blog/'), links.join(' '));
+check('language links keep the page', links.includes('en=/blog/') && links.includes('ja=/ja/blog/') && links.includes('ko=/ko/blog/'), links.join(' '));
 
 // Home page: 150px into the projects section.
 await page.goto(base, { waitUntil: 'networkidle' });
@@ -58,6 +58,14 @@ await jump(420);
 await page.waitForTimeout(200);
 await switchTo('ja');
 check('article keeps position (en → ja)', Math.abs((await scrollY()) - 420) <= 8, `y=${await scrollY()}`);
+
+// Korean uses the same generated layout and must restore the position too.
+await page.goto(`${base}blog/minimum-spanning-tree/`, { waitUntil: 'networkidle' });
+await page.keyboard.press('Escape');
+await jump(420);
+await page.waitForTimeout(200);
+await switchTo('ko');
+check('article keeps position (en → ko)', Math.abs((await scrollY()) - 420) <= 8, `y=${await scrollY()}`);
 
 // At the top of a page, stay at the top.
 await page.goto(`${base}ja/projects/`, { waitUntil: 'networkidle' });

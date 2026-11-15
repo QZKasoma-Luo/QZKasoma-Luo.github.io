@@ -770,8 +770,9 @@ html[data-theme="dark"] .btn-solid:hover {
 }
 
 /* The labelled language switch is wider than the old EN/中/日 chips, so the
-   inline nav collapses into the menu a little earlier. */
-@media (max-width: 1120px) {
+   inline nav collapses into the menu a little earlier. Four languages need
+   a little more room than three did. */
+@media (max-width: 1160px) {
   .nav-links {
     display: none;
   }

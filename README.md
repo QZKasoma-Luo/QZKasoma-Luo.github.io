@@ -15,7 +15,7 @@ Live site: <https://qzkasoma-luo.github.io>
 > link, privacy, and accessibility checks pass. Lighthouse mobile is 99; desktop is 87 with
 > the 1.78s opening (94 with the opening skipped). The four 2023 course notes are migrated
 > and published with a “Course notes” label. The full site is available in English,
-> Simplified Chinese, and Japanese.
+> Simplified Chinese, Japanese, and Korean.
 
 ## Stack
 
@@ -41,22 +41,23 @@ Node 24 is used in CI (`.nvmrc`). Astro 7 needs Node ≥ 22.23.4.
 
 ## Languages
 
-The site is generated in three static locales:
+The site is generated in four static locales:
 
 - English: `/`
 - Simplified Chinese: `/zh/`
 - Japanese: `/ja/`
+- Korean: `/ko/`
 
-The language switcher shows each language in its own name (English / 中文 / 日本語) with a
-flat inline-SVG flag, keeps the current page **and the reading position**: the three locales
-are separate static documents, so `LocaleScroll` restores the section and offset after the
-switch instead of jumping back to the top. Localized RSS feeds are at
-`/zh/rss.xml` and `/ja/rss.xml`.
+The language switcher shows each language in its own name (English / 中文 / 日本語 / 한국어)
+with a flat inline-SVG flag, keeps the current page **and the reading position**: the four
+locales are separate static documents, so `LocaleScroll` restores the section and offset
+after the switch instead of jumping back to the top. Localized RSS feeds are at
+`/zh/rss.xml`, `/ja/rss.xml`, and `/ko/rss.xml`.
 
 Translations are **build-time**, not a Google widget or a runtime API. After
 `npm run build`, the translation pass reads the English HTML, translates the visible text
 with DeepSeek using a fixed glossary and tone guide, caches every string, and writes the
-`/zh/` and `/ja/` pages. The cache is committed so CI can rebuild without an API key.
+`/zh/`, `/ja/`, and `/ko/` pages. The cache is committed so CI can rebuild without an API key.
 
 ```bash
 npm run i18n           # translate missing strings (local only; needs DEEPSEEK_API_KEY)
@@ -84,9 +85,9 @@ npm run check:private
 node scripts/axe.mjs      # WCAG A/AA in light and dark
 ```
 
-Lighthouse is run separately for the English, Chinese, and Japanese homepages (desktop and
-mobile) and the research, projects, blog, and feed pages (mobile). Results are summarised
-in `docs/media/qa/lighthouse.json`.
+Lighthouse is run separately for the English, Chinese, Japanese, and Korean homepages
+(desktop and mobile) and the research, projects, blog, and feed pages (mobile). Results are
+summarised in `docs/media/qa/lighthouse.json`.
 
 ## Update content (the normal workflow)
 
@@ -236,7 +237,7 @@ src/
   components/        Header, Footer, Opening animation
   content/           Markdown entries (projects, research, experience, blog, pages)
   data/site.yaml     site-wide details
-  i18n/cache/        committed zh/ja translation cache
+  i18n/cache/        committed zh/ja/ko translation cache
   layouts/           BaseLayout
   lib/content.ts     draft/verified filtering
   pages/             home, projects, research, blog, feed, RSS, 404

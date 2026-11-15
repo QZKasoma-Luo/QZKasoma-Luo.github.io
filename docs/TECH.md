@@ -1,8 +1,8 @@
 # Project tech note — Qingze Luo personal site
 
-**Status:** Live at <https://qzkasoma-luo.github.io> in English, Simplified Chinese, and
-Japanese. Résumé-backed content, the 2023 course notes, the design pass, and the QA gates
-are in place. Deployed through GitHub Actions → GitHub Pages.
+**Status:** Live at <https://qzkasoma-luo.github.io> in English, Simplified Chinese,
+Japanese, and Korean. Résumé-backed content, the 2023 course notes, the design pass, and
+the QA gates are in place. Deployed through GitHub Actions → GitHub Pages.
 **Owner:** Qingze Luo. **Implemented by:** 秧秧 (Yangyang) for this rebuild.
 
 ## 0. What is built (2026-11-15)
@@ -177,28 +177,29 @@ See `docs/open-questions.md`. The design direction, résumé, LinkedIn URL, anim
 reference, blog migration, Pages setting, and deployment are settled. Remaining content
 questions are CUDA team details, the DP paper’s authorship/venue, and RAG demo details.
 
-## 11. Three-language build
+## 11. Four-language build
 
-English at `/` is the source of truth. The site is built in three static locales:
+English at `/` is the source of truth. The site is built in four static locales:
 
 - English: `/`
 - Simplified Chinese: `/zh/`
 - Japanese: `/ja/`
+- Korean: `/ko/`
 
 `scripts/i18n-build.mjs` runs after `astro build`:
 
 1. Parses every generated English HTML page with Cheerio.
 2. Collects visible text blocks and `alt` / `title` / `aria-label` / meta values.
 3. Translates only missing strings through the DeepSeek chat API using a fixed glossary
-   and tone guide; every translation is cached in `src/i18n/cache/{zh,ja}.json`.
-4. Writes localized HTML under `dist/zh/` and `dist/ja/`, rewrites internal links,
+   and tone guide; every translation is cached in `src/i18n/cache/{zh,ja,ko}.json`.
+4. Writes localized HTML under `dist/{zh,ja,ko}/`, rewrites internal links,
    preserves the current page in the language switcher, adds `hreflang` / canonical /
    `og:locale`, and generates localized RSS feeds.
 5. Appends the localized URLs to `dist/sitemap-0.xml`.
 
-The switcher labels each language in its own name (English / 中文 / 日本語) with a flat,
-inline-SVG flag; the labels are intentionally not translated. A language switch is a full
-navigation between those static documents.
+The switcher labels each language in its own name (English / 中文 / 日本語 / 한국어) with a
+flat, inline-SVG flag; the labels are intentionally not translated. A language switch is a
+full navigation between those static documents.
 `components/LocaleScroll.astro` records the section under the viewport top and its offset
 before the switch, restores it on the next page (hidden until applied so the top never
 flashes), and is covered by `npm run test:locale`.
@@ -209,4 +210,4 @@ API key and fails if a new English string has no cached translation. Local runs 
 is exposed to the browser or committed.
 
 When adding or editing English content, run `npm run build && npm run i18n`, check the
-affected `/zh/` and `/ja/` pages, and commit the updated cache.
+affected `/zh/`, `/ja/`, and `/ko/` pages, and commit the updated cache.

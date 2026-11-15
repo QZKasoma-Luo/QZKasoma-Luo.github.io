@@ -13,12 +13,17 @@ const pages = [
   '/feed/',
   '/zh/',
   '/ja/',
+  '/ko/',
   '/zh/blog/minimum-spanning-tree/',
   '/ja/blog/minimum-spanning-tree/',
+  '/ko/blog/minimum-spanning-tree/',
   '/zh/projects/cuda-knn/',
   '/ja/research/ieee-access-iout-ddos/',
+  '/ko/projects/cuda-knn/',
+  '/ko/research/ieee-access-iout-ddos/',
   '/zh/feed/',
   '/ja/feed/',
+  '/ko/feed/',
 ];
 
 const browser = await chromium.launch();

@@ -172,6 +172,7 @@
     "Designed and developed a real-time production dashboard with Vue.js, Element UI, and ECharts, giving supervisors visibility into line status, KPIs, and changeover metrics.": "Vue.js、Element UI、EChartsを用いてリアルタイム生産ダッシュボードを設計・開発し、監督者がライン状況、KPI、段取り替え指標を可視化できるようにしました。",
     "Designs can rarely handle everyone; we typically need feature-level customization to reach a broad audience.": "設計はすべての人に対応できることはほとんどなく、幅広い利用者に届けるには通常、機能レベルでのカスタマイズが必要です。",
     "Developing Tasks:": "タスクの作成：",
+    "Download PDF": "PDFをダウンロード",
     "Download résumé (PDF)": "履歴書をダウンロード（PDF）",
     "ECharts": "ECharts",
     "Element UI": "Element UI",

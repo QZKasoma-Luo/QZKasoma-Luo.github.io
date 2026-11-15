@@ -219,7 +219,7 @@ const statusLabel: Record<string, string> = {
       <p>The public PDF has the same dates, roles, and project details as this site.</p>
       {site.resume ? (
         <a class="btn btn-solid" href={site.resume} download>
-          Download PDF
+          <span>Download PDF</span>
           <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v7M3 5l3 3 3-3M2 11h8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
         </a>
       ) : (
