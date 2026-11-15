@@ -194,7 +194,9 @@ English at `/` is the source of truth. The site is built in three static locales
    `og:locale`, and generates localized RSS feeds.
 5. Appends the localized URLs to `dist/sitemap-0.xml`.
 
-A language switch is a full navigation between those static documents.
+The switcher labels each language in its own name (English / 中文 / 日本語) with a flat,
+inline-SVG flag; the labels are intentionally not translated. A language switch is a full
+navigation between those static documents.
 `components/LocaleScroll.astro` records the section under the viewport top and its offset
 before the switch, restores it on the next page (hidden until applied so the top never
 flashes), and is covered by `npm run test:locale`.

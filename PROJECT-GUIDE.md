@@ -35,7 +35,7 @@ src/pages/*.astro  ─┘                      │
 
 ```
 src/
-  components/        Header / Footer / Opening / LocaleScroll
+  components/        Header / Footer / Opening / LocaleScroll / LangSwitch
   content/
     pages/           about.md（首页 About 正文）
     projects/        cuda-knn.md, changeover-dashboard.md, rag-demo.md, iot-iout-validation.md
@@ -109,7 +109,9 @@ public/
 
 ### 语言切换
 
-- `Header.astro` 里有 `nav.lang-switch` + 移动菜单 `.menu-langs`，链接带 `data-locale="en|zh|ja"`，`data-i18n-skip` 防止被翻译。
+- `LangSwitch.astro` 渲染两组开关：`Header.astro` 的 `nav.lang-switch`（桌面）和移动菜单里的 `.menu-langs`（`as="div"`），链接带 `data-locale="en|zh|ja"`、`lang`、`hreflang`，`data-i18n-skip` 防止被翻译。
+- 语言项显示 **English / 中文 / 日本語 + 矩形国旗**：文字是各语言本名，故意不做翻译（三语页面都长一样）；旗子是 `BaseLayout.astro` 里的内联 `<symbol>`（`#flag-ca` / `#flag-cn` / `#flag-jp`），统一 3:2 小旗，不请求外部资源。改旗子只改那几个 symbol。
+- 带文字后开关变宽，导航在 **≤1120px** 收进汉堡菜单（原来 980）；菜单里的语言项是三行整宽。别再改回 980，否则 981–1096px 会横向溢出。
 - 源码里的 `href` 是占位（`/`、`/zh/`、`/ja/`）；**构建后的 `i18n-build.mjs` 会把它们改写成当前页面对应语言**，例如 `/projects/` → `/zh/projects/`。
 - 不要手工创建 `src/pages/zh/` 或 `src/pages/ja/`；三语页面由构建脚本生成。
 - 新增一个页面时，只要它走 `BaseLayout`（Header 在），脚本会自动生成 `/zh/`、`/ja/` 版本并接好切换链接。

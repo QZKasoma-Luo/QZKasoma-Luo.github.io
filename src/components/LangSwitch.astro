@@ -1,0 +1,27 @@
+---
+// The three language links. Each label is written in its own language
+// (English / 中文 / 日本語) and is intentionally not translated; the flags
+// are inline SVG symbols defined in BaseLayout so the site makes no external
+// requests. The build script rewrites the hrefs to the current page.
+interface Props {
+  as?: 'nav' | 'div';
+  class?: string;
+}
+
+const { as: Tag = 'nav', class: className = 'lang-switch' } = Astro.props;
+---
+
+<Tag class={className} aria-label="Language" data-i18n-skip>
+  <a href="/" data-locale="en" lang="en" hreflang="en" title="English">
+    <svg class="flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#flag-ca" /></svg>
+    <span>English</span>
+  </a>
+  <a href="/zh/" data-locale="zh" lang="zh-Hans" hreflang="zh-Hans" title="简体中文">
+    <svg class="flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#flag-cn" /></svg>
+    <span>中文</span>
+  </a>
+  <a href="/ja/" data-locale="ja" lang="ja" hreflang="ja" title="日本語">
+    <svg class="flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><use href="#flag-jp" /></svg>
+    <span>日本語</span>
+  </a>
+</Tag>

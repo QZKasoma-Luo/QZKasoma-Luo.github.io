@@ -47,9 +47,10 @@ The site is generated in three static locales:
 - Simplified Chinese: `/zh/`
 - Japanese: `/ja/`
 
-The language switcher in the header keeps the current page **and the reading position**:
-the three locales are separate static documents, so `LocaleScroll` restores the section and
-offset after the switch instead of jumping back to the top. Localized RSS feeds are at
+The language switcher shows each language in its own name (English / 中文 / 日本語) with a
+flat inline-SVG flag, keeps the current page **and the reading position**: the three locales
+are separate static documents, so `LocaleScroll` restores the section and offset after the
+switch instead of jumping back to the top. Localized RSS feeds are at
 `/zh/rss.xml` and `/ja/rss.xml`.
 
 Translations are **build-time**, not a Google widget or a runtime API. After
