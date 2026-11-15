@@ -1,0 +1,104 @@
+---
+// Language switching moves between three static documents (/ , /zh/ , /ja/),
+// so it is a full-page navigation: the browser always starts the new document
+// at the top. Remember the reading position before the switch and restore it
+// on the next page, so changing language keeps the place instead of jumping.
+---
+
+<script is:inline>
+  (() => {
+    const KEY = 'qz-locale-scroll';
+    const root = document.documentElement;
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    // The deepest element with an id that begins at or above the top edge of the
+    // viewport: the section the reader is currently inside. Translated sections
+    // have different heights, so restoring this anchor (plus an offset) is more
+    // faithful than replaying a raw scroll offset.
+    const currentAnchor = () => {
+      let best = null;
+      for (const el of document.querySelectorAll('[id]')) {
+        if (el.closest('.intro')) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.height < 24 || rect.top > 1 || rect.bottom <= 1) continue;
+        if (!best || rect.top > best.top) best = { el, top: rect.top };
+      }
+      if (!best) return null;
+      return { id: best.el.id, offset: Math.round(-best.top) };
+    };
+
+    document.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0
+        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target instanceof Element ? event.target.closest('a[data-locale]') : null;
+      if (!link) return;
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin) return;
+      const anchor = currentAnchor();
+      try {
+        sessionStorage.setItem(KEY, JSON.stringify({
+          y: Math.round(window.scrollY),
+          id: anchor?.id ?? null,
+          offset: anchor?.offset ?? 0,
+        }));
+      } catch {}
+    });
+
+    let pending = null;
+    try {
+      pending = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+    } catch {}
+    if (!pending || typeof pending.y !== 'number') return;
+
+    // Keep the document hidden until the position is applied, otherwise the
+    // first paint would flash the top of the page before jumping down.
+    root.classList.add('locale-restoring');
+
+    const jump = (top) => {
+      const previous = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, top);
+      root.style.scrollBehavior = previous;
+    };
+
+    const targetTop = () => {
+      let top = pending.y;
+      if (pending.id) {
+        const el = document.getElementById(pending.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          const height = rect.height;
+          top = rect.top + window.scrollY + clamp(pending.offset, 0, Math.max(0, height));
+        }
+      }
+      const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      return clamp(top, 0, max);
+    };
+
+    let applied = null;
+    const apply = () => {
+      jump(targetTop());
+      applied = Math.round(window.scrollY);
+    };
+    // Fonts and images can change section heights after the first restore.
+    // Correct the position again unless the reader has already scrolled away.
+    const settle = () => {
+      if (applied !== null && Math.abs(Math.round(window.scrollY) - applied) > 2) return;
+      apply();
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        apply();
+      } finally {
+        root.classList.remove('locale-restoring');
+        try {
+          sessionStorage.removeItem(KEY);
+        } catch {}
+      }
+    });
+
+    window.addEventListener('load', settle);
+    if (document.fonts?.ready) document.fonts.ready.then(settle).catch(() => {});
+  })();
+</script>

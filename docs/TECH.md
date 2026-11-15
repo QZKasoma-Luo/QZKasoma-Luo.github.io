@@ -8,7 +8,7 @@ are in place. Deployed through GitHub Actions → GitHub Pages.
 ## 0. What is built (2026-11-15)
 
 - Astro 7.4.12 static site, content collections, RSS, sitemap, 404.
-- Home page with About / Research / Projects / Experience / Résumé / Writing / Contact.
+- Home page with About / Research / Projects / Experience / Résumé / Blog / Contact.
 - Project and research detail routes generated from Markdown.
 - Three-layer glass system, JS detection, reduced-transparency/contrast fallbacks.
 - Original “QL signal lock” opening animation, 1.78 s, skippable; plays on a fresh entry and on refresh, but not when navigating between internal pages.
@@ -193,6 +193,11 @@ English at `/` is the source of truth. The site is built in three static locales
    preserves the current page in the language switcher, adds `hreflang` / canonical /
    `og:locale`, and generates localized RSS feeds.
 5. Appends the localized URLs to `dist/sitemap-0.xml`.
+
+A language switch is a full navigation between those static documents.
+`components/LocaleScroll.astro` records the section under the viewport top and its offset
+before the switch, restores it on the next page (hidden until applied so the top never
+flashes), and is covered by `npm run test:locale`.
 
 The cache is committed. CI runs `npm run i18n:offline`, which rebuilds locales without an
 API key and fails if a new English string has no cached translation. Local runs use

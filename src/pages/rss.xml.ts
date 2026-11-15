@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
   return rss({
-    title: 'Qingze Luo — Writing',
+    title: 'Qingze Luo — Blog',
     description: 'Notes on privacy, systems, coursework, and learning in public.',
     site: context.site ?? 'https://qzkasoma-luo.github.io',
     items: posts.map((post) => ({

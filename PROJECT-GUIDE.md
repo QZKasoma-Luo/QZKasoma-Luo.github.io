@@ -35,7 +35,7 @@ src/pages/*.astro  ─┘                      │
 
 ```
 src/
-  components/        Header / Footer / Opening
+  components/        Header / Footer / Opening / LocaleScroll
   content/
     pages/           about.md（首页 About 正文）
     projects/        cuda-knn.md, changeover-dashboard.md, rag-demo.md, iot-iout-validation.md
@@ -113,6 +113,9 @@ public/
 - 源码里的 `href` 是占位（`/`、`/zh/`、`/ja/`）；**构建后的 `i18n-build.mjs` 会把它们改写成当前页面对应语言**，例如 `/projects/` → `/zh/projects/`。
 - 不要手工创建 `src/pages/zh/` 或 `src/pages/ja/`；三语页面由构建脚本生成。
 - 新增一个页面时，只要它走 `BaseLayout`（Header 在），脚本会自动生成 `/zh/`、`/ja/` 版本并接好切换链接。
+- **切换语言会保留当前阅读位置**：三语是三份静态文档，点切换是整页导航，浏览器默认回到顶部；`components/LocaleScroll.astro`（放在 `BaseLayout` 的 `<head>`）在点击时把「视口顶部所在带 id 的元素 + 偏移」写进 `sessionStorage`，目标页在 `DOMContentLoaded` 恢复；恢复期间 `<html class="locale-restoring">` 隐藏 body，避免先闪一下顶部（规则在 `global.css`）。字体/图片加载完会在读者未滚动时再校正一次。
+- 如果目标页没有对应的 id 锚点，就退回复原原始 `scrollY`。不要改成“切换语言回顶部”，也不要手工在语言链接上加 `scrollTo(0, …)`。
+- 回归测试：`BASE_URL=http://127.0.0.1:4322/ npm run test:locale`（桌面 + 移动折叠菜单，8 项）。
 
 ## 6. 三语翻译系统（重点）
 
@@ -146,7 +149,7 @@ node scripts/i18n-build.mjs --locale=zh --limit=3
 
 ### 缓存与成本
 
-- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 345 条、合计 ~230KB；
+- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 352 条、合计 ~238KB；
 - 缓存 key 是英文 HTML 字符串（含 Astro scoped 属性）。如果大改 CSS 导致 `data-astro-cid-*` 变化，可能触发一批重译；跑 `npm run i18n` 即可，成本很小；
 - 不要为了省缓存去提交三份翻译 Markdown；现在这套只多两个 JSON，仓库 pack 仍约 24.5MB。
 
@@ -242,6 +245,7 @@ npm run build
 npm run i18n:offline
 python3 -m http.server 4322 -d dist   # 另一个终端
 BASE_URL=http://127.0.0.1:4322/ npm run test:intro
+BASE_URL=http://127.0.0.1:4322/ npm run test:locale
 BASE_URL=http://127.0.0.1:4322/ npm run qa:browsers
 npm run qa:pages
 BASE_URL=http://127.0.0.1:4322/ npm run check:links
@@ -256,7 +260,7 @@ BASE_URL=http://127.0.0.1:4322/ node scripts/axe.mjs
 - axe：32 个页面/主题组合 clean
 - links：106 条，0 失败（LinkedIn 999 是反爬）
 - private：0 处
-- intro：8/8
+- intro：8/8；locale scroll：8/8
 - Lighthouse：手机 99/100/100/100；桌面 87/100/100/100（1.78s 开场影响 Speed Index；英文首页跳过开场 94）
 - 结果文件：`docs/media/qa/lighthouse.json`、`docs/media/qa/three-browser-pages.json`、`docs/media/qa/report.json`
 

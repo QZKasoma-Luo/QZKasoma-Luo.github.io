@@ -47,7 +47,9 @@ The site is generated in three static locales:
 - Simplified Chinese: `/zh/`
 - Japanese: `/ja/`
 
-The language switcher in the header keeps the current page. Localized RSS feeds are at
+The language switcher in the header keeps the current page **and the reading position**:
+the three locales are separate static documents, so `LocaleScroll` restores the section and
+offset after the switch instead of jumping back to the top. Localized RSS feeds are at
 `/zh/rss.xml` and `/ja/rss.xml`.
 
 Translations are **build-time**, not a Google widget or a runtime API. After
@@ -72,6 +74,7 @@ npm run check
 npm run build
 npm run i18n:offline
 npm run test:intro
+npm run test:locale           # language switch keeps the reading position
 npm run qa:browsers       # Chromium, WebKit, Firefox screenshots
 npm run qa:pages          # key pages in all three browsers
 npm run check:links

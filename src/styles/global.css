@@ -115,6 +115,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Language switch restores the reading position; hide the page until that
+   scroll is applied so the top of the document never flashes. */
+html.locale-restoring body {
+  visibility: hidden;
+}
+
 /* Paper grain: inline SVG noise, no network request. */
 body::before {
   content: "";
