@@ -237,10 +237,21 @@ private key.
 ## Checks
 
 ```bash
-npm run check
+npm run check          # Astro + TypeScript + content schemas
 npm run build
+npm run test:intro     # first visit / skip / reduced motion
+npm run check:links    # needs a running preview server
+npm run check:private  # scans src, public, and dist
+npm run qa:browsers    # Chromium, WebKit, Firefox screenshots into docs/media/qa
 npx lighthouse http://127.0.0.1:4322/ --preset=desktop
 npx lighthouse http://127.0.0.1:4322/
+```
+
+For a QA build that includes unverified draft entries:
+
+```bash
+INCLUDE_DRAFTS=1 npm run build
+npm run preview -- --host 127.0.0.1 --port 4322
 ```
 
 The current local baseline (with draft content included for QA) is 100 / 100 / 100 / 100

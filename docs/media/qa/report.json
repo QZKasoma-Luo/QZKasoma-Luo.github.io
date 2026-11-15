@@ -1,0 +1,56 @@
+{
+  "chromium": {
+    "desktop": {
+      "classes": "glass-blur glass-refract",
+      "theme": "light",
+      "navBackdrop": "blur(18px) saturate(1.55)",
+      "navBackground": "rgba(250, 248, 241, 0.56)",
+      "scrollWidth": 1440,
+      "innerWidth": 1440
+    },
+    "mobile": {
+      "classes": "glass-blur glass-refract",
+      "theme": "light",
+      "navBackdrop": "blur(18px) saturate(1.55)",
+      "navBackground": "rgba(250, 248, 241, 0.56)",
+      "scrollWidth": 390,
+      "innerWidth": 390
+    }
+  },
+  "webkit": {
+    "desktop": {
+      "classes": "glass-blur",
+      "theme": "light",
+      "navBackdrop": "blur(18px) saturate(1.55)",
+      "navBackground": "rgba(250, 248, 241, 0.56)",
+      "scrollWidth": 1440,
+      "innerWidth": 1440
+    },
+    "mobile": {
+      "classes": "glass-blur",
+      "theme": "light",
+      "navBackdrop": "blur(18px) saturate(1.55)",
+      "navBackground": "rgba(250, 248, 241, 0.56)",
+      "scrollWidth": 390,
+      "innerWidth": 390
+    }
+  },
+  "firefox": {
+    "desktop": {
+      "classes": "",
+      "theme": "light",
+      "navBackdrop": "none",
+      "navBackground": "rgba(250, 248, 241, 0.94)",
+      "scrollWidth": 1440,
+      "innerWidth": 1440
+    },
+    "mobile": {
+      "classes": "",
+      "theme": "light",
+      "navBackdrop": "none",
+      "navBackground": "rgba(250, 248, 241, 0.94)",
+      "scrollWidth": 390,
+      "innerWidth": 390
+    }
+  }
+}
