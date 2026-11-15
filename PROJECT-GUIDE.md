@@ -86,7 +86,7 @@ public/
 
 blog 的 `category` 三选一：`life`（个人生活分享）、`course`（课程笔记）、`project`（项目开发心得）；博客列表按它筛选。
 
-当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、RAG demo（in progress）、4 篇课程笔记。
+当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、RAG demo（in progress）、4 篇课程笔记 + 1 篇项目复盘。
 仍是草稿：DP 论文、IoUT 项目（IoUT 已并入 SOLIDS Lab 经历）。
 
 ## 4. 设计系统
@@ -155,7 +155,7 @@ node scripts/i18n-build.mjs --locale=zh --limit=3
 
 ### 缓存与成本
 
-- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 358 条、合计 ~240KB；
+- 缓存是 `src/i18n/cache/zh.json` + `ja.json`，当前约 385 条、合计 ~270KB；
 - 缓存 key 是英文 HTML 字符串（含 Astro scoped 属性）。如果大改 CSS 导致 `data-astro-cid-*` 变化，可能触发一批重译；跑 `npm run i18n` 即可，成本很小；
 - 不要为了省缓存去提交三份翻译 Markdown；现在这套只多两个 JSON，仓库 pack 仍约 24.5MB。
 
@@ -274,7 +274,7 @@ BASE_URL=http://127.0.0.1:4322/ node scripts/axe.mjs
 - axe：32 个页面/主题组合 clean
 - links：106 条，0 失败（LinkedIn 999 是反爬）
 - private：0 处
-- intro：8/8；locale scroll：8/8；blog filter/search：18/18
+- intro：8/8；locale scroll：8/8；blog filter/search：21/21
 - Lighthouse：手机 99/100/100/100；桌面 87/100/100/100（1.78s 开场影响 Speed Index；英文首页跳过开场 94）
 - 结果文件：`docs/media/qa/lighthouse.json`、`docs/media/qa/three-browser-pages.json`、`docs/media/qa/report.json`
 

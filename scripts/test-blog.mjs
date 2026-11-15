@@ -25,37 +25,53 @@ page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()
 page.on('pageerror', (err) => errors.push(String(err)));
 
 await page.goto(`${base}blog/`, { waitUntil: 'networkidle' });
-check('all posts are listed', (await visiblePosts(page)) === 4, `${await visiblePosts(page)} visible`);
+check('all posts are listed', (await visiblePosts(page)) === 5, `${await visiblePosts(page)} visible`);
 
 await page.click('[data-blog-filter="life"]');
-check('empty category hides the course notes', (await visiblePosts(page)) === 0);
+check('empty category hides every post', (await visiblePosts(page)) === 0);
 check('empty category shows the message', await emptyShown(page));
 check('life filter is pressed', (await page.getAttribute('[data-blog-filter="life"]', 'aria-pressed')) === 'true');
 check('all filter is released', (await page.getAttribute('[data-blog-filter="all"]', 'aria-pressed')) === 'false');
 
 await page.click('[data-blog-filter="all"]');
-check('all filter restores every post', (await visiblePosts(page)) === 4);
+check('all filter restores every post', (await visiblePosts(page)) === 5);
 
 await page.click('[data-blog-filter="course"]');
 check('course filter keeps the course notes', (await visiblePosts(page)) === 4);
 check('message stays hidden while posts match', !(await emptyShown(page)));
 
+await page.click('[data-blog-filter="project"]');
+check('project filter keeps the project post', (await visiblePosts(page)) === 1);
+check('project filter shows the right post', await page.evaluate(() => {
+  const visible = [...document.querySelectorAll('#blog-posts .post')].find((el) => !el.hidden);
+  return Boolean(visible && /Picking up a site/.test(visible.textContent ?? ''));
+}));
+
+await page.click('[data-blog-filter="all"]');
 await page.fill('#blog-search', 'minimum spanning');
 check('search narrows to one post', (await visiblePosts(page)) === 1);
 
 await page.fill('#blog-search', 'kruskal');
 check('search matches the description', (await visiblePosts(page)) === 1);
 
+await page.fill('#blog-search', 'air-gapped');
+check('search finds the new project post', (await visiblePosts(page)) === 1);
+
 await page.fill('#blog-search', 'no-such-post-xyz');
 check('unmatched search shows the message', (await visiblePosts(page)) === 0 && (await emptyShown(page)));
 
 await page.fill('#blog-search', '');
 await page.click('[data-blog-filter="all"]');
-check('clearing restores every post', (await visiblePosts(page)) === 4);
+check('clearing restores every post', (await visiblePosts(page)) === 5);
 
 await page.goto(`${base}zh/blog/`, { waitUntil: 'networkidle' });
-check('zh page keeps the category label', await page.evaluate(() =>
-  [...document.querySelectorAll('#blog-posts .tag-accent')].every((el) => el.textContent.trim() === '课程笔记')));
+check('zh labels match their categories', await page.evaluate(() =>
+  [...document.querySelectorAll('#blog-posts .post')].every((el) => {
+    const label = el.querySelector('.tag-accent')?.textContent.trim();
+    if (el.dataset.category === 'course') return label === '课程笔记';
+    if (el.dataset.category === 'project') return label === '项目心得';
+    return true;
+  })));
 await page.fill('#blog-search', '最小生成树');
 check('zh search matches translated text', (await visiblePosts(page)) === 1, `${await visiblePosts(page)} visible`);
 
