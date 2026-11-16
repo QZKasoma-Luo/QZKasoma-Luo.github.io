@@ -5,6 +5,7 @@ const base = process.env.BASE_URL || 'http://127.0.0.1:4322/';
 const pages = [
   '/',
   '/blog/',
+  '/blog/before-4-0/',
   '/blog/minimum-spanning-tree/',
   '/projects/',
   '/projects/cuda-knn/',
@@ -18,6 +19,9 @@ const pages = [
   '/zh/blog/minimum-spanning-tree/',
   '/ja/blog/minimum-spanning-tree/',
   '/ko/blog/minimum-spanning-tree/',
+  '/zh/blog/before-4-0/',
+  '/ja/blog/before-4-0/',
+  '/ko/blog/before-4-0/',
   '/zh/projects/cuda-knn/',
   '/ja/research/ieee-access-iout-ddos/',
   '/ko/projects/cuda-knn/',

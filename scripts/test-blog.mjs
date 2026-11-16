@@ -25,16 +25,20 @@ page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()
 page.on('pageerror', (err) => errors.push(String(err)));
 
 await page.goto(`${base}blog/`, { waitUntil: 'networkidle' });
-check('all posts are listed', (await visiblePosts(page)) === 5, `${await visiblePosts(page)} visible`);
+check('all posts are listed', (await visiblePosts(page)) === 6, `${await visiblePosts(page)} visible`);
 
 await page.click('[data-blog-filter="life"]');
-check('empty category hides every post', (await visiblePosts(page)) === 0);
-check('empty category shows the message', await emptyShown(page));
+check('life filter keeps the life post', (await visiblePosts(page)) === 1, `${await visiblePosts(page)} visible`);
+check('life filter shows the 4.0 post', await page.evaluate(() => {
+  const visible = [...document.querySelectorAll('#blog-posts .post')].find((el) => !el.hidden);
+  return Boolean(visible && /4\.0/.test(visible.textContent ?? ''));
+}));
+check('message stays hidden while posts match', !(await emptyShown(page)));
 check('life filter is pressed', (await page.getAttribute('[data-blog-filter="life"]', 'aria-pressed')) === 'true');
 check('all filter is released', (await page.getAttribute('[data-blog-filter="all"]', 'aria-pressed')) === 'false');
 
 await page.click('[data-blog-filter="all"]');
-check('all filter restores every post', (await visiblePosts(page)) === 5);
+check('all filter restores every post', (await visiblePosts(page)) === 6);
 
 await page.click('[data-blog-filter="course"]');
 check('course filter keeps the course notes', (await visiblePosts(page)) === 4);
@@ -62,7 +66,7 @@ check('unmatched search shows the message', (await visiblePosts(page)) === 0 && 
 
 await page.fill('#blog-search', '');
 await page.click('[data-blog-filter="all"]');
-check('clearing restores every post', (await visiblePosts(page)) === 5);
+check('clearing restores every post', (await visiblePosts(page)) === 6);
 
 await page.goto(`${base}zh/blog/`, { waitUntil: 'networkidle' });
 check('zh labels match their categories', await page.evaluate(() =>

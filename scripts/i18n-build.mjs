@@ -57,7 +57,8 @@ DDoS, CUDA, KNN, k-NN, MNIST, Vue.js, Element UI, ECharts, ASP.NET, GitHub, Link
 Flextronics, Nicholson Manufacturing Ltd., SOLIDS Lab, BlueOS, Docker, co-op, IT audit,
 SYS 321 / SENG 321, CompTIA Security+, Azure Fundamentals, pigy, Android, Kotlin,
 Jetpack Compose, Material 3, Navigation Compose, Hilt, SQLCipher, Tink, DataStore, Room,
-ML Kit Document Scanner, Android Keystore, FLAG_SECURE, StateFlow, USE_BIOMETRIC.
+ML Kit Document Scanner, Android Keystore, FLAG_SECURE, StateFlow, USE_BIOMETRIC,
+Wuthering Waves, 秧秧, 秧秧·玄翎, 穗穗, 清宵, 千咲.
 Keep all HTML tags, attributes, href/src values, code, URLs, numbers, dates, and email
 addresses exactly as they are. Do not translate text inside <code>...</code>.
 `.trim();
@@ -241,6 +242,26 @@ const TERM_OVERRIDES = {
     ['Enhancing Underwater Network Security: ML-Based Detection and Prediction of DDoS Attacks in IoUT Networks', '增强水下网络安全：基于机器学习的 IoUT 网络 DDoS 攻击检测与预测'],
     ['VICTORIA, BC · 48.4°N', '维多利亚，BC · 48.4°N'],
     ['Independent', '独立项目'],
+    ['Wuthering Waves', '鸣潮'],
+    ['Jinzhou', '今州'],
+    ['Rinascita', '黎那汐塔'],
+    ['Dreamland', '梦州'],
+    ['New Federation', '新联邦'],
+    ['Rover', '漂泊者'],
+    ['Jinhsi', '今汐'],
+    ['Xuanbird', '玄鸟'],
+    ['Shell Credits', '贝币'],
+    ['Resonance Chain', '共鸣链'],
+    ['锦州', '今州'],
+    ['梦境地图', '梦州地图'],
+    ['在梦境中', '在梦州'],
+    ['梦境的故事', '梦州的故事'],
+    ['巡林者', '巡林官'],
+    ['第一共鸣链', '一命'],
+    ['高冷剑客', '清冷女剑仙'],
+    ['姐姐气场', '姐姐属性'],
+    ['出场时间最少的看板娘', '戏份最少的看板娘'],
+    ['最初的秧秧纯粹是个写信的人', '初版秧秧纯纯写信娘'],
     ['Victoria, BC, Canada', '加拿大不列颠哥伦比亚省维多利亚'],
     ['SOLIDS Lab, University of Victoria · Victoria, BC, Canada', 'SOLIDS Lab, University of Victoria · 加拿大不列颠哥伦比亚省维多利亚'],
     ['University of Victoria · Victoria, BC, Canada', 'University of Victoria · 加拿大不列颠哥伦比亚省维多利亚'],

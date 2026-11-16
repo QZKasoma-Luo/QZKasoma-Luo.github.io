@@ -10,6 +10,7 @@ const pages = [
   '/projects/', '/zh/projects/', '/ja/projects/', '/ko/projects/',
   '/projects/pigy/', '/zh/projects/pigy/', '/ja/projects/pigy/', '/ko/projects/pigy/',
   '/blog/', '/zh/blog/', '/ja/blog/', '/ko/blog/',
+  '/blog/before-4-0/', '/zh/blog/before-4-0/', '/ja/blog/before-4-0/', '/ko/blog/before-4-0/',
   '/feed/', '/zh/feed/', '/ja/feed/', '/ko/feed/',
 ];
 const engines = { chromium, webkit, firefox };

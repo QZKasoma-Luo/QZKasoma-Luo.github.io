@@ -86,7 +86,7 @@ public/
 
 blog 的 `category` 三选一：`life`（个人生活分享）、`course`（课程笔记）、`project`（项目开发心得）；博客列表按它筛选。
 
-当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、pigy Android（in progress）、RAG demo（in progress）、4 篇课程笔记 + 1 篇项目复盘。
+当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、pigy Android（in progress）、RAG demo（in progress）、4 篇课程笔记 + 1 篇项目复盘 + 1 篇生活随笔。
 仍是草稿：DP 论文、IoUT 项目（IoUT 已并入 SOLIDS Lab 经历）。
 
 ## 4. 设计系统
@@ -215,12 +215,25 @@ CI 不传 `DEEPSEEK_API_KEY`。如果新增英文内容没跑过本地 `npm run 
 3. 发布设 `draft: false`；
 4. build + i18n；RSS 会自动包含。
 
+### 给 blog 加图片
+
+1. 图片放 `public/images/blog/<slug>/`，文件名用英文小写、不要空格；
+2. Markdown 里用（需要图注时包一层 figure）：
+   ```html
+   <figure class="post-figure">
+     <img src="/images/blog/<slug>/yangyang.jpg" alt="秧秧" loading="lazy" />
+     <figcaption>秧秧 · 4.0 前</figcaption>
+   </figure>
+   ```
+3. 图片路径不做语言前缀（`localizePageLinks` 只改 `a[href]`，不改 `img[src]`）；`alt` 和 `figcaption` 会被翻译；
+4. `npm run check:links` 会顺带检查 `img[src]` 是否存在。
+
 ### 博客筛选 / 搜索
 
 - `/blog/` 顶部有分类筛选（All / Life / Course notes / Project notes）和搜索框，纯客户端脚本，没引入前端框架。
 - 卡片带 `data-category`，按钮带 `data-blog-filter`；脚本按渲染后的 `textContent` 匹配，所以中文页搜中文、日文页搜日文（翻译后的标题/摘要/标签都能搜到）。
-- 新增/修改分类：改 `src/lib/content.ts` 的 `BLOG_CATEGORIES` 和 `content.config.ts` 的 enum，再往 `src/i18n/cache/{zh,ja}.json` 补新 label 的翻译（`npm run i18n:offline` 会报缺）。
-- 回归测试：`BASE_URL=http://127.0.0.1:4322/ npm run test:blog`（18 项）。
+- 新增/修改分类：改 `src/lib/content.ts` 的 `BLOG_CATEGORIES` 和 `content.config.ts` 的 enum，再往 `src/i18n/cache/{zh,ja,ko}.json` 补新 label 的翻译（`npm run i18n:offline` 会报缺）。
+- 回归测试：`BASE_URL=http://127.0.0.1:4322/ npm run test:blog`（24 项）。
 
 ### 换头像 / favicon
 

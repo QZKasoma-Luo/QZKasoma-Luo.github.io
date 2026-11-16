@@ -69,6 +69,12 @@ The owner asked to migrate them. All four were published on 2026-11-15 with
 `draft: false` and `category: course`; they are labelled “Course notes” in the blog index
 and included in the RSS feed.
 
+## New blog posts (owner-provided)
+
+| Date | Title | Category | Source |
+| --- | --- | --- | --- |
+| 2026-11-16 | Before 4.0: a few words for 秧秧, 穗穗, and 清宵 | `life` | Owner-provided Chinese draft; English source and translations. Three character images are pending from the owner. |
+
 ## Wording rules
 
 - Rewrite the résumé sentence “Gathered reporting requirements from production supervisors…”

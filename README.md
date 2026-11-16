@@ -14,8 +14,8 @@ Live site: <https://qzkasoma-luo.github.io>
 > in place. Experience, research, and project content follow the résumé; cross-browser,
 > link, privacy, and accessibility checks pass. Lighthouse mobile is 99; desktop is 87 with
 > the 1.78s opening (94 with the opening skipped). The four 2023 course notes are migrated
-> and published with a “Course notes” label. The full site is available in English,
-> Simplified Chinese, Japanese, and Korean.
+> and published with a “Course notes” label, alongside a new life post. The full site is
+> available in English, Simplified Chinese, Japanese, and Korean.
 
 ## Stack
 
@@ -213,6 +213,21 @@ Markdown body.
 - `project` — notes from building projects
 
 The four 2023 course notes are published with `category: course`.
+
+### Add images to a blog post
+
+Put images under `public/images/blog/<slug>/` and reference them from Markdown. A bare
+image is fine; use a figure when it needs a caption:
+
+```html
+<figure class="post-figure">
+  <img src="/images/blog/<slug>/photo.jpg" alt="Describe the image" loading="lazy" />
+  <figcaption>A short caption.</figcaption>
+</figure>
+```
+
+Image paths are not language-prefixed. The build-time pass translates `alt` and
+`figcaption`, and `npm run check:links` checks that every `img[src]` resolves.
 
 ### Résumé PDF
 

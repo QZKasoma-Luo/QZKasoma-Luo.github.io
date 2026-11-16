@@ -22,6 +22,12 @@ while (queue.length) {
   const found = await page.$$eval('a[href]', (anchors) =>
     anchors.map((anchor) => anchor.getAttribute('href')).filter(Boolean),
   );
+  const foundImages = await page.$$eval('img[src]', (images) =>
+    images.map((image) => image.getAttribute('src')).filter(Boolean),
+  );
+  for (const src of foundImages) {
+    hrefs.add(new URL(src, url).href);
+  }
   for (const href of found) {
     if (href.startsWith('mailto:') || href.startsWith('tel:')) {
       console.log(`PRIVATE CONTACT LINK ${href}`);
