@@ -73,7 +73,7 @@ and included in the RSS feed.
 
 | Date | Title | Category | Source |
 | --- | --- | --- | --- |
-| 2026-11-16 | Wait, Wuthering Waves 4.0 has no Dreamland?! What about my date with 穗穗?! | `life` | Owner-provided Chinese draft; English source and translations. Three images: 秧秧·玄翎, 穗穗, and 清宵 solo art. The earlier 穗穗 & 秧秧 group photo is no longer used. Chinese title set to the owner’s wording (梦州 spelling). |
+| 2026-11-16 | Wait, Wuthering Waves 4.0 has no Mengzhou?! What about my date with Suisui?! | `life` | Owner-provided Chinese draft. English source uses the official English names; Chinese/Japanese/Korean use the official names: Yangyang: Xuanling / 秧秧·玄翎 / ヤンヤン・ゲンレイ / 양양: 현령; Suisui / 穗穗 / スイスイ / 수이수이; Qingxiao / 清宵 / セイショウ / 칭샤오; Mengzhou / 梦州 / 夢州 / 몽저우. Three solo images; the earlier 穗穗 & 秧秧 group photo is no longer used. |
 
 ## Wording rules
 
