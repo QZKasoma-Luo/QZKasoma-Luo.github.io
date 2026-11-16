@@ -15,6 +15,11 @@ first, so why are we going straight to the New Federation? I still have a soft s
 
 ## 秧秧
 
+<figure class="post-figure">
+  <img src="/images/blog/before-4-0/yangyang-xuanling.jpg" alt="秧秧·玄翎 in a black and white outfit, holding a sword, with blue birds flying around her" width="1200" height="675" loading="lazy" decoding="async" />
+  <figcaption>秧秧·玄翎 · official character art · © KURO GAMES</figcaption>
+</figure>
+
 Honestly, I didn't feel much for 秧秧 at first. At launch she was the girl who picked the
 Rover up in Jinzhou: gentle, soft-spoken, helping me register, taking me to meet Jinhsi, and
 then... nothing. Once the main story moved to Rinascita, she disappeared from the plot. All
