@@ -37,11 +37,16 @@ blog (with a “Course notes” label) or start the blog fresh.
 
 ## Assets
 
-- 9 JPEG photos used as post covers (`images/IMG_*.jpeg`, `Morning.jpeg`, `Victoria.jpeg`, `Selfie.jpg`).
-- `about/about.png`, `WkExperience/about.png`.
+The original legacy image files were removed from the current branch on 2026-11-16 to save
+checkout space; they remain in the local `legacy-site-2023` tag. The legacy HTML, CSS and
+text files are kept.
+
+- Removed: the legacy JPEG covers (`images/IMG_*.jpeg`, `Morning.jpeg`, `Victoria.jpeg`,
+  `Selfie.jpg`), `about/about.png`, `WkExperience/about.png`, `css/images/banner.jpg`, and
+  `images/favicon.ico`.
 - Bulma CSS, Hexo theme CSS, jQuery, Fancybox, highlight.js.
 - `atom.xml`, `search.xml`.
-- Total repository size: ~25 MB.
+- Total repository size at backup time: ~25 MB.
 
 ## Privacy / tracking check
 

@@ -65,7 +65,7 @@ public/
   fonts/             self-hosted WOFF2
 ```
 
-旧 Hexo 站的根目录文件（`index.html`、`images/`、`style/`、`js/`、`about/`、`WkExperience/` 等）只作参考和备份，**不是新站构建输入**；不要混进 `src/`。
+旧 Hexo 站的 HTML/CSS/JS 文件（`index.html`、`style/`、`js/`、`about/`、`WkExperience/` 等）只作参考和备份，**不是新站构建输入**；旧站图片已在 2026-11-16 从当前分支删除，仍可从本地 `legacy-site-2023` tag 找回。不要混进 `src/`。
 
 ## 3. 内容模型
 

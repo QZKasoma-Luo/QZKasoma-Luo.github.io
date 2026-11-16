@@ -50,6 +50,8 @@ The old site is preserved three ways:
 2. Annotated local tag `legacy-site-2023` — not pushed yet.
 3. `docs/legacy-inventory.md` — human-readable inventory.
 
+Legacy image files were removed from the current branch on 2026-11-16; the tag still contains them.
+
 New work happens on branch **`rebuild-2026`**. Nothing is pushed without an explicit OK.
 
 ## 2. Remote access
