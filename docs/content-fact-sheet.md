@@ -73,7 +73,7 @@ and included in the RSS feed.
 
 | Date | Title | Category | Source |
 | --- | --- | --- | --- |
-| 2026-11-16 | Before 4.0: a few words for 秧秧, 穗穗, and 清宵 | `life` | Owner-provided Chinese draft; English source and translations. Three character images are pending from the owner. |
+| 2026-11-16 | Before 4.0: a few words for 秧秧, 穗穗, and 清宵 | `life` | Owner-provided Chinese draft; English source and translations. 秧秧·玄翎 art added 2026-11-16; 穗穗 and 清宵 images pending. |
 
 ## Wording rules
 
