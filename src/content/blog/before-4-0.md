@@ -37,8 +37,8 @@ came to see me in person. How was I supposed to resist?
 ## 穗穗
 
 <figure class="post-figure">
-  <img src="/images/blog/before-4-0/suisui-yangyang.jpg" alt="穗穗 and 秧秧 standing together, with a blue bird flying between them" width="690" height="386" loading="lazy" decoding="async" />
-  <figcaption>穗穗 &amp; 秧秧 · official art · © KURO GAMES</figcaption>
+  <img src="/images/blog/before-4-0/suisui.jpg" alt="穗穗 with long blonde hair, holding a folding fan painted with a landscape, in a white, black, and gold outfit" width="1200" height="675" loading="lazy" decoding="async" />
+  <figcaption>穗穗 · official character art · © KURO GAMES</figcaption>
 </figure>
 
 Then there's 穗穗, 秧秧's older sister. I want both sisters, thank you very much.
