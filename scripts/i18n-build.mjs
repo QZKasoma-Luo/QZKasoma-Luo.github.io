@@ -55,7 +55,9 @@ Keep these names and terms in English:
 Qingze Luo, University of Victoria, UVic, IEEE Access, IoUT, Internet of Underwater Things,
 DDoS, CUDA, KNN, k-NN, MNIST, Vue.js, Element UI, ECharts, ASP.NET, GitHub, LinkedIn,
 Flextronics, Nicholson Manufacturing Ltd., SOLIDS Lab, BlueOS, Docker, co-op, IT audit,
-SYS 321 / SENG 321, CompTIA Security+, Azure Fundamentals.
+SYS 321 / SENG 321, CompTIA Security+, Azure Fundamentals, pigy, Android, Kotlin,
+Jetpack Compose, Material 3, Navigation Compose, Hilt, SQLCipher, Tink, DataStore, Room,
+ML Kit Document Scanner, Android Keystore, FLAG_SECURE, StateFlow, USE_BIOMETRIC.
 Keep all HTML tags, attributes, href/src values, code, URLs, numbers, dates, and email
 addresses exactly as they are. Do not translate text inside <code>...</code>.
 `.trim();
@@ -255,6 +257,9 @@ const TERM_OVERRIDES = {
     ['Enhancing Underwater Network Security: ML-Based Detection and Prediction of DDoS Attacks in IoUT Networks', '수중 네트워크 보안 강화: 머신러닝 기반 IoUT 네트워크 DDoS 공격 탐지 및 예측'],
     ['VICTORIA, BC · 48.4°N', '빅토리아, BC · 48.4°N'],
     ['Independent', '개인 프로젝트'],
+    ['<strong>Document scanner</strong>', '<strong>문서 스캐너</strong>'],
+    ['<strong>Reminders</strong>', '<strong>알림</strong>'],
+    ['<strong>Polish</strong>', '<strong>마무리</strong>'],
     ['REV 2026.11 · PORTFOLIO', 'REV 2026.11 · 포트폴리오'],
     ['MASc Electrical &amp; Computer Engineering', '전기 및 컴퓨터 공학 석사(MASc)'],
     ['University of Victoria · BSc Computer Science', 'University of Victoria · 컴퓨터 과학 학사(BSc)'],

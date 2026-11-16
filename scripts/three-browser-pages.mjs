@@ -8,6 +8,7 @@ const pages = [
   '/', '/zh/', '/ja/', '/ko/',
   '/research/ieee-access-iout-ddos/', '/zh/research/ieee-access-iout-ddos/', '/ja/research/ieee-access-iout-ddos/', '/ko/research/ieee-access-iout-ddos/',
   '/projects/', '/zh/projects/', '/ja/projects/', '/ko/projects/',
+  '/projects/pigy/', '/zh/projects/pigy/', '/ja/projects/pigy/', '/ko/projects/pigy/',
   '/blog/', '/zh/blog/', '/ja/blog/', '/ko/blog/',
   '/feed/', '/zh/feed/', '/ja/feed/', '/ko/feed/',
 ];

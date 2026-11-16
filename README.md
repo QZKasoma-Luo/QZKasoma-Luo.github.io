@@ -292,6 +292,8 @@ private key.
   labelled “course lab” only after confirmation.
 - The Flex changeover dashboard is labelled **independent, internal prototype, not deployed**.
 - The RAG demo is labelled **in progress**.
+- The pigy Android app is labelled **in progress**, with its milestone status, private-repo
+  status, and no public-build claim stated explicitly.
 - Do not copy the “Gathered reporting requirements…” résumé sentence; rewrite it accurately.
 - No phone, email, street address, date of birth, student number, passport, or visa details.
 - Contact = GitHub + LinkedIn only.

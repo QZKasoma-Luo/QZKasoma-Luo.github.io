@@ -163,6 +163,16 @@ h4 {
   text-wrap: balance;
 }
 
+/* Korean writes without spaces inside a word; keep headings from breaking
+   between syllables while still allowing an over-long word to wrap. */
+html[lang="ko"] h1,
+html[lang="ko"] h2,
+html[lang="ko"] h3,
+html[lang="ko"] h4 {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 code,
 pre {
   font-family: var(--font-mono);

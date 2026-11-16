@@ -54,6 +54,7 @@ const projects = defineCollection({
     tags: z.array(z.string()).default([]),
     links: linkSet,
     deployed: z.boolean().default(false),
+    internal: z.boolean().default(false),
     featured: z.boolean().default(false),
     order: z.number().default(99),
     draft: z.boolean().default(false),

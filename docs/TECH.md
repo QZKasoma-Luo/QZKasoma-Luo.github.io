@@ -15,6 +15,7 @@ the QA gates are in place. Deployed through GitHub Actions → GitHub Pages.
 - Three-layer glass system, JS detection, reduced-transparency/contrast fallbacks.
 - Original “QL signal lock” opening animation, 1.78 s, skippable; plays on a fresh entry and on refresh, but not when navigating between internal pages.
 - Four legacy course-note posts migrated and published with a “Course notes” label; RAG demo entry is public as “In progress”.
+- pigy Android app entry is public as “In progress”, with its milestone status and no public repository/build claim.
 - Self-hosted fonts, OG card, 2023 pig-avatar favicon and profile, robots.txt.
 - Local QA scripts: `npm run check`, `npm run test:intro`, `npm run qa:browsers`,
   `npm run qa:pages`, `npm run check:links`, `npm run check:private`, `scripts/axe.mjs`,

@@ -52,6 +52,7 @@ résumé and direct owner confirmation are the only two bases for that flag.
 | Real-time production dashboard | Flextronics, 2023. Vue.js, Element UI, ECharts, RESTful ASP.NET back end; line status, KPIs, changeover metrics. Public repo. | **Independent, internal tool, not publicly deployed.** `verified: true`. |
 | IoT / IoUT validation framework | Public repo; overlaps with the SOLIDS Lab Research Assistant work. | Held as `draft: true`, `verified: false`; covered by the experience entry instead. |
 | Retrieval-augmented generation demo | Owner says it is in progress. No repo, stack, dataset, or result is confirmed. | **In progress**; `verified: true` by direct owner confirmation, not from the résumé. Details remain intentionally sparse. |
+| pigy Android app | Owner request 2026-11-16. Private repo; offline-first Android app for document scanning, notes, and reminders. Project README/PLAN: M0 and M1 complete (security core; 154 unit tests, 9 instrumented tests), M2 notes is next. | **In progress**; `verified: true` by direct owner request. No public repo or build link. |
 | DP hierarchical counts (Shrinkage granularity) | Public repo exists; authorship, author order, venue, and status are not on the public résumé. | `draft: true`, `verified: false`. Do not publish or claim a paper. |
 | Neo4j security-incident analysis | Repository exists, but it is **not Qingze’s design**. | Omit by default. If ever mentioned, label “course lab” only. |
 

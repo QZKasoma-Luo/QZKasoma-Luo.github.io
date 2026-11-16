@@ -73,7 +73,7 @@ public/
 | --- | --- | --- |
 | `site` | 全站元数据 | `name`, `title`, `description`, `tagline`, `focus`, `socials`, `resume` |
 | `pages` | About 正文 | `title`, `description`, `draft`, `verified` |
-| `projects` | 项目 | `title`, `summary`, `year`, `kind`, `status`, `tags`, `links`, `featured`, `order`, `draft`, `verified` |
+| `projects` | 项目 | `title`, `summary`, `year`, `kind`, `status`, `tags`, `links`, `deployed`, `internal`, `featured`, `order`, `draft`, `verified` |
 | `research` | 论文 | `title`, `summary`, `year`, `authors`, `venue`, `status`, `tags`, `links`, `featured`, `order` |
 | `experience` | 经历 | `role`, `org`, `location`, `start`, `end`, `current`, `bullets`, `order` |
 | `blog` | 文章 | `title`, `description`, `date`, `tags`, `category`, `draft` |
@@ -86,7 +86,7 @@ public/
 
 blog 的 `category` 三选一：`life`（个人生活分享）、`course`（课程笔记）、`project`（项目开发心得）；博客列表按它筛选。
 
-当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、RAG demo（in progress）、4 篇课程笔记 + 1 篇项目复盘。
+当前公开内容：4 段经历、IEEE Access 论文、CUDA KNN（group）、Flextronics 看板（independent / not deployed）、pigy Android（in progress）、RAG demo（in progress）、4 篇课程笔记 + 1 篇项目复盘。
 仍是草稿：DP 论文、IoUT 项目（IoUT 已并入 SOLIDS Lab 经历）。
 
 ## 4. 设计系统
@@ -191,10 +191,10 @@ CI 不传 `DEEPSEEK_API_KEY`。如果新增英文内容没跑过本地 `npm run 
 ### 加一个项目
 
 1. 在 `src/content/projects/` 新建 `<slug>.md`；
-2. 字段按 `src/content.config.ts`；`kind` 用 `group` / `independent` / `research` / `coursework`；
+2. 字段按 `src/content.config.ts`；`kind` 用 `group` / `independent` / `research` / `coursework` / `project`；只有内部工具才写 `internal: true`，详情页会显示 Internal prototype 提示；
 3. 真实才写 `verified: true`、`draft: false`；不确定就留草稿；
-4. `order` 控制顺序；`featured` 控制首页卡片；
-5. `npm run build && npm run i18n`，检查英文/中文/日文项目页和首页卡片。
+4. `order` 控制顺序；首页会显示所有公开项目，`featured` 目前只是保留字段；
+5. `npm run build && npm run i18n`，检查英文/中文/日文/韩文项目页和首页卡片。
 
 ### 加一篇论文
 

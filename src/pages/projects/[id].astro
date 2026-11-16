@@ -79,7 +79,7 @@ const linkEntries = [
       </aside>
     ) : null}
 
-    {project.data.kind === 'independent' && project.data.deployed === false ? (
+    {project.data.internal ? (
       <aside class="notice">
         <strong>Internal prototype.</strong> Built as an internal tool; it was not deployed to
         production.
