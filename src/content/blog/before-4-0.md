@@ -1,6 +1,6 @@
 ---
-title: "Before 4.0: a few words for 秧秧, 穗穗, and 清宵"
-description: "A personal note before Wuthering Waves 4.0: why 秧秧, her sister 穗穗, and 清宵 ended up among my favourite characters."
+title: "Wait, Wuthering Waves 4.0 has no Dreamland?! What about my date with 穗穗?!"
+description: "A small protest about Wuthering Waves 4.0 skipping Dreamland, plus a few words for 秧秧, her sister 穗穗, and 清宵."
 date: 2026-11-16
 tags:
   - Wuthering Waves
@@ -14,11 +14,6 @@ first, so why are we going straight to the New Federation? I still have a soft s
 秧秧·玄翎, 穗穗, and 清宵. Before the new version lands, I want to praise these three properly.
 
 ## 秧秧
-
-<figure class="post-figure">
-  <img src="/images/blog/before-4-0/yangyang-xuanling.jpg" alt="秧秧·玄翎 with long blue hair, holding a jade staff, seated against a mountain landscape with birds and cherry blossoms" width="1200" height="675" loading="lazy" decoding="async" />
-  <figcaption>秧秧·玄翎 · official character art · © KURO GAMES</figcaption>
-</figure>
 
 Honestly, I didn't feel much for 秧秧 at first. At launch she was the girl who picked the
 Rover up in Jinzhou: gentle, soft-spoken, helping me register, taking me to meet Jinhsi, and
@@ -36,7 +31,10 @@ came to see me in person. How was I supposed to resist?
 
 ## 穗穗
 
-<!-- figure: 穗穗 -->
+<figure class="post-figure">
+  <img src="/images/blog/before-4-0/suisui-yangyang.jpg" alt="穗穗 and 秧秧 standing together, with a blue bird flying between them" width="690" height="386" loading="lazy" decoding="async" />
+  <figcaption>穗穗 &amp; 秧秧 · official art · © KURO GAMES</figcaption>
+</figure>
 
 Then there's 穗穗, 秧秧's older sister. I want both sisters, thank you very much.
 
@@ -52,7 +50,10 @@ too; that dignified, slightly sharp way she talks is very easy to write.
 
 ## 清宵
 
-<!-- figure: 清宵 -->
+<figure class="post-figure">
+  <img src="/images/blog/before-4-0/qingxiao.jpg" alt="清宵 with long blue hair, holding a long jade weapon, seated against a mountain landscape with birds and cherry blossoms" width="1200" height="675" loading="lazy" decoding="async" />
+  <figcaption>清宵 · official character art · © KURO GAMES</figcaption>
+</figure>
 
 清宵 is different from the other two. I like her purely because of how she plays.
 

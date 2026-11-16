@@ -73,7 +73,7 @@ and included in the RSS feed.
 
 | Date | Title | Category | Source |
 | --- | --- | --- | --- |
-| 2026-11-16 | Before 4.0: a few words for 秧秧, 穗穗, and 清宵 | `life` | Owner-provided Chinese draft; English source and translations. 秧秧·玄翎 art added 2026-11-16; 穗穗 and 清宵 images pending. |
+| 2026-11-16 | Wait, Wuthering Waves 4.0 has no Dreamland?! What about my date with 穗穗?! | `life` | Owner-provided Chinese draft; English source and translations. Two images: 穗穗 & 秧秧 group art, and 清宵 solo art. Chinese title set to the owner’s wording (梦州 spelling). |
 
 ## Wording rules
 
